@@ -22,7 +22,7 @@ class Firebase {
 
   // Signup new user
   doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWIthEmailAndPassword(email, password);
+    this.auth.createUserWithEmailAndPassword(email, password);
 
   // Sign In with existing user
   doSignInWithEmailAndPassword = (email, password) =>

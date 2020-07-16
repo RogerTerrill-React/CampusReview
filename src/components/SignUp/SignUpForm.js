@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 
-const SignUpForm = () => {
+const SignUpForm = ({ firebase }) => {
   const INITIAL_STATE = {
     username: '',
     email: '',
@@ -12,7 +12,16 @@ const SignUpForm = () => {
   const [values, setValues] = useState(INITIAL_STATE);
 
   const onSubmit = (event) => {
-    console.log(event);
+    const { email, passwordOne } = values;
+    firebase
+    .doCreateUserWithEmailAndPassword(email, passwordOne)
+    .then((authUser) => {
+      setValues(INITIAL_STATE);
+    })
+    .catch((error) => {
+      setValues(error);
+    });
+    event.preventDefault();
   };
 
   const onChange = (event) => {
@@ -34,28 +43,28 @@ const SignUpForm = () => {
     <form onSubmit={onSubmit}>
       <input
         name='username'
-        value={values.username}
+        value={username}
         onChange={onChange}
         type='text'
         placeholder='Full Name'
       />
       <input
         name='email'
-        value={values.email}
+        value={email}
         onChange={onChange}
         type='text'
         placeholder='Email Address'
       />{' '}
       <input
         name='passwordOne'
-        value={values.passwordOne}
+        value={passwordOne}
         onChange={onChange}
         type='password'
         placeholder='Password'
       />{' '}
       <input
         name='passwordTwo'
-        value={values.passwordTwo}
+        value={passwordTwo}
         onChange={onChange}
         type='password'
         placeholder='Confirm Password'
@@ -68,4 +77,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm
+export default SignUpForm;

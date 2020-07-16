@@ -1,12 +1,15 @@
 import React from 'react';
 
 import SignUpForm from './SignUpForm';
+import { FirebaseContext } from '../Firebase';
 
 const SignUp = () => {
   return (
     <>
       <div>SignUp</div>
-      <SignUpForm />
+      <FirebaseContext.Consumer>
+        {(firebase) => <SignUpForm firebase={firebase} />}
+      </FirebaseContext.Consumer>
     </>
   );
 };
