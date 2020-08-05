@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
 
-const SignUpForm = ({ firebase }) => {
+const SignUpFormBase = ({ firebase }) => {
+  let history = useHistory();
+
   const INITIAL_STATE = {
     username: '',
     email: '',
@@ -17,6 +22,7 @@ const SignUpForm = ({ firebase }) => {
     .doCreateUserWithEmailAndPassword(email, passwordOne)
     .then((authUser) => {
       setValues(INITIAL_STATE);
+      history.push(ROUTES.HOME);
     })
     .catch((error) => {
       setValues(error);
@@ -77,4 +83,8 @@ const SignUpForm = ({ firebase }) => {
   );
 };
 
+const SignUpForm = withFirebase(SignUpFormBase);
+
 export default SignUpForm;
+
+export { SignUpFormBase };
