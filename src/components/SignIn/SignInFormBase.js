@@ -2,30 +2,28 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-const SignUpFormBase = ({ firebase }) => {
+const SignInFormBase = ({ firebase }) => {
   let history = useHistory();
 
   const INITIAL_STATE = {
-    username: '',
     email: '',
-    passwordOne: '',
-    passwordTwo: '',
+    password: '',
     error: null,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
   const onSubmit = (event) => {
-    const { email, passwordOne } = values;
+    const { email, password } = values;
     firebase
-    .doCreateUserWithEmailAndPassword(email, passwordOne)
-    .then(() => {
-      setValues(INITIAL_STATE);
-      history.push(ROUTES.HOME);
-    })
-    .catch((error) => {
-      setValues(error);
-    });
+      .doSignInWithEmailAndPassword(email, password)
+      .then(() => {
+        setValues(INITIAL_STATE);
+        history.push(ROUTES.HOME);
+      })
+      .catch((error) => {
+        setValues(error);
+      });
     event.preventDefault();
   };
 
@@ -37,22 +35,14 @@ const SignUpFormBase = ({ firebase }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const { username, email, passwordOne, passwordTwo } = values;
+  const { email, password } = values;
 
   const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === '' ||
-    email === '' ||
-    username === '';
+    password === '' ||
+    email === '';
+    
   return (
     <form onSubmit={onSubmit}>
-      <input
-        name='username'
-        value={username}
-        onChange={onChange}
-        type='text'
-        placeholder='Full Name'
-      />
       <input
         name='email'
         value={email}
@@ -61,27 +51,18 @@ const SignUpFormBase = ({ firebase }) => {
         placeholder='Email Address'
       />
       <input
-        name='passwordOne'
-        value={passwordOne}
+        name='password'
+        value={password}
         onChange={onChange}
         type='password'
         placeholder='Password'
       />
-      <input
-        name='passwordTwo'
-        value={passwordTwo}
-        onChange={onChange}
-        type='password'
-        placeholder='Confirm Password'
-      />
       <button disabled={isInvalid} type='submit'>
-        Sign Up
+        Sign In
       </button>
       {values.error && <p>{values.error.message}</p>}
     </form>
   );
 };
 
-export default SignUpFormBase;
-
-
+export default SignInFormBase;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SignUpForm from './SignUpFormBase';
+import SignUpForm from './SignUpForm';
 
 const SignUp = () => {
   return (
