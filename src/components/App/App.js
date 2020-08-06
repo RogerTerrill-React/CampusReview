@@ -16,10 +16,11 @@ const App = ({ firebase }) => {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged((authUser) =>
+    const unsubscribe = firebase.auth.onAuthStateChanged((authUser) =>
       authUser ? setAuthUser(authUser) : setAuthUser(null)
     );
-  }); 
+    return () => unsubscribe();
+  },[firebase.auth]); 
 
   return (
     <Router>
