@@ -1,12 +1,15 @@
 import React from 'react';
-import NavigationAuth from './NavigationAuth'
-import NavigationNonAuth from './NavigationNonAuth'
+import NavigationAuth from './NavigationAuth';
+import NavigationNonAuth from './NavigationNonAuth';
+import { AuthUserContext } from '../Session';
 
-const Navigation = ({authUser}) => {
-
+const Navigation = () => {
   return (
-
-    <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />} </div>
+    <div>
+      <AuthUserContext.Consumer>
+        {(authUser) => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+      </AuthUserContext.Consumer>
+    </div>
   );
 };
 
