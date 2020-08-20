@@ -1,7 +1,7 @@
 import React from 'react';
 import { SignUpLink } from '../SignUp';
 import SignInForm from './SignInForm';
-import PasswordForgetLink from '../PasswordForget/PasswordForgetLink';
+import { PasswordForgetLink } from '../PasswordForget';
 
 const SignInPage = () => {
   return (

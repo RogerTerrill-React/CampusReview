@@ -1,7 +1,6 @@
-import SignUp from './SignUp';
-import SignUpFormBase from './SignUpFormBase';
+import SignUp from './SignUpPage';
 import SignUpLink from './SignUpLink'
 
 export default SignUp;
-export {SignUpFormBase, SignUpLink};
+export { SignUpLink };
 
