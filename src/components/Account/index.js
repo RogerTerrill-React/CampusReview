@@ -1,2 +1,2 @@
-import Account from './Account';
-export default Account;
+import AccountPage from './AccountPage';
+export default AccountPage;

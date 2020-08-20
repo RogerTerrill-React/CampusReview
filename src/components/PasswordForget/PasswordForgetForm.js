@@ -1,4 +1,4 @@
 import { withFirebase } from '../Firebase';
-import PasswordForgetBaseForm from './PasswordForgetFormBase';
+import PasswordForgetFormBase from './PasswordForgetFormBase';
 
-export default withFirebase(PasswordForgetBaseForm);
+export default withFirebase(PasswordForgetFormBase);

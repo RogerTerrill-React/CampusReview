@@ -1,11 +1,4 @@
-import React from 'react'
+import { withFirebase } from '../Firebase';
+import PasswordChangeFormBase from './PasswordChangeFormBase';
 
-const PasswordChange = () => {
-  return (
-    <div>
-      Password Change
-    </div>
-  )
-}
-
-export default PasswordChange
+export default withFirebase(PasswordChangeFormBase);

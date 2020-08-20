@@ -2,20 +2,21 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
-const PasswordForgetFormBase = ({firebase}) => {
+const PasswordChangeFormBase = ({firebase}) => {
   let history = useHistory();
 
   const INITIAL_STATE = {
-    email: '',
+    passwordOne: '',
+    passwordTwo: '',
     error: null,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
   const onSubmit = (event) => {
-    const { email } = values;
+    const { passwordOne } = values;
     firebase
-      .doPasswordReset(email)
+      .doPasswordUpdate(passwordOne)
       .then(() => {
         setValues(INITIAL_STATE);
         history.push(ROUTES.HOME);
@@ -34,25 +35,34 @@ const PasswordForgetFormBase = ({firebase}) => {
     setValues({ ...values, [name]: value });
   };
 
-  const { email } = values;
+  const { passwordOne, passwordTwo, error } = values;
+  console.log(values);
+  console.log(passwordOne, passwordTwo);
 
-  const isInvalid = email === '';
+  const isInvalid = passwordOne === '' || passwordOne !== passwordTwo;
     
   return (
     <form onSubmit={onSubmit}>
       <input
-        name='email'
-        value={email}
+        name='passwordOne'
+        value={passwordOne}
         onChange={onChange}
-        type='text'
-        placeholder='Email Address'
+        type='password'
+        placeholder='New Password'
+      />
+      <input
+        name='passwordTwo'
+        value={passwordTwo}
+        onChange={onChange}
+        type='password'
+        placeholder='Confirm New Password'
       />
       <button disabled={isInvalid} type='submit'>
         Reset My Password
       </button>
-      {values.error && <p>{values.error.message}</p>}
+      {error && <p>{error.message}</p>}
     </form>
   );
 };
 
-export default PasswordForgetFormBase
+export default PasswordChangeFormBase;
