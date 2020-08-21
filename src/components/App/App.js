@@ -12,7 +12,7 @@ import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
-const App = ({ firebase }) => {
+const App = () => {
   return (
     <Router>
       <div>
