@@ -5,7 +5,7 @@ import * as ROUTES from '../../constants/routes';
 
 const SignUpForm = () => {
   const firebase = useFirebase();
-  let history = useHistory();
+  const history = useHistory();
 
   const INITIAL_STATE = {
     username: '',
