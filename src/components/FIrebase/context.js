@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 const FirebaseContext = createContext(null);
 
 const withFirebase = Component => props => (
@@ -7,5 +7,9 @@ const withFirebase = Component => props => (
   </FirebaseContext.Consumer>
 )
 
-export { withFirebase };
+const useFirebase = () => {
+  return useContext(FirebaseContext);
+}
+
+export { withFirebase, useFirebase };
 export default FirebaseContext;
