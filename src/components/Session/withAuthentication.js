@@ -14,6 +14,7 @@ const withAuthentication = (Component) => {
       return () => unsubscribe();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    
     return (
       <AuthUserContext.Provider value={authUser}>
         <Component {...props} />
