@@ -12,8 +12,8 @@ const withAuthentication = (Component) => {
         authUser ? setAuthUser(authUser) : setAuthUser(null)
       );
       return () => unsubscribe();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+
+    }, [firebase]);
     
     return (
       <AuthUserContext.Provider value={authUser}>

@@ -20,14 +20,18 @@ const SignUpForm = () => {
   const onSubmit = (event) => {
     const { email, passwordOne } = values;
     firebase
-    .doCreateUserWithEmailAndPassword(email, passwordOne)
-    .then(() => {
-      setValues(INITIAL_STATE);
-      history.push(ROUTES.HOME);
-    })
-    .catch((error) => {
-      setValues(error);
-    });
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then((authUser) => {
+        // Create a user in Firebase realtime databse
+        return firebase.user(authUser.user.uid).set({ username, email });
+      })
+      .then(() => {
+        setValues(INITIAL_STATE);
+        history.push(ROUTES.HOME);
+      })
+      .catch((error) => {
+        setValues(error);
+      });
     event.preventDefault();
   };
 
@@ -85,5 +89,3 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
-
-
