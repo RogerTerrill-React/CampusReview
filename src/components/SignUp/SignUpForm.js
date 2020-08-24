@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 const SignUpForm = () => {
   const firebase = useFirebase();
@@ -12,18 +13,29 @@ const SignUpForm = () => {
     email: '',
     passwordOne: '',
     passwordTwo: '',
+    isAdmin: false,
     error: null,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
   const onSubmit = (event) => {
-    const { email, passwordOne } = values;
+    const { username, email, passwordOne, isAdmin } = values;
+    const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
+
     firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then((authUser) => {
         // Create a user in Firebase realtime databse
-        return firebase.user(authUser.user.uid).set({ username, email });
+        return firebase.user(authUser.user.uid).set({
+          username,
+          email,
+          roles,
+        });
       })
       .then(() => {
         setValues(INITIAL_STATE);
@@ -43,7 +55,15 @@ const SignUpForm = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const { username, email, passwordOne, passwordTwo } = values;
+  const onChangeCheckbox = (event) => {
+    // Destructure out name and value from event.target
+    const { name, checked } = event.target;
+
+    // Spread current values and overwrite with the destructured value
+    setValues({ ...values, [name]: checked });
+  };
+
+  const { username, email, passwordOne, passwordTwo, isAdmin } = values;
 
   const isInvalid =
     passwordOne !== passwordTwo ||
@@ -80,6 +100,15 @@ const SignUpForm = () => {
         type='password'
         placeholder='Confirm Password'
       />
+      <label>
+        Admin:
+        <input
+          name='isAdmin'
+          type='checkbox'
+          checked={isAdmin}
+          onChange={onChangeCheckbox}
+        />
+      </label>
       <button disabled={isInvalid} type='submit'>
         Sign Up
       </button>
