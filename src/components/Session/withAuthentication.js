@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useFirebase } from  '../Firebase';
+import { useFirebase } from '../Firebase';
 import AuthUserContext from './context';
 
 const withAuthentication = (Component) => {
@@ -8,13 +8,13 @@ const withAuthentication = (Component) => {
     const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
-      const unsubscribe = firebase.auth.onAuthStateChanged((authUser) =>
-        authUser ? setAuthUser(authUser) : setAuthUser(null)
+      const unsubscribe = firebase.onAuthUserListener(
+        (authUser) => setAuthUser(authUser),
+        () => setAuthUser(null)
       );
       return () => unsubscribe();
-
     }, [firebase]);
-    
+
     return (
       <AuthUserContext.Provider value={authUser}>
         <Component {...props} />
