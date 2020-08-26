@@ -37,6 +37,7 @@ const SignUpForm = () => {
           roles,
         });
       })
+      .then(() => firebase.doSendEmailVerification())
       .then(() => {
         setValues(INITIAL_STATE);
         history.push(ROUTES.HOME);
