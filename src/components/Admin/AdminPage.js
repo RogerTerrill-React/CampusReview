@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
+import { withAuthorization } from '../Session';
+import * as ROLES from '../../constants/roles';
 
 import UserList from './UserList';
 
@@ -14,12 +16,12 @@ const AdminPage = () => {
   const [values, setValues] = useState(INITIAL_STATE);
 
   useEffect(() => {
-    setValues({...values, loading: true });
+    setValues({ ...values, loading: true });
 
     firebase.users().on('value', (snapshot) => {
       const usersObject = snapshot.val();
-      
-      const usersList = Object.keys(usersObject).map(key => ({
+
+      const usersList = Object.keys(usersObject).map((key) => ({
         ...usersObject[key],
         uid: key,
       }));
@@ -35,13 +37,16 @@ const AdminPage = () => {
 
   const { users, loading } = values;
 
-  return( 
+  return (
     <>
       <h1>Admin</h1>
+      <p>The Admin Page is accessible by every signed in admin user.</p>
       {loading && <div>Loading...</div>}
       <UserList users={users} />
     </>
-    );
+  );
 };
 
-export default AdminPage;
+const condition = authUser => authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default withAuthorization(condition)(AdminPage);

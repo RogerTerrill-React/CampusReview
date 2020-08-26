@@ -9,10 +9,16 @@ const withAuthentication = (Component) => {
 
     useEffect(() => {
       const unsubscribe = firebase.onAuthUserListener(
-        (authUser) => setAuthUser(authUser),
+        (authUser) =>{
+          localStorage.setItem('authUser', JSON.stringify(authUser));
+          setAuthUser(authUser);
+        },
         () => setAuthUser(null)
       );
-      return () => unsubscribe();
+      return () => {
+        localStorage.removeItem('authUser');
+        unsubscribe();
+      }
     }, [firebase]);
 
     return (

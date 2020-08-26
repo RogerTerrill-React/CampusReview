@@ -8,7 +8,7 @@ const Navigation = () => {
   
   return (
     <div>
-      {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+      {authUser ? <NavigationAuth authUser={authUser}/> : <NavigationNonAuth />}
     </div>
   );
 };
