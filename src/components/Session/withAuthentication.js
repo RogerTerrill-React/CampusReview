@@ -5,7 +5,7 @@ import AuthUserContext from './context';
 const withAuthentication = (Component) => {
   const WithAuthentication = (props) => {
     const firebase = useFirebase();
-    const [authUser, setAuthUser] = useState(null);
+    const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('authUser')));
 
     useEffect(() => {
       const unsubscribe = firebase.onAuthUserListener(
