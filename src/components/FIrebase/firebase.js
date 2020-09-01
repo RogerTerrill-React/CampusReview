@@ -41,9 +41,10 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
 
   // Email Verification
-  doSendEmailVerification = () => this.auth.currentUser.sendEmailVerification({
-    url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
-  })
+  doSendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+    });
 
   // *** Merge Auth and DB User API *** //
   onAuthUserListener = (next, fallback) =>

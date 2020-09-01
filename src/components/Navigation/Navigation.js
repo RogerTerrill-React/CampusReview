@@ -5,10 +5,14 @@ import { useAuthUser } from '../Session';
 
 const Navigation = () => {
   const authUser = useAuthUser();
-  
+
   return (
     <div>
-      {authUser ? <NavigationAuth authUser={authUser}/> : <NavigationNonAuth />}
+      {authUser ? (
+        <NavigationAuth authUser={authUser} />
+      ) : (
+        <NavigationNonAuth />
+      )}
     </div>
   );
 };
