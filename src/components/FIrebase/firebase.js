@@ -18,6 +18,7 @@ class Firebase {
     app.initializeApp(firebaseConfig);
     this.auth = app.auth();
     this.db = app.database();
+    this.serverValue = app.database.ServerValue;
   }
 
   // ***Firebase Auth API***
@@ -84,7 +85,7 @@ class Firebase {
 
   // *** Message API ***
 
-  message = uid => this.db.ref(`messages/${uid}`);
+  message = (uid) => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
 }
