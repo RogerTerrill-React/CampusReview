@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
+import { useAuthUser } from '../Session';
 import MessageList from './MessageList';
 
 const Messages = () => {
   const firebase = useFirebase();
+  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
     messages: [],
+    text: '',
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
@@ -24,16 +27,32 @@ const Messages = () => {
           ...messageObject[key],
           uid: key,
         }));
-        setValues({ loading: false, messages: messageList });
+        setValues({...values, loading: false, messages: messageList });
       } else {
-        setValues({ loading: false, messages: null });
+        setValues({...values, loading: false, messages: null });
       }
     });
     return () => firebase.messages().off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { messages, loading } = values;
+  const { text, messages, loading } = values;
+
+  const onChangeText = (event) => {
+    // Spread current values and overwrite with the destructured value
+    setValues({ ...values, text: event.target.value });
+  };
+
+  const onCreateMessage = (event) => {
+    firebase.messages().push({
+      text,
+      userId: authUser.uid,
+    });
+
+    setValues({...values, text: ''})
+
+    event.preventDefault();
+  }
 
   return (
     <div>
@@ -44,6 +63,15 @@ const Messages = () => {
       ) : (
         <div>There are no messages ...</div>
       )}
+
+      <form onSubmit={onCreateMessage}>
+        <input
+          type='text'
+          value={text}
+          onChange={onChangeText}
+          />
+          <button type='submit'>Send</button>
+      </form>
     </div>
   );
 };
