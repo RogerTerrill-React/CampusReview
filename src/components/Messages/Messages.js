@@ -16,7 +16,7 @@ const Messages = () => {
 
   const [values, setValues] = useState(INITIAL_STATE);
 
-  const onListenForMessages = () => {
+  useEffect(() => {
     setValues({ ...values, loading: true });
 
     firebase
@@ -37,10 +37,7 @@ const Messages = () => {
           setValues({ ...values, loading: false, messages: null });
         }
       });
-  };
 
-  useEffect(() => {
-    onListenForMessages();
     return () => firebase.messages().off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.limit]);
