@@ -37,13 +37,13 @@ const Messages = () => {
           setValues({ ...values, loading: false, messages: null });
         }
       });
-  }
+  };
 
   useEffect(() => {
     onListenForMessages();
     return () => firebase.messages().off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [values.limit]);
 
   const { text, messages, loading } = values;
 
@@ -79,15 +79,16 @@ const Messages = () => {
   };
 
   const onNextPage = () => {
-    setValues(previousState => ({...values, limit: previousState.limit + 5 }),
-    onListenForMessages,
-    )
-  }
+    setValues((previousState) => ({
+      ...values,
+      limit: previousState.limit + 5,
+    }));
+  };
 
   return (
     <div>
       {!loading && messages && (
-        <button type="button" onClick={onNextPage}>
+        <button type='button' onClick={onNextPage}>
           More
         </button>
       )}
