@@ -75,6 +75,7 @@ const Messages = () => {
 
       {messages ? (
         <MessageList
+          authUser={authUser}
           messages={messages}
           onEditMessage={onEditMessage}
           onRemoveMessage={onRemoveMessage}

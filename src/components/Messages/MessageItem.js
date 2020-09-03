@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const MessageItem = ({ message, onEditMessage, onRemoveMessage }) => {
+const MessageItem = ({ authUser, message, onEditMessage, onRemoveMessage }) => {
   const INITIAL_STATE = {
     editMode: false,
     editText: message.text,
@@ -37,18 +37,22 @@ const MessageItem = ({ message, onEditMessage, onRemoveMessage }) => {
         </span>
       )}
 
-      {editMode ? (
+      {authUser.uid === message.userId && (
         <span>
-          <button onClick={onSaveEditText}>Save</button>
-          <button onClick={onToggleEditMode}>Reset</button>
+          {editMode ? (
+            <span>
+              <button onClick={onSaveEditText}>Save</button>
+              <button onClick={onToggleEditMode}>Reset</button>
+            </span>
+          ) : (
+            <button onClick={onToggleEditMode}>Edit</button>
+          )}
+          {!editMode && (
+            <button type='button' onClick={() => onRemoveMessage(message.uid)}>
+              Delete
+            </button>
+          )}
         </span>
-      ) : (
-        <button onClick={onToggleEditMode}>Edit</button>
-      )}
-      {!editMode && (
-        <button type='button' onClick={() => onRemoveMessage(message.uid)}>
-          Delete
-        </button>
       )}
     </li>
   );
