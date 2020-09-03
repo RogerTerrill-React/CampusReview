@@ -11,27 +11,36 @@ const Messages = () => {
     loading: false,
     messages: [],
     text: '',
+    limit: 5,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
-  useEffect(() => {
+  const onListenForMessages = () => {
     setValues({ ...values, loading: true });
 
-    firebase.messages().on('value', (snapshot) => {
-      const messageObject = snapshot.val();
+    firebase
+      .messages()
+      .orderByChild('createdAt')
+      .limitToLast(values.limit)
+      .on('value', (snapshot) => {
+        const messageObject = snapshot.val();
 
-      if (messageObject) {
-        // convert messages list from snapshot
-        const messageList = Object.keys(messageObject).map((key) => ({
-          ...messageObject[key],
-          uid: key,
-        }));
-        setValues({ ...values, loading: false, messages: messageList });
-      } else {
-        setValues({ ...values, loading: false, messages: null });
-      }
-    });
+        if (messageObject) {
+          // convert messages list from snapshot
+          const messageList = Object.keys(messageObject).map((key) => ({
+            ...messageObject[key],
+            uid: key,
+          }));
+          setValues({ ...values, loading: false, messages: messageList });
+        } else {
+          setValues({ ...values, loading: false, messages: null });
+        }
+      });
+  }
+
+  useEffect(() => {
+    onListenForMessages();
     return () => firebase.messages().off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -69,8 +78,20 @@ const Messages = () => {
     });
   };
 
+  const onNextPage = () => {
+    setValues(previousState => ({...values, limit: previousState.limit + 5 }),
+    onListenForMessages,
+    )
+  }
+
   return (
     <div>
+      {!loading && messages && (
+        <button type="button" onClick={onNextPage}>
+          More
+        </button>
+      )}
+
       {loading && <div>Loading...</div>}
 
       {messages ? (
