@@ -88,6 +88,13 @@ class Firebase {
   message = (uid) => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
+
+  // *** Campus API ***
+
+  campus = (uid) => this.db.ref(`campus/${uid}`);
+
+  campuses = () => this.db.ref('campuses');
+
 }
 
 export default Firebase;
