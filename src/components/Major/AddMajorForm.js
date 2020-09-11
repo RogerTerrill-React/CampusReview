@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 // import { useAuthUser } from '../Session';
 
-const AddCampusForm = () => {
+const AddMajorForm = () => {
   const firebase = useFirebase();
   // const authUser = useAuthUser();
 
@@ -19,7 +19,7 @@ const AddCampusForm = () => {
 
   const onSubmit = (event) => {
     const {name} = values;
-    firebase.campuses().push({
+    firebase.majors().push({
       name,
     });
 
@@ -31,13 +31,13 @@ const AddCampusForm = () => {
 
   return (
     <div>
-      Add Campus Form
+      Add Major Form
       <form onSubmit={onSubmit}>
         <input type='text' value={name} onChange={onChangeText} />
-        <button type='submit'>Add Campus</button>
+        <button type='submit'>Add Major</button>
       </form>
     </div>
   )
 }
 
-export default AddCampusForm;
+export default AddMajorForm;

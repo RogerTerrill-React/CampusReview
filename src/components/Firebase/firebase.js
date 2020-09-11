@@ -95,6 +95,12 @@ class Firebase {
 
   campuses = () => this.db.ref('campuses');
 
+  // *** Majors API ***
+
+  major = (uid) => this.db.ref(`major/${uid}`);
+
+  majors = () => this.db.ref('majors');
+
 }
 
 export default Firebase;

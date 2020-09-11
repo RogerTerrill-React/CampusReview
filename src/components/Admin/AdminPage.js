@@ -8,6 +8,7 @@ import * as ROUTES from '../../constants/routes';
 import UserList from './UserList';
 import UserItem from './UserItem';
 import AddCampusForm from '../Campus';
+import AddMajorForm from '../Major';
 
 const AdminPage = () => {
   return (
@@ -18,6 +19,7 @@ const AdminPage = () => {
         <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
         <Route exact path={ROUTES.ADMIN} component={UserList} />
         <Route exact path={ROUTES.ADD_CAMPUS} component={AddCampusForm} />
+        <Route exact path={ROUTES.ADD_MAJOR} component={AddMajorForm} />
       </Switch>
     </>
   );
