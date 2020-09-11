@@ -10,3 +10,4 @@ export const ADMIN_USERS = '/admin/users';
 export const ADMIN_USERS_DETAILS = '/admin/users/:id';
 export const ADD_CAMPUS = '/admin/campus/add';
 export const ADD_MAJOR = '/admin/major/add';
+export const ADD_COURSE = '/admin/course/add';
