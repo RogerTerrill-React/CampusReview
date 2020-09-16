@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
+import {useLocation, useParams} from 'react-router-dom';
 
-const UserItem = ({ match, location }) => {
+const UserItem = () => {
   const firebase = useFirebase();
-
+  const params = useParams();
+  const location = useLocation();
   const INITIAL_STATE = {
     loading: false,
     user: null,
-    ...location.state,
+    ...location.state, // location comes from state in Link to
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
@@ -23,13 +25,14 @@ const UserItem = ({ match, location }) => {
 
     setValues({ ...values, loading: true });
 
-    firebase.user(match.params.id).on('value', (snapshot) => {
+    // match prop is returned through react router Link
+    firebase.user(params.id).on('value', (snapshot) => {
       setValues({
         loading: false,
         user: snapshot.val(),
       });
     });
-    return () => firebase.user(match.params.id).off();
+    return () => firebase.user(params.id).off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +40,7 @@ const UserItem = ({ match, location }) => {
 
   return (
     <>
-      <h2>User ({match.params.id})</h2>
+      <h2>User ({params.id})</h2>
       {loading && <div>Loading...</div>}
 
       {user && (

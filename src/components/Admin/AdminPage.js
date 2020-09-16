@@ -6,6 +6,7 @@ import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
 
 import { UserList, UserItem } from '../User';
+import User from '../User';
 import AddCampusForm from '../Campus';
 import AddMajorForm from '../Major';
 import AddCourseForm from '../Course';
@@ -44,7 +45,7 @@ const AdminPage = () => {
       </Modal>
       <Switch>
         <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
-        <Route exact path={ROUTES.ADMIN} component={UserList} />
+        <Route exact path={ROUTES.ADMIN} component={User} />
         <Route exact path={ROUTES.ADD_CAMPUS} component={AddCampusForm} />
         <Route exact path={ROUTES.ADD_MAJOR} component={AddMajorForm} />
         <Route exact path={ROUTES.ADD_COURSE} component={AddCourseForm} />
