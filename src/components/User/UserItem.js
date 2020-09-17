@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
-import {useLocation, useParams} from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const UserItem = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
-
-  console.log(location);
 
   const INITIAL_STATE = {
     loading: false,

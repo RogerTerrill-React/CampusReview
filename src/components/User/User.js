@@ -41,6 +41,6 @@ const User = () => {
       <UserList users={users} />
     </>
   );
-}
+};
 
-export default User
+export default User;

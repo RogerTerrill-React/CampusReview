@@ -8,7 +8,8 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
-import {Campus} from '../Campus';
+import { Campus } from '../Campus';
+import Container from 'react-bootstrap/Container';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -16,7 +17,7 @@ import { withAuthentication } from '../Session';
 const App = () => {
   return (
     <Router>
-      <div>
+      <Container>
         <Navigation />
         <hr />
         <Switch>
@@ -29,7 +30,7 @@ const App = () => {
           <Route path={ROUTES.ADMIN} component={AdminPage} />
           <Route path={ROUTES.CAMPUSES} component={Campus} />
         </Switch>
-      </div>
+      </Container>
     </Router>
   );
 };

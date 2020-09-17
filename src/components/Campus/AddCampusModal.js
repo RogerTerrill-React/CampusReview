@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import AddCampusForm from './AddCampusForm';
 
 import Modal from 'react-bootstrap/Modal';
@@ -9,7 +9,7 @@ const AddCampusModal = () => {
 
   return (
     <>
-    <Button variant='primary' onClick={() => setCampusModalShow(true)}>
+      <Button variant='primary' onClick={() => setCampusModalShow(true)}>
         Add Campus
       </Button>
       <Modal
@@ -31,8 +31,8 @@ const AddCampusModal = () => {
           <Button onClick={() => setCampusModalShow(false)}>Close</Button>
         </Modal.Footer>
       </Modal>
-      </>
-  )
-}
+    </>
+  );
+};
 
-export default AddCampusModal
+export default AddCampusModal;

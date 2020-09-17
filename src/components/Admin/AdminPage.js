@@ -13,8 +13,6 @@ import AddMajorForm from '../Major';
 import AddCourseForm from '../Course';
 
 const AdminPage = () => {
-  
-
   return (
     <>
       <h1>Admin</h1>
