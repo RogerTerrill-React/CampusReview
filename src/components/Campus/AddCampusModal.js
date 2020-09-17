@@ -27,9 +27,6 @@ const AddCampusModal = () => {
         <Modal.Body>
           <AddCampusForm />
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setCampusModalShow(false)}>Close</Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
