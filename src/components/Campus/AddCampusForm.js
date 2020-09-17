@@ -97,6 +97,7 @@ const AddCampusForm = () => {
             value={state}
             onChange={onChange}
           >
+            <option>Choose State</option>
             <option>California</option>
           </Form.Control>
         </Form.Group>
