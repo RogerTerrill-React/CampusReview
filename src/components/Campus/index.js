@@ -1,5 +1,6 @@
+import AddCampusModal from './AddCampusModal';
 import AddCampusForm from './AddCampusForm';
 import Campus from './Campus';
 
-export { Campus };
-export default AddCampusForm;
+export { Campus, AddCampusForm };
+export default AddCampusModal;

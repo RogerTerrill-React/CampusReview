@@ -6,6 +6,9 @@ const UserItem = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
+
+  console.log(location);
+
   const INITIAL_STATE = {
     loading: false,
     user: null,
@@ -25,7 +28,7 @@ const UserItem = () => {
 
     setValues({ ...values, loading: true });
 
-    // match prop is returned through react router Link
+    // params returned through react router Link
     firebase.user(params.id).on('value', (snapshot) => {
       setValues({
         loading: false,
