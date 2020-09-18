@@ -5,16 +5,16 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const AddCampusModal = () => {
-  const [campusModalShow, setCampusModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
-      <Button variant='primary' onClick={() => setCampusModalShow(true)}>
+      <Button variant='primary' onClick={() => setModalShow(true)}>
         Add Campus
       </Button>
       <Modal
-        onHide={() => setCampusModalShow(false)}
-        show={campusModalShow}
+        onHide={() => setModalShow(false)}
+        show={modalShow}
         size='lg'
         animation={false}
         centered
