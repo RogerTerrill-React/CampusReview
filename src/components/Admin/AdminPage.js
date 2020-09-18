@@ -8,8 +8,8 @@ import * as ROUTES from '../../constants/routes';
 import { UserItem } from '../User';
 import User from '../User';
 import AddCampusModal from '../Campus';
+import AddMajorModal from '../Major';
 
-import AddMajorForm from '../Major';
 import AddCourseForm from '../Course';
 
 const AdminPage = () => {
@@ -18,10 +18,10 @@ const AdminPage = () => {
       <h1>Admin</h1>
       <p>The Admin Page is accessible by every signed in admin user.</p>
       <AddCampusModal />
+      <AddMajorModal />
       <Switch>
         <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
         <Route exact path={ROUTES.ADMIN} component={User} />
-        <Route exact path={ROUTES.ADD_MAJOR} component={AddMajorForm} />
         <Route exact path={ROUTES.ADD_COURSE} component={AddCourseForm} />
       </Switch>
     </>

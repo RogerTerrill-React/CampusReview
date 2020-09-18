@@ -3,6 +3,7 @@ import { useFirebase } from '../Firebase';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 
 const AddCampusForm = () => {
   const firebase = useFirebase();
@@ -41,7 +42,6 @@ const AddCampusForm = () => {
   };
 
   const onSubmit = (event) => {
-    console.log('FIred off');
     firebase.campuses().push({
       name,
       address,
@@ -58,29 +58,29 @@ const AddCampusForm = () => {
   };
 
   return (
-    <div>
-      <Form onSubmit={onSubmit}>
-        <Form.Group controlId='formName'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            name='name'
-            value={name}
-            onChange={onChange}
-            type='text'
-            placeholder='Enter School Name'
-          />
-        </Form.Group>
-        <Form.Group controlId='formStreet'>
-          <Form.Label>Street</Form.Label>
-          <Form.Control
-            name='address'
-            value={address}
-            onChange={onChange}
-            type='text'
-            placeholder='1234 Main St'
-          />
-        </Form.Group>
-        <Form.Group controlId='formCity'>
+    <Form onSubmit={onSubmit}>
+      <Form.Group controlId='formName'>
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          name='name'
+          value={name}
+          onChange={onChange}
+          type='text'
+          placeholder='Enter School Name'
+        />
+      </Form.Group>
+      <Form.Group controlId='formStreet'>
+        <Form.Label>Street</Form.Label>
+        <Form.Control
+          name='address'
+          value={address}
+          onChange={onChange}
+          type='text'
+          placeholder='1234 Main St'
+        />
+      </Form.Group>
+      <Form.Row>
+        <Form.Group as={Col} controlId='formCity'>
           <Form.Label>City</Form.Label>
           <Form.Control
             name='city'
@@ -89,7 +89,7 @@ const AddCampusForm = () => {
             type='text'
           />
         </Form.Group>
-        <Form.Group controlId='formState'>
+        <Form.Group as={Col} controlId='formState'>
           <Form.Label>State</Form.Label>
           <Form.Control
             as='select'
@@ -101,7 +101,7 @@ const AddCampusForm = () => {
             <option>California</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId='formZipcode'>
+        <Form.Group as={Col} controlId='formZipcode'>
           <Form.Label>Zip</Form.Label>
           <Form.Control
             name='zipcode'
@@ -110,39 +110,34 @@ const AddCampusForm = () => {
             type='text'
           />
         </Form.Group>
-        <Form.Group controlId='formPhoneNumber'>
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control
-            name='phoneNumber'
-            value={phoneNumber}
-            onChange={onChange}
-            type='tel'
-          />
-        </Form.Group>
-        <Form.Group controlId='formUrl'>
-          <Form.Label>Website</Form.Label>
-          <Form.Control
-            name='url'
-            value={url}
-            onChange={onChange}
-            type='url'
-          />
-        </Form.Group>
-        <Form.Group controlId='formAbout'>
-          <Form.Label>About</Form.Label>
-          <Form.Control
-            as='textarea'
-            name='about'
-            value={about}
-            onChange={onChange}
-          />
-        </Form.Group>
+      </Form.Row>
+      <Form.Group controlId='formPhoneNumber'>
+        <Form.Label>Phone Number</Form.Label>
+        <Form.Control
+          name='phoneNumber'
+          value={phoneNumber}
+          onChange={onChange}
+          type='tel'
+        />
+      </Form.Group>
+      <Form.Group controlId='formUrl'>
+        <Form.Label>Website</Form.Label>
+        <Form.Control name='url' value={url} onChange={onChange} type='url' />
+      </Form.Group>
+      <Form.Group controlId='formAbout'>
+        <Form.Label>About</Form.Label>
+        <Form.Control
+          as='textarea'
+          name='about'
+          value={about}
+          onChange={onChange}
+        />
+      </Form.Group>
 
-        <Button variant='primary' type='submit'>
-          Submit
-        </Button>
-      </Form>
-    </div>
+      <Button variant='primary' type='submit'>
+        Submit
+      </Button>
+    </Form>
   );
 };
 

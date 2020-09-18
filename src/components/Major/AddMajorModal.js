@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import AddCampusForm from './AddCampusForm';
+import AddMajorForm from './AddMajorForm';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const AddCampusModal = () => {
+const AddMajorModal = () => {
   const [campusModalShow, setCampusModalShow] = useState(false);
 
   return (
     <>
       <Button variant='primary' onClick={() => setCampusModalShow(true)}>
-        Add Campus
+        Add Major
       </Button>
       <Modal
         onHide={() => setCampusModalShow(false)}
@@ -20,14 +20,14 @@ const AddCampusModal = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Campus</Modal.Title>
+          <Modal.Title>Add Major</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddCampusForm />
+          <AddMajorForm />
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
-export default AddCampusModal;
+export default AddMajorModal;

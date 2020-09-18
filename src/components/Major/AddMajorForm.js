@@ -1,43 +1,83 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
-// import { useAuthUser } from '../Session';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const AddMajorForm = () => {
   const firebase = useFirebase();
-  // const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     name: '',
+    isOnline: false,
+    schoolId: '',
+    rating: 0,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
-  const onChangeText = (event) => {
+  const { name, isOnline, schoolId } = values;
+
+  const onChange = (event) => {
+    // Destructure out name and value from event.target
+    const { name, value } = event.target;
+
     // Spread current values and overwrite with the destructured value
-    setValues({ ...values, name: event.target.value });
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (event) => {
-    const {name} = values;
-    firebase.majors().push({
+    firebase.campuses().push({
       name,
+      isOnline,
+      schoolId,
     });
 
-    setValues({...values, name: ''});
+    setValues(INITIAL_STATE);
     event.preventDefault();
-  }
-
-  const { name } = values;
+  };
 
   return (
-    <div>
-      Add Major Form
-      <form onSubmit={onSubmit}>
-        <input type='text' value={name} onChange={onChangeText} />
-        <button type='submit'>Add Major</button>
-      </form>
-    </div>
-  )
-}
+    <Form onSubmit={onSubmit}>
+      <Form.Group controlId='formName'>
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          name='name'
+          value={name}
+          onChange={onChange}
+          type='text'
+          placeholder='Enter School Name'
+        />
+      </Form.Group>
+
+      <Form.Group controlId='formCampus'>
+        <Form.Label>Campus</Form.Label>
+        <Form.Control
+          as='select'
+          name='schoolId'
+          value={schoolId}
+          onChange={onChange}
+        >
+          <option>Choose Campus</option>
+          <option>CSUMB</option>
+        </Form.Control>
+      </Form.Group>
+
+      <Form.Group controlId='formIsOnline'>
+        <Form.Check
+          required
+          name='isOnline'
+          label='Available Online'
+          onChange={onChange}
+          id='validationFormik106'
+          feedbackTooltip
+        />
+      </Form.Group>
+
+      <Button variant='primary' type='submit'>
+        Submit
+      </Button>
+    </Form>
+  );
+};
 
 export default AddMajorForm;
