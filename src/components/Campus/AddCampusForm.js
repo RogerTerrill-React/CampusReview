@@ -117,7 +117,6 @@ const AddCampusForm = () => {
             value={phoneNumber}
             onChange={onChange}
             type='tel'
-            placeholder='Enter Phone Number'
           />
         </Form.Group>
         <Form.Group controlId='formUrl'>
@@ -127,7 +126,6 @@ const AddCampusForm = () => {
             value={url}
             onChange={onChange}
             type='url'
-            placeholder='Enter School URL'
           />
         </Form.Group>
         <Form.Group controlId='formAbout'>
@@ -137,7 +135,6 @@ const AddCampusForm = () => {
             name='about'
             value={about}
             onChange={onChange}
-            placeholder='Enter About'
           />
         </Form.Group>
 
