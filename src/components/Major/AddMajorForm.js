@@ -9,13 +9,13 @@ const AddMajorForm = () => {
   const INITIAL_STATE = {
     name: '',
     isOnline: false,
-    schoolId: '',
+    schoolIds: [],
     rating: 0,
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
 
-  const { name, isOnline, schoolId } = values;
+  const { name, isOnline, schoolIds } = values;
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -25,11 +25,22 @@ const AddMajorForm = () => {
     setValues({ ...values, [name]: value });
   };
 
+  const onSelectChange = (event) => {
+    let options = event.target.options;
+    let value = [];
+    for (let i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    setValues({ ...values, schoolIds: value });
+  };
+
   const onSubmit = (event) => {
-    firebase.campuses().push({
+    firebase.majors().push({
       name,
       isOnline,
-      schoolId,
+      schoolIds,
     });
 
     setValues(INITIAL_STATE);
@@ -45,7 +56,7 @@ const AddMajorForm = () => {
           value={name}
           onChange={onChange}
           type='text'
-          placeholder='Enter School Name'
+          placeholder='Enter Major Name'
         />
       </Form.Group>
 
@@ -53,12 +64,13 @@ const AddMajorForm = () => {
         <Form.Label>Campus</Form.Label>
         <Form.Control
           as='select'
-          name='schoolId'
-          value={schoolId}
-          onChange={onChange}
+          name='schoolIds'
+          value={schoolIds}
+          onChange={onSelectChange}
+          multiple
         >
-          <option>Choose Campus</option>
-          <option>CSUMB</option>
+          <option value="csumbValue">CSUMB</option>
+          <option>CSUMB2</option>
         </Form.Control>
       </Form.Group>
 
