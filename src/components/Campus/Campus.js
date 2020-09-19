@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
-// import { useAuthUser } from '../Session';
 import CampusList from './CampusList';
 
 const Campus = () => {
   const firebase = useFirebase();
-  // const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -37,7 +35,6 @@ const Campus = () => {
 
   const { campuses, loading } = values;
 
-  console.log(campuses);
   return (
     <>
       {loading && <div>Loading...</div>}

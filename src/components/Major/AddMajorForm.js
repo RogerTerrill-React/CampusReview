@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
+import { CampusOptionsList }  from '../Campus';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -14,8 +15,11 @@ const AddMajorForm = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [campuses, setCampuses] = useState([]);
 
   const { name, isOnline, schoolIds } = values;
+
+
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -28,7 +32,7 @@ const AddMajorForm = () => {
   const onSelectChange = (event) => {
     let options = event.target.options;
     let value = [];
-    for (let i = 0, l = options.length; i < l; i++) {
+    for (let i = 0;  i < options.length; i++) {
       if (options[i].selected) {
         value.push(options[i].value);
       }
@@ -46,6 +50,22 @@ const AddMajorForm = () => {
     setValues(INITIAL_STATE);
     event.preventDefault();
   };
+
+  useEffect(() => {
+    firebase.campuses().on('value', (snapshot) => {
+      const campusObject = snapshot.val();
+
+      if(campusObject) {
+        const campusList = Object.keys(campusObject).map((key) => ({
+          ...campusObject[key],
+          uid: key,
+        }));
+        setCampuses(campusList);
+      }
+    })
+    return () => firebase.campuses().off();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Form onSubmit={onSubmit}>
@@ -70,7 +90,7 @@ const AddMajorForm = () => {
           multiple
         >
           <option value="csumbValue">CSUMB</option>
-          <option>CSUMB2</option>
+          <CampusOptionsList campuses={campuses}/>
         </Form.Control>
       </Form.Group>
 

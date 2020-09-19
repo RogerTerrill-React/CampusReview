@@ -98,7 +98,7 @@ const AddCampusForm = () => {
             onChange={onChange}
           >
             <option>Choose State</option>
-            <option>California</option>
+            <option value='CA'>California</option>
           </Form.Control>
         </Form.Group>
         <Form.Group as={Col} controlId='formZipcode'>

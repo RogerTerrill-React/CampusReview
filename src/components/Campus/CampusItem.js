@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CampusItem = () => {
+const CampusItem = ({campus}) => {
   return (
     <div>
       CampusItem
