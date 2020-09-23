@@ -7,7 +7,7 @@ import * as ROUTES from '../../constants/routes';
 
 import { UserItem } from '../User';
 import User from '../User';
-import {Campus} from '../Campus';
+import { Campus } from '../Campus';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
 

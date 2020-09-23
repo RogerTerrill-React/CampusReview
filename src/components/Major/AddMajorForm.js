@@ -9,6 +9,7 @@ const AddMajorForm = () => {
 
   const INITIAL_STATE = {
     name: '',
+    code: '',
     isOnline: false,
     schoolIds: [],
     rating: 0,
@@ -17,7 +18,7 @@ const AddMajorForm = () => {
   const [values, setValues] = useState(INITIAL_STATE);
   const [campuses, setCampuses] = useState([]);
 
-  const { name, isOnline, schoolIds } = values;
+  const { name, code, isOnline, schoolIds } = values;
 
 
 
@@ -80,6 +81,17 @@ const AddMajorForm = () => {
         />
       </Form.Group>
 
+      <Form.Group controlId='formCode'>
+        <Form.Label>Code</Form.Label>
+        <Form.Control
+          name='code'
+          value={code}
+          onChange={onChange}
+          type='text'
+          placeholder='Enter Major Name'
+        />
+      </Form.Group>
+
       <Form.Group controlId='formCampus'>
         <Form.Label>Campus</Form.Label>
         <Form.Control
@@ -89,7 +101,6 @@ const AddMajorForm = () => {
           onChange={onSelectChange}
           multiple
         >
-          <option value="csumbValue">CSUMB</option>
           <CampusOptionsList campuses={campuses}/>
         </Form.Control>
       </Form.Group>
