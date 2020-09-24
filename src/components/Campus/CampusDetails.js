@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
+import { useAuthUser } from '../Session';
+
+import AddCampusReviewModal from '../Review';
 
 const CampusDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
+  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -40,13 +44,11 @@ const CampusDetails = () => {
       <h2>Campus ({params.id})</h2>
       {loading && <div>Loading...</div>}
 
-      {campus && (
-        <div>
-          {campus.name}
-        </div>
-      )}
-    </>
-  )
-}
+      {authUser && <AddCampusReviewModal campus={campus} />}
 
-export default CampusDetails
+      {campus && <div>{campus.name}</div>}
+    </>
+  );
+};
+
+export default CampusDetails;

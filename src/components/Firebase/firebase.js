@@ -107,6 +107,11 @@ class Firebase {
 
   courses = () => this.db.ref('courses');
 
+    // *** Reviews API ***
+
+    review = (uid) => this.db.ref(`review/${uid}`);
+
+    reviews = () => this.db.ref('reviews');
 }
 
 export default Firebase;

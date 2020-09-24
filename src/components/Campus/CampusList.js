@@ -5,9 +5,8 @@ const CampusList = ({ campuses }) => {
   return (
     <ul>
       {campuses.map((campus) => {
-        return (
-        <CampusItem key={campus.uid} campus={campus}/>
-      )})}
+        return <CampusItem key={campus.uid} campus={campus} />;
+      })}
     </ul>
   );
 };
@@ -17,10 +16,13 @@ const CampusOptionsList = ({ campuses }) => {
     <>
       {campuses.map((campus) => {
         return (
-          <option key={campus.uid} value={campus.uid}>{campus.name}</option>
-      )})}
+          <option key={campus.uid} value={campus.uid}>
+            {campus.name}
+          </option>
+        );
+      })}
     </>
   );
-}
-export {CampusOptionsList};
+};
+export { CampusOptionsList };
 export default CampusList;
