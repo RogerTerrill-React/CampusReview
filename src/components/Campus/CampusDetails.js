@@ -6,7 +6,6 @@ const CampusDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
-  console.log(location);
 
   const INITIAL_STATE = {
     loading: false,

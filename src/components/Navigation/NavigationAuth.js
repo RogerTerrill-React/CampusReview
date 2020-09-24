@@ -1,30 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
+import Nav from 'react-bootstrap/Nav';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 const NavigationAuth = ({ authUser }) => {
   return (
-    <ul>
-      <li>
-        <Link to={ROUTES.LANDING}>Landing</Link>
-      </li>
-      <li>
-        <Link to={ROUTES.HOME}>Home</Link>
-      </li>
-      <li>
-        <Link to={ROUTES.ACCOUNT}>Account</Link>
-      </li>
+    <>
+      <Nav.Link as={Link} to={ROUTES.LANDING}>
+        Landing
+      </Nav.Link>
+      <Nav.Link as={Link} to={ROUTES.HOME}>
+        Home
+      </Nav.Link>
+      <Nav.Link as={Link} to={ROUTES.ACCOUNT}>
+        Account
+      </Nav.Link>
+
       {!!authUser.roles[ROLES.ADMIN] && (
-        <li>
-          <Link to={ROUTES.ADMIN}>Admin</Link>
-        </li>
+        <Nav.Link as={Link} to={ROUTES.ADMIN}>
+          Admin
+        </Nav.Link>
       )}
-      <li>
+
+      <Nav.Link>
         <SignOutButton />
-      </li>
-    </ul>
+      </Nav.Link>
+    </>
   );
 };
 

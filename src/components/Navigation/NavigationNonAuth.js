@@ -1,18 +1,19 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
 import * as ROUTES from '../../constants/routes';
 
 const NavigationNonAuth = () => {
   return (
-    <ul>
-        <li>
-          <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-        </li>
-      </ul>
-  )
-}
+    <>
+      <Nav.Link as={Link} to={ROUTES.LANDING}>
+        Landing
+      </Nav.Link>
+      <Nav.Link as={Link} to={ROUTES.SIGN_IN}>
+        Sign In
+      </Nav.Link>
+    </>
+  );
+};
 
-export default NavigationNonAuth
+export default NavigationNonAuth;
