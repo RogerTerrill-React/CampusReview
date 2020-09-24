@@ -9,6 +9,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import { Campus, CampusDetails } from '../Campus';
+import { Major, MajorDetails } from '../Major';
 import Container from 'react-bootstrap/Container';
 
 import * as ROUTES from '../../constants/routes';
@@ -29,7 +30,9 @@ const App = () => {
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
           <Route path={ROUTES.CAMPUSES} component={Campus} />
+          <Route path={ROUTES.MAJORS} component={Major} />
           <Route path={ROUTES.CAMPUS_DETAILS} component={CampusDetails} />
+          <Route path={ROUTES.MAJOR_DETAILS} component={MajorDetails} />
         </Switch>
       </Container>
     </Router>
