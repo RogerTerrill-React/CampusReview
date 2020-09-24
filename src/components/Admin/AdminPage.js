@@ -8,6 +8,7 @@ import * as ROUTES from '../../constants/routes';
 import { UserItem } from '../User';
 import User from '../User';
 import { Campus } from '../Campus';
+import { Major } from '../Major';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
 
@@ -26,6 +27,7 @@ const AdminPage = () => {
         <Route exact path={ROUTES.ADD_COURSE} component={AddCourseForm} />
       </Switch>
       <Campus />
+      <Major />
     </>
   );
 };

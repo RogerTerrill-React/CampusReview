@@ -37,9 +37,9 @@ const Major = () => {
 
   const { majors, loading } = values;
 
-  console.log(majors);
   return (
     <>
+    <h1>Majors List</h1>
       {loading && <div>Loading...</div>}
       {majors ? (
         <MajorList majors={majors} />

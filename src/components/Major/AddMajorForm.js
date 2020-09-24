@@ -42,6 +42,7 @@ const AddMajorForm = () => {
   const onSubmit = (event) => {
     firebase.majors().push({
       name,
+      code,
       isOnline,
       schoolIds,
     });

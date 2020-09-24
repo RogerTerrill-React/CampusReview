@@ -37,7 +37,6 @@ const Course = () => {
 
   const { courses, loading } = values;
 
-  console.log(courses);
   return (
     <>
       {loading && <div>Loading...</div>}

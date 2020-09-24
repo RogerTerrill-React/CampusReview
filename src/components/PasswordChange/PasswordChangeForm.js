@@ -38,8 +38,6 @@ const PasswordChangeForm = () => {
   };
 
   const { passwordOne, passwordTwo, error } = values;
-  console.log(values);
-  console.log(passwordOne, passwordTwo);
 
   const isInvalid = passwordOne === '' || passwordOne !== passwordTwo;
     

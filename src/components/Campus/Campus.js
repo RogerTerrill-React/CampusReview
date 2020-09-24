@@ -37,6 +37,7 @@ const Campus = () => {
 
   return (
     <>
+    <h1>Campuses List</h1>
       {loading && <div>Loading...</div>}
       {campuses ? (
         <CampusList campuses={campuses} />

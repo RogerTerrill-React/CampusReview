@@ -1,10 +1,8 @@
 import React from 'react'
 
-const MajorItem = () => {
+const MajorItem = ({major}) => {
   return (
-    <div>
-      MajorItem
-    </div>
+    <li>{major.name} ({major.code})</li>
   )
 }
 

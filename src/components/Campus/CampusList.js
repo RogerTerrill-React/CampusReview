@@ -1,11 +1,12 @@
 import React from 'react';
+import CampusItem from './CampusItem';
 
 const CampusList = ({ campuses }) => {
   return (
     <ul>
       {campuses.map((campus) => {
         return (
-        <li key={campus.uid}>{campus.name}</li>
+        <CampusItem key={campus.uid} campus={campus}/>
       )})}
     </ul>
   );

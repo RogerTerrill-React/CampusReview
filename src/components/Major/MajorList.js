@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
+import MajorItem from './MajorItem';
 
-const MajorList = ({majors}) => {
+const MajorList = ({ majors }) => {
   return (
     <ul>
       {majors.map((major) => (
-        <li key={major.uid}>{major.name}</li>
+        <MajorItem key={major.uid} major={major} />
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default MajorList
+export default MajorList;
