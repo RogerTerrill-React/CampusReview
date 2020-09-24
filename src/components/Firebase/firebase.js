@@ -101,11 +101,11 @@ class Firebase {
 
   majors = () => this.db.ref('majors');
 
-    // *** Courses API ***
+  // *** Courses API ***
 
-    course = (uid) => this.db.ref(`course/${uid}`);
+  course = (uid) => this.db.ref(`course/${uid}`);
 
-    courses = () => this.db.ref('courses');
+  courses = () => this.db.ref('courses');
 
 }
 

@@ -20,8 +20,6 @@ const AddMajorForm = () => {
 
   const { name, code, isOnline, schoolIds } = values;
 
-
-
   const onChange = (event) => {
     // Destructure out name and value from event.target
     const { name, value } = event.target;
@@ -107,7 +105,6 @@ const AddMajorForm = () => {
 
       <Form.Group controlId='formIsOnline'>
         <Form.Check
-          required
           name='isOnline'
           label='Available Online'
           onChange={onChange}
