@@ -43,7 +43,7 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
           reviews: campusReviewsList,
         });
         setCount(campusReviewsList.length);
-        setTotalScore(totalScore)
+        setTotalScore(totalScore);
       } else {
         setValues({
           ...values,
@@ -85,9 +85,9 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
     firebase.campus(campus.uid).set({
       ...snapshot,
       reviewCount,
-      averageScore: avgScore,
+      averageScore: avgScore.toFixed(2),
     });
-    
+
     firebase.campusReviews(campus.uid).push({
       userId: authUser.uid,
       score,
@@ -100,29 +100,40 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
     event.preventDefault();
   };
 
+  const disable = score === '' || review === '';
+
   return (
     <Form onSubmit={onSubmit}>
       <Form.Group controlId='forScore'>
         <Form.Label>Score</Form.Label>
         <Form.Control
+          as='select'
           name='score'
           value={score}
           onChange={onChange}
           type='text'
           placeholder='Enter Score'
-        />
+        >
+          <option>Please rate...</option>
+          <option value='5'>5</option>
+          <option value='4'>4</option>
+          <option value='3'>3</option>
+          <option value='2'>2</option>
+          <option value='1'>1</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group controlId='formReview'>
         <Form.Label>Review</Form.Label>
         <Form.Control
+          as='textarea'
           name='review'
           value={review}
           onChange={onChange}
           type='text'
-          placeholder='1234 Main St'
+          placeholder='Give feedback you wish you had as a new incoming student...'
         />
       </Form.Group>
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' disabled={disable}>
         Submit
       </Button>
     </Form>

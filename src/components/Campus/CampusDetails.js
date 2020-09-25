@@ -42,10 +42,12 @@ const CampusDetails = () => {
 
   return (
     <>
-      <h2>Campus ({params.id}) The average score is {campus.averageScore} based on {campus.reviewCount} reviews</h2>
+      <h2>
+        Campus ({params.id}) The average score is {campus.averageScore} based on {campus.reviewCount} reviews
+      </h2>
       {loading && <div>Loading...</div>}
 
-      {authUser && <AddCampusReviewModal campus={campus}/>}
+      {authUser && <AddCampusReviewModal campus={campus} />}
 
       {campus && <div>{campus.name}</div>}
     </>
