@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
-import { CampusOptionsList }  from '../Campus';
+import { CampusOptionsList } from '../Campus';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const AddMajorForm = ({setModalShow}) => {
+const AddMajorForm = ({ setModalShow }) => {
   const firebase = useFirebase();
 
   const INITIAL_STATE = {
@@ -13,12 +13,13 @@ const AddMajorForm = ({setModalShow}) => {
     isOnline: false,
     schoolIds: [],
     rating: 0,
+    activeYear: '',
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
   const [campuses, setCampuses] = useState([]);
 
-  const { name, code, isOnline, schoolIds } = values;
+  const { name, code, isOnline, schoolIds, activeYear } = values;
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -29,14 +30,15 @@ const AddMajorForm = ({setModalShow}) => {
   };
 
   const onSelectChange = (event) => {
+    const { name } = event.target
     let options = event.target.options;
     let value = [];
-    for (let i = 0;  i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
         value.push(options[i].value);
       }
     }
-    setValues({ ...values, schoolIds: value });
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (event) => {
@@ -45,6 +47,7 @@ const AddMajorForm = ({setModalShow}) => {
       code,
       isOnline,
       schoolIds,
+      activeYear,
     });
 
     setValues(INITIAL_STATE);
@@ -56,17 +59,17 @@ const AddMajorForm = ({setModalShow}) => {
     firebase.campuses().on('value', (snapshot) => {
       const campusObject = snapshot.val();
 
-      if(campusObject) {
+      if (campusObject) {
         const campusList = Object.keys(campusObject).map((key) => ({
           ...campusObject[key],
           uid: key,
         }));
         setCampuses(campusList);
       }
-    })
+    });
     return () => firebase.campuses().off();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Form onSubmit={onSubmit}>
@@ -101,7 +104,24 @@ const AddMajorForm = ({setModalShow}) => {
           onChange={onSelectChange}
           multiple
         >
-          <CampusOptionsList campuses={campuses}/>
+          <CampusOptionsList campuses={campuses} />
+        </Form.Control>
+      </Form.Group>
+
+      <Form.Group controlId='formYears'>
+        <Form.Label>Year Active</Form.Label>
+        <Form.Control
+          as='select'
+          name='activeYear'
+          value={activeYear}
+          onChange={onChange}
+        >
+          <option>Select year</option>
+          <option>2020</option>
+          <option>2019</option>
+          <option>2018</option>
+          <option>2017</option>
+          <option>2016</option>
         </Form.Control>
       </Form.Group>
 
