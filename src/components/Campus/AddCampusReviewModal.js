@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddCampusReviewForm } from '../Review';
+import  AddCampusReviewForm  from './AddCampusReviewForm';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';

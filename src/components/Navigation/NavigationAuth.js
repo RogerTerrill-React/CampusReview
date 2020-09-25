@@ -8,12 +8,10 @@ import * as ROLES from '../../constants/roles';
 const NavigationAuth = ({ authUser }) => {
   return (
     <>
-      <Nav.Link as={Link} to={ROUTES.LANDING}>
-        Landing
-      </Nav.Link>
       <Nav.Link as={Link} to={ROUTES.HOME}>
         Home
       </Nav.Link>
+
       <Nav.Link as={Link} to={ROUTES.ACCOUNT}>
         Account
       </Nav.Link>

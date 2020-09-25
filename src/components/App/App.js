@@ -20,7 +20,6 @@ const App = () => {
     <Router>
       <Container>
         <Navigation />
-        <hr />
         <Switch>
           <Route exact path={ROUTES.LANDING} component={LandingPage} />
           <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
