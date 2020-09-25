@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useAuthUser } from '../Session';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const AddCampusReviewForm = ({ campus }) => {
+const AddCampusReviewForm = ({ campus, setModalShow }) => {
   const firebase = useFirebase();
   const authUser = useAuthUser();
 
@@ -15,8 +15,60 @@ const AddCampusReviewForm = ({ campus }) => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [totalScore, setTotalScore] = useState(0);
+  const [count, setCount] = useState(0);
+  const [snapshot, setSnapshot] = useState(null);
 
   const { score, review } = values;
+
+  useEffect(() => {
+    setValues({ ...values, loading: true });
+
+    firebase.campusReviews(campus.uid).on('value', (snapshot) => {
+      const campusReviewsObject = snapshot.val();
+
+      if (campusReviewsObject) {
+        const campusReviewsList = Object.keys(campusReviewsObject).map(
+          (key) => ({
+            ...campusReviewsObject[key],
+          })
+        );
+
+        let totalScore = 0;
+        campusReviewsList.map(
+          (review) => (totalScore += parseInt(review.score))
+        );
+        setValues({
+          ...values,
+          reviews: campusReviewsList,
+        });
+        setCount(campusReviewsList.length);
+        setTotalScore(totalScore)
+      } else {
+        setValues({
+          ...values,
+          reviews: null,
+        });
+      }
+    });
+    return () => firebase.campusReviews(campus.uid).off();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    firebase.campus(campus.uid).on('value', (snapshot) => {
+      const campusSnapshot = snapshot.val();
+
+      if (campusSnapshot) {
+        setSnapshot({ ...campusSnapshot });
+      } else {
+        setSnapshot(null);
+      }
+    });
+
+    return () => firebase.campuses(campus.uid).off();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -27,14 +79,24 @@ const AddCampusReviewForm = ({ campus }) => {
   };
 
   const onSubmit = (event) => {
-    firebase.reviews().push({
+    const reviewCount = count + 1;
+    const avgScore = (totalScore + parseInt(score)) / reviewCount;
+
+    firebase.campus(campus.uid).set({
+      ...snapshot,
+      reviewCount,
+      averageScore: avgScore,
+    });
+    
+    firebase.campusReviews(campus.uid).push({
       userId: authUser.uid,
-      campusId: campus.uid,
       score,
       review,
     });
 
+    setCount(0);
     setValues(INITIAL_STATE);
+    setModalShow(false);
     event.preventDefault();
   };
 

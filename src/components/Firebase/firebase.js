@@ -91,27 +91,26 @@ class Firebase {
 
   // *** Campus API ***
 
-  campus = (uid) => this.db.ref(`campus/${uid}`);
+  campus = (uid) => this.db.ref(`campuses/${uid}`);
 
   campuses = () => this.db.ref('campuses');
 
+  campusReview = (uid, ruid) => this.db.ref(`campuses/${uid}/reviews/${ruid}`);
+
+  campusReviews = (uid) => this.db.ref(`campuses/${uid}/reviews`);
+
   // *** Majors API ***
 
-  major = (uid) => this.db.ref(`major/${uid}`);
+  major = (uid) => this.db.ref(`majors/${uid}`);
 
   majors = () => this.db.ref('majors');
 
   // *** Courses API ***
 
-  course = (uid) => this.db.ref(`course/${uid}`);
+  course = (uid) => this.db.ref(`courses/${uid}`);
 
   courses = () => this.db.ref('courses');
 
-    // *** Reviews API ***
-
-    review = (uid) => this.db.ref(`review/${uid}`);
-
-    reviews = () => this.db.ref('reviews');
 }
 
 export default Firebase;

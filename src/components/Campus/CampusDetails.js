@@ -14,6 +14,7 @@ const CampusDetails = () => {
   const INITIAL_STATE = {
     loading: false,
     campus: null,
+    reviews: null,
     ...location.state, // location comes from state in Link to
   };
 
@@ -41,10 +42,10 @@ const CampusDetails = () => {
 
   return (
     <>
-      <h2>Campus ({params.id})</h2>
+      <h2>Campus ({params.id}) The average score is {campus.averageScore} based on {campus.reviewCount} reviews</h2>
       {loading && <div>Loading...</div>}
 
-      {authUser && <AddCampusReviewModal campus={campus} />}
+      {authUser && <AddCampusReviewModal campus={campus}/>}
 
       {campus && <div>{campus.name}</div>}
     </>
