@@ -23,7 +23,7 @@ const AddCampusModal = () => {
           <Modal.Title>Add Campus</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddCampusForm />
+          <AddCampusForm setModalShow={setModalShow}/>
         </Modal.Body>
       </Modal>
     </>

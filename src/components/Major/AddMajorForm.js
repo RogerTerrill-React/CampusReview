@@ -4,7 +4,7 @@ import { CampusOptionsList }  from '../Campus';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const AddMajorForm = () => {
+const AddMajorForm = ({setModalShow}) => {
   const firebase = useFirebase();
 
   const INITIAL_STATE = {
@@ -48,6 +48,7 @@ const AddMajorForm = () => {
     });
 
     setValues(INITIAL_STATE);
+    setModalShow(false);
     event.preventDefault();
   };
 

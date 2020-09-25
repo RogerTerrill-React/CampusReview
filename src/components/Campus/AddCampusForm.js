@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 
-const AddCampusForm = () => {
+const AddCampusForm = ({setModalShow}) => {
   const firebase = useFirebase();
 
   const INITIAL_STATE = {
@@ -54,6 +54,7 @@ const AddCampusForm = () => {
     });
 
     setValues(INITIAL_STATE);
+    setModalShow(false);
     event.preventDefault();
   };
 

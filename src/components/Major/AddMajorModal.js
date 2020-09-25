@@ -23,7 +23,7 @@ const AddMajorModal = () => {
           <Modal.Title>Add Major</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddMajorForm />
+          <AddMajorForm setModalShow={setModalShow}/>
         </Modal.Body>
       </Modal>
     </>
