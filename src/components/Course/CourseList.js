@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CourseLIst = ({courses}) => {
+const CourseList = ({courses}) => {
   return (
     <ul>
       {courses.map((course) => (
@@ -10,4 +10,4 @@ const CourseLIst = ({courses}) => {
   )
 }
 
-export default CourseLIst
+export default CourseList

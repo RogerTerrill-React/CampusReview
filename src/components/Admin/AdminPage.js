@@ -9,6 +9,7 @@ import { UserItem } from '../User';
 import User from '../User';
 import { Campus } from '../Campus';
 import { Major } from '../Major';
+import { Course } from '../Course';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
 import AddCourseModal from '../Course';
@@ -27,6 +28,7 @@ const AdminPage = () => {
       </Switch>
       <Campus />
       <Major />
+      <Course />
     </>
   );
 };

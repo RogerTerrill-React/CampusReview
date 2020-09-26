@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
-// import { useAuthUser } from '../Session';
 import CourseList from './CourseList';
 
 const Course = () => {
   const firebase = useFirebase();
-  // const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
