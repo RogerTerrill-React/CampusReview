@@ -18,15 +18,17 @@ const Major = () => {
     setValues({ ...values, loading: true });
 
     firebase.majors().on('value', (snapshot) => {
-      const campusObject = snapshot.val();
+      const majorsSnapshot = snapshot.val();
 
-      if (campusObject) {
+      if (majorsSnapshot) {
         // convert campus list from snapshot
-        const campusList = Object.keys(campusObject).map((key) => ({
-          ...campusObject[key],
+        const majorList = Object.keys(majorsSnapshot).map((key) => ({
+          ...majorsSnapshot[key],
           uid: key,
         }));
-        setValues({ ...values, loading: false, majors: campusList });
+
+        console.log(majorList)
+        setValues({ ...values, loading: false, majors: majorList });
       } else {
         setValues({ ...values, loading: false, majors: null });
       }

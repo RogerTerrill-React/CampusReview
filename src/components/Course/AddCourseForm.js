@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
-// import { useAuthUser } from '../Session';
 
-const AddMajorForm = () => {
+const AddCourseForm = () => {
   const firebase = useFirebase();
-  // const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     name: '',
@@ -40,4 +38,4 @@ const AddMajorForm = () => {
   )
 }
 
-export default AddMajorForm;
+export default AddCourseForm;

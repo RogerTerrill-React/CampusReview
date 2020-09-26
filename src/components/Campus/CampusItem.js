@@ -11,7 +11,7 @@ const CampusItem = ({ campus }) => {
           state: { campus },
         }}
       >
-        {campus.name}
+        {campus.name} - {campus.averageScore}
       </Link>
     </li>
   );

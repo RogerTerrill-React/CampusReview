@@ -12,7 +12,7 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
   const authUser = useAuthUser();
 
   const INITIAL_STATE = {
-    score: '',
+    score: 0,
     review: '',
     startYear: '',
     endYear: '',
@@ -92,13 +92,13 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
     firebase.campus(campus.uid).set({
       ...snapshot,
       reviewCount,
-      averageScore: avgScore.toFixed(2),
+      averageScore: Number(avgScore.toFixed(2)),
     });
 
     // Add new review to campus
     firebase.campusReviews(campus.uid).push({
       userId: authUser.uid,
-      score,
+      score: parseInt(score),
       review,
     });
 
@@ -162,7 +162,7 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
                   name='score'
                   value={score}
                   onChange={onChange}
-                  type='text'
+                  type='number'
                   placeholder='Enter Score'
                 >
                   <option>Please rate...</option>

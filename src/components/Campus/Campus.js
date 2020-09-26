@@ -34,6 +34,7 @@ const Campus = () => {
   }, []);
 
   const { campuses, loading } = values;
+  console.log(campuses);
 
   return (
     <>

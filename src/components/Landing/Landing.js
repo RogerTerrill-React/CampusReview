@@ -1,10 +1,11 @@
 import React from 'react';
+import {Campus} from '../Campus';
 
 
 const Landing = () => {
   return (
     <div>
-      Landing
+      <Campus />
     </div>
   )
 }

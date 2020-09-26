@@ -10,16 +10,14 @@ const AddMajorForm = ({ setModalShow }) => {
   const INITIAL_STATE = {
     name: '',
     code: '',
-    isOnline: false,
     schoolIds: [],
     rating: 0,
-    activeYear: '',
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
   const [campuses, setCampuses] = useState([]);
 
-  const { name, code, isOnline, schoolIds, activeYear } = values;
+  const { name, code, schoolIds } = values;
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -45,9 +43,7 @@ const AddMajorForm = ({ setModalShow }) => {
     firebase.majors().push({
       name,
       code,
-      isOnline,
       schoolIds,
-      activeYear,
     });
 
     setValues(INITIAL_STATE);
@@ -106,33 +102,6 @@ const AddMajorForm = ({ setModalShow }) => {
         >
           <CampusOptionsList campuses={campuses} />
         </Form.Control>
-      </Form.Group>
-
-      <Form.Group controlId='formYears'>
-        <Form.Label>Year Active</Form.Label>
-        <Form.Control
-          as='select'
-          name='activeYear'
-          value={activeYear}
-          onChange={onChange}
-        >
-          <option>Select year</option>
-          <option>2020</option>
-          <option>2019</option>
-          <option>2018</option>
-          <option>2017</option>
-          <option>2016</option>
-        </Form.Control>
-      </Form.Group>
-
-      <Form.Group controlId='formIsOnline'>
-        <Form.Check
-          name='isOnline'
-          label='Available Online'
-          onChange={onChange}
-          id='validationFormik106'
-          feedbackTooltip
-        />
       </Form.Group>
 
       <Button variant='primary' type='submit'>
