@@ -1,7 +1,9 @@
 import React from 'react';
 import CampusItem from './CampusItem';
+import { useCampusList } from '../Campus';
 
-const CampusList = ({ campuses }) => {
+const CampusList = () => {
+  const campuses = useCampusList();
   return (
     <ul>
       {campuses.map((campus) => {
@@ -11,7 +13,8 @@ const CampusList = ({ campuses }) => {
   );
 };
 
-const CampusOptionsList = ({ campuses }) => {
+const CampusOptionsList = () => {
+  const campuses = useCampusList();
   return (
     <>
       {campuses.map((campus) => {

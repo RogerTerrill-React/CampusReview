@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
+import { useCampusList } from '../Campus';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,6 +8,9 @@ import Col from 'react-bootstrap/Col';
 
 const AddCampusForm = ({setModalShow}) => {
   const firebase = useFirebase();
+  const campusList = useCampusList();
+
+  console.log("asdfasd", campusList);
 
   const INITIAL_STATE = {
     name: '',
@@ -67,7 +71,7 @@ const AddCampusForm = ({setModalShow}) => {
           value={name}
           onChange={onChange}
           type='text'
-          placeholder='Enter School Name'
+          placeholder='Enter Course Name'
         />
       </Form.Group>
       <Form.Group controlId='formStreet'>

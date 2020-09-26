@@ -100,7 +100,7 @@ const AddMajorForm = ({ setModalShow }) => {
           onChange={onSelectChange}
           multiple
         >
-          <CampusOptionsList campuses={campuses} />
+          <CampusOptionsList/>
         </Form.Control>
       </Form.Group>
 

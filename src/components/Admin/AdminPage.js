@@ -11,8 +11,7 @@ import { Campus } from '../Campus';
 import { Major } from '../Major';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
-
-import AddCourseForm from '../Course';
+import AddCourseModal from '../Course';
 
 const AdminPage = () => {
   return (
@@ -21,10 +20,10 @@ const AdminPage = () => {
       <p>The Admin Page is accessible by every signed in admin user.</p>
       <AddCampusModal />
       <AddMajorModal />
+      <AddCourseModal />
       <Switch>
         <Route exact path={ROUTES.ADMIN_USERS_DETAILS} component={UserItem} />
         <Route exact path={ROUTES.ADMIN} component={User} />
-        <Route exact path={ROUTES.ADD_COURSE} component={AddCourseForm} />
       </Switch>
       <Campus />
       <Major />
