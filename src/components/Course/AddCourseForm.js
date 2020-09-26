@@ -87,6 +87,7 @@ const AddCourseForm = ({ setModalShow }) => {
             value={majorId}
             onChange={onChange}
           >
+            <option>Choose Major</option>
             <MajorsOptionsList />
           </Form.Control>
         </Form.Group>
@@ -99,6 +100,7 @@ const AddCourseForm = ({ setModalShow }) => {
             value={schoolId}
             onChange={onChange}
           >
+            <option>Choose Campus</option>
             <CampusOptionsList />
           </Form.Control>
         </Form.Group>
