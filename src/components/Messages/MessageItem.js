@@ -6,7 +6,6 @@ const MessageItem = ({ authUser, message, onEditMessage, onRemoveMessage }) => {
     editText: message.text,
   };
 
-  console.log(message);
   const [values, setValues] = useState(INITIAL_STATE);
 
   const onToggleEditMode = () => {

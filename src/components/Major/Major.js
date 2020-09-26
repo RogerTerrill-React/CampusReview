@@ -27,7 +27,6 @@ const Major = () => {
           uid: key,
         }));
 
-        console.log(majorList)
         setValues({ ...values, loading: false, majors: majorList });
       } else {
         setValues({ ...values, loading: false, majors: null });

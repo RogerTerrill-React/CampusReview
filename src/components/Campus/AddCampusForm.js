@@ -10,8 +10,6 @@ const AddCampusForm = ({setModalShow}) => {
   const firebase = useFirebase();
   const campusList = useCampusList();
 
-  console.log("asdfasd", campusList);
-
   const INITIAL_STATE = {
     name: '',
     address: '',
