@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import AuthUserContext from './context';
 import { CampusListContext } from '../Campus';
+import { MajorsListContext } from '../Major';
 
 const withAuthentication = (Component) => {
   const WithAuthentication = (props) => {
@@ -10,6 +11,7 @@ const withAuthentication = (Component) => {
       JSON.parse(localStorage.getItem('authUser'))
     );
     const [campusList, setCampusList] = useState([]);
+    const [majorsList, setMajorsList] = useState([]);
 
     // Get the authenticated User
     useEffect(() => {
@@ -25,7 +27,6 @@ const withAuthentication = (Component) => {
         unsubscribe();
       };
     }, [firebase]);
-
 
     // Get the full list of campuses
     useEffect(() => {
@@ -47,11 +48,32 @@ const withAuthentication = (Component) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log("campusList", campusList);
+    // Get the full list of majors
+    useEffect(() => {
+      firebase.majors().on('value', (snapshot) => {
+        const majorsSnapshot = snapshot.val();
+
+        if (majorsSnapshot) {
+          // convert campus list from snapshot
+          const majorsList = Object.keys(majorsSnapshot).map((key) => ({
+            ...majorsSnapshot[key],
+            uid: key,
+          }));
+          setMajorsList(majorsList);
+        } else {
+          setMajorsList(null);
+        }
+      });
+      return () => firebase.majors().off();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
       <AuthUserContext.Provider value={authUser}>
         <CampusListContext.Provider value={campusList}>
-          <Component {...props} />
+          <MajorsListContext.Provider value={majorsList}>
+            <Component {...props} />
+          </MajorsListContext.Provider>
         </CampusListContext.Provider>
       </AuthUserContext.Provider>
     );

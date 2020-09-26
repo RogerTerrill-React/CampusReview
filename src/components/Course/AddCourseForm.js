@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 
 import { CampusOptionsList } from '../Campus';
+import { MajorsOptionsList } from '../Major';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -86,8 +87,7 @@ const AddCourseForm = ({ setModalShow }) => {
             value={majorId}
             onChange={onChange}
           >
-            <option>Choose Major</option>
-            <option value='CA'>California</option>
+            <MajorsOptionsList />
           </Form.Control>
         </Form.Group>
 

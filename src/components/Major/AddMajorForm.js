@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 import { CampusOptionsList } from '../Campus';
 import Form from 'react-bootstrap/Form';
@@ -15,7 +15,6 @@ const AddMajorForm = ({ setModalShow }) => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
-  const [campuses, setCampuses] = useState([]);
 
   const { name, code, schoolIds } = values;
 
@@ -50,22 +49,6 @@ const AddMajorForm = ({ setModalShow }) => {
     setModalShow(false);
     event.preventDefault();
   };
-
-  useEffect(() => {
-    firebase.campuses().on('value', (snapshot) => {
-      const campusObject = snapshot.val();
-
-      if (campusObject) {
-        const campusList = Object.keys(campusObject).map((key) => ({
-          ...campusObject[key],
-          uid: key,
-        }));
-        setCampuses(campusList);
-      }
-    });
-    return () => firebase.campuses().off();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Form onSubmit={onSubmit}>

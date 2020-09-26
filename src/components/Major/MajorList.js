@@ -1,7 +1,10 @@
 import React from 'react';
 import MajorItem from './MajorItem';
+import {useMajorsList } from '../Major';
 
-const MajorList = ({ majors }) => {
+const MajorList = () => {
+  const majors = useMajorsList();
+
   return (
     <ul>
       {majors.map((major) => (
@@ -11,7 +14,9 @@ const MajorList = ({ majors }) => {
   );
 };
 
-const MajorListLinks = ({ campus, majors}) => {
+const CampusMajorsList = ({ campus }) => {
+  const majors = useMajorsList();
+
   return (
     <ul>
       {majors.map((major) => {
@@ -25,5 +30,20 @@ const MajorListLinks = ({ campus, majors}) => {
   );
 }
 
-export {MajorListLinks}
+const MajorsOptionsList = () => {
+  const majors = useMajorsList();
+  return (
+    <>
+      {majors.map((major) => {
+        return (
+          <option key={major.uid} value={major.uid}>
+            {major.name}
+          </option>
+        );
+      })}
+    </>
+  );
+};
+
+export {CampusMajorsList, MajorsOptionsList}
 export default MajorList;
