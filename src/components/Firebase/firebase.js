@@ -115,6 +115,10 @@ class Firebase {
 
   courses = () => this.db.ref('courses');
 
+  courseReview = (uid, ruid) => this.db.ref(`courses/${uid}/reviews/${ruid}`);
+
+  courseReviews = (uid) => this.db.ref(`courses/${uid}/reviews`);
+
 }
 
 export default Firebase;

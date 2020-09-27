@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
 
-// import AddMajorReviewModal from './AddMajorReviewModal';
+import AddCourseReviewModal from './AddCourseReviewModal';
 
 const CourseDetails = () => {
   const firebase = useFirebase();
@@ -41,7 +41,7 @@ const CourseDetails = () => {
 
   return (
     <>
-    {/* {campus && <AddMajorReviewModal campus={campus} major={major} />} */}
+    {course && <AddCourseReviewModal course={course} />}
       <h2>Course ({params.id}) CourseDetails.js</h2>
       {loading && <div>Loading...</div>}
 
