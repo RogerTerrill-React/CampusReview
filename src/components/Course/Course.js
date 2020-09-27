@@ -37,9 +37,10 @@ const Course = () => {
 
   return (
     <>
+    <h1>Courses List</h1>
       {loading && <div>Loading...</div>}
       {courses ? (
-        <CourseList courses={courses} />
+        <CourseList />
       ) : (
         <div>There are no courses...</div>
       )}

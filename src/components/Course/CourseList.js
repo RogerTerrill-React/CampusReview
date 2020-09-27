@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import CourseItem from './CourseItem';
+import {useCourseList } from '../Course';
 
-const CourseList = ({courses}) => {
+// Fill courses list
+const CourseList = () => {
+  const courses = useCourseList();
+
   return (
     <ul>
       {courses.map((course) => (
-        <li key={course.uid}>{course.name}</li>
+        <CourseItem course={course}/>
       ))}
     </ul>
   )

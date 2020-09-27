@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
 
-const CourseItem = () => {
+const CourseItem = ({ course }) => {
   return (
-    <div>
-      CourseItem
-    </div>
-  )
+    <li>
+      <Link
+        to={{
+          pathname: `${ROUTES.COURSE}/${course.uid}`,
+          state: { course },
+        }}
+      >
+        {course.name}
+      </Link>
+    </li>
+  );
 }
 
 export default CourseItem

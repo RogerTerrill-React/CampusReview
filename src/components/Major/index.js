@@ -5,11 +5,11 @@ import { CampusMajorsList, MajorsOptionsList } from './MajorList';
 import MajorsListContext, { useMajorsList } from './context';
 
 export {
-  CampusMajorsList,
   Major,
   MajorDetails,
-  MajorsListContext,
-  MajorsOptionsList,
   useMajorsList,
+  CampusMajorsList,
+  MajorsOptionsList,
+  MajorsListContext,
 };
 export default AddMajorModal;
