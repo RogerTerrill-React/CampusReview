@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
 
+import AddMajorReviewModal from './AddMajorReviewModal';
+
 const MajorDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
@@ -10,6 +12,7 @@ const MajorDetails = () => {
   const INITIAL_STATE = {
     loading: false,
     major: null,
+    campus: null,
     ...location.state, // location comes from state in Link to
   };
 
@@ -33,11 +36,12 @@ const MajorDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { major, loading } = values;
+  const { campus, major, loading } = values;
 
   return (
     <>
-      <h2>Major ({params.id})</h2>
+    {campus && <AddMajorReviewModal campus={campus} major={major} />}
+      <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
 
       {major && (

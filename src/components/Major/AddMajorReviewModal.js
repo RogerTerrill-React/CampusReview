@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import  AddCampusReviewForm  from './AddCampusReviewForm';
+import  AddMajorReviewForm  from './AddMajorReviewForm';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const AddCampusReviewModal = ({ campus }) => {
+const AddMajorReviewModal = ({ campus,  major }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
       <Button variant='primary' onClick={() => setModalShow(true)}>
-        Add Campus Review
+        Add Major Review
       </Button>
       <Modal
         onHide={() => setModalShow(false)}
@@ -20,14 +20,14 @@ const AddCampusReviewModal = ({ campus }) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Campus Review</Modal.Title>
+          <Modal.Title>Add Campus Review for {campus.name} </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddCampusReviewForm campus={campus} setModalShow={setModalShow}/>
+          <AddMajorReviewForm campus={campus} major={major} setModalShow={setModalShow}/>
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
-export default AddCampusReviewModal;
+export default AddMajorReviewModal;

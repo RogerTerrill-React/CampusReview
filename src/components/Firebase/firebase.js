@@ -105,6 +105,10 @@ class Firebase {
 
   majors = () => this.db.ref('majors');
 
+  majorReview = (uid, ruid) => this.db.ref(`majors/${uid}/reviews/${ruid}`);
+
+  majorReviews = (uid) => this.db.ref(`majors/${uid}/reviews`);
+
   // *** Courses API ***
 
   course = (uid) => this.db.ref(`courses/${uid}`);
