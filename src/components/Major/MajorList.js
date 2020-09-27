@@ -1,6 +1,6 @@
 import React from 'react';
 import MajorItem from './MajorItem';
-import {useMajorsList } from '../Major';
+import { useMajorsList } from '../Major';
 
 const MajorList = () => {
   const majors = useMajorsList();
@@ -21,10 +21,10 @@ const CampusMajorsList = ({ campus }) => {
     <ul>
       {majors.map((major) => {
         const isMajor = Object.values(major)[Object.keys(major).indexOf('schoolIds')].includes(campus.uid)
-        if(!isMajor){
+        if (!isMajor) {
           return null;
         }
-        return <MajorItem key={major.uid} major={major} campus={campus}/>;
+        return <MajorItem key={major.uid} major={major} campus={campus} />;
       })}
     </ul>
   );
@@ -45,5 +45,5 @@ const MajorsOptionsList = () => {
   );
 };
 
-export {CampusMajorsList, MajorsOptionsList}
+export { CampusMajorsList, MajorsOptionsList }
 export default MajorList;

@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseItem from './CourseItem';
-import {useCourseList } from '../Course';
+import { useCourseList } from '../Course';
 
 // Fill courses list
 const CourseList = () => {
@@ -9,10 +9,30 @@ const CourseList = () => {
   return (
     <ul>
       {courses.map((course) => (
-        <CourseItem course={course}/>
+        <CourseItem course={course} />
       ))}
     </ul>
   )
 }
 
-export default CourseList
+const CampusMajorCoursesList = ({ campus, major }) => {
+  const courses = useCourseList();
+  console.log(courses);
+
+  return (
+    <ul>
+      {courses.map((course) => {
+        const isCourse = (major.uid === course.majorId) && (campus.uid === course.schoolId)
+        
+        if (!isCourse) {
+          return null;
+        }
+        return <CourseItem key={course.uid} course={course} />;
+      })}
+      
+    </ul>
+  );
+}
+
+export { CampusMajorCoursesList }
+export default CourseList;

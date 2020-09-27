@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
+import { useAuthUser } from '../Session';
 
 import AddCourseReviewModal from './AddCourseReviewModal';
 
@@ -8,6 +9,7 @@ const CourseDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
+  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -41,7 +43,7 @@ const CourseDetails = () => {
 
   return (
     <>
-    {course && <AddCourseReviewModal course={course} />}
+    {course && authUser && <AddCourseReviewModal course={course} />}
       <h2>Course ({params.id}) CourseDetails.js</h2>
       {loading && <div>Loading...</div>}
 

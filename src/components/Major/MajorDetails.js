@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
+import { useAuthUser } from '../Session';
 
 import AddMajorReviewModal from './AddMajorReviewModal';
+import { CampusMajorCoursesList } from '../Course';
 
 const MajorDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
+  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -40,7 +43,7 @@ const MajorDetails = () => {
 
   return (
     <>
-    {campus && <AddMajorReviewModal campus={campus} major={major} />}
+      {authUser && campus && <AddMajorReviewModal campus={campus} major={major} />}
       <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
 
@@ -49,6 +52,8 @@ const MajorDetails = () => {
           {major.name}
         </div>
       )}
+
+      <CampusMajorCoursesList campus={campus} major={major} />
     </>
   )
 }

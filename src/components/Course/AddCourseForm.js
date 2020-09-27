@@ -55,7 +55,7 @@ const AddCourseForm = ({ setModalShow }) => {
           value={name}
           onChange={onChange}
           type='text'
-          placeholder='Enter School Name'
+          placeholder='Enter Course Name'
         />
       </Form.Group>
       <Form.Row>
