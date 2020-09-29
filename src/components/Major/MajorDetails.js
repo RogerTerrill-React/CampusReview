@@ -5,6 +5,7 @@ import { useAuthUser } from '../Session';
 
 import AddMajorReviewModal from './AddMajorReviewModal';
 import { CampusMajorCoursesList } from '../Course';
+import MajorReviews from './MajorReviews';
 
 const MajorDetails = () => {
   const firebase = useFirebase();
@@ -15,7 +16,7 @@ const MajorDetails = () => {
   const INITIAL_STATE = {
     loading: false,
     major: null,
-    campus: null,
+    campus: null, // Gets set from location.state
     ...location.state, // location comes from state in Link to
   };
 
@@ -46,9 +47,11 @@ const MajorDetails = () => {
       {authUser && campus && <AddMajorReviewModal campus={campus} major={major} />}
       <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
+      
 
       {major && (
         <div>
+          <MajorReviews campus={campus} major={major} />
           {major.name}
         </div>
       )}

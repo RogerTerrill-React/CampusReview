@@ -7,18 +7,18 @@ const CourseList = () => {
   const courses = useCourseList();
 
   return (
-    <ul>
+    courses ? <ul>
       {courses.map((course) => (
         <CourseItem key={course.uid} course={course} />
       ))}
     </ul>
+    : <p>No courses</p>
   )
 }
 
 const CampusMajorCoursesList = ({ campus, major }) => {
   const courses = useCourseList();
-  console.log(courses);
-
+  
   return (
     <ul>
       {courses.map((course) => {
