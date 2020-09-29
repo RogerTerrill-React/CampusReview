@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useAuthUser } from '../Session';
 
 import AddCourseReviewModal from './AddCourseReviewModal';
+import CourseReviews from './CourseReviews';
 
 const CourseDetails = () => {
   const firebase = useFirebase();
@@ -49,6 +50,7 @@ const CourseDetails = () => {
 
       {course && (
         <div>
+          <CourseReviews course={course} />
           {course.name}
         </div>
       )}
