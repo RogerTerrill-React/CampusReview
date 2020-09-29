@@ -6,9 +6,11 @@ const MajorReviews = ({ campus, major }) => {
   
   const INITIAL_STATE ={
     average: 0,
+    count: 0,
   }
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const {average, count} = values;
 
   useEffect(() => {
     
@@ -30,7 +32,7 @@ const MajorReviews = ({ campus, major }) => {
       const length = scoreArray.length ? scoreArray.length : 1
       const total = scoreArray.reduce(((score, sum) => score + sum),0)
       const average = total / length;
-      setValues({...values, average});
+      setValues({...values, average, count: scoreArray.length});
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [majorsList.length])
@@ -39,9 +41,9 @@ const MajorReviews = ({ campus, major }) => {
   return (
     <>
       |{ campus.name}-{major.name}|
-      {majorsList && majorsList.length}
+      {majorsList && count}
 
-      {values.average }
+      {average }
 
     </>
   )
