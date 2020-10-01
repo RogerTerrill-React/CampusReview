@@ -4,9 +4,9 @@ import { useFirebase } from '../Firebase';
 const SignOutButton = () => {
   const firebase = useFirebase();
   return (
-    <button type='button' onClick={firebase.doSignOut}>
+    <div onClick={firebase.doSignOut}>
       Sign Out
-    </button>
+    </div>
   );
 };
 

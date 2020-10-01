@@ -11,16 +11,13 @@ import AdminPage from '../Admin';
 import { Campus, CampusDetails } from '../Campus';
 import { Major, MajorDetails } from '../Major';
 import { Course, CourseDetails } from '../Course'
-import Container from 'react-bootstrap/Container';
-
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
 const App = () => {
   return (
     <Router>
-      <Container>
-        <Navigation />
+        <Navigation>
         <Switch>
           <Route exact path={ROUTES.LANDING} component={LandingPage} />
           <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -36,7 +33,7 @@ const App = () => {
           <Route path={ROUTES.MAJOR_DETAILS} component={MajorDetails} />
           <Route path={ROUTES.COURSE_DETAILS} component={CourseDetails} />
         </Switch>
-      </Container>
+        </Navigation>
     </Router>
   );
 };
