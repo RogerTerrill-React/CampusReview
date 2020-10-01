@@ -13,27 +13,27 @@ const Navigation = ({ children }) => {
 
   return (
     <>
-    <Navbar className='border-bottom' bg='light' fixed='top' expand='sm'>
-      <Container>
-        <Navbar.Brand className='mr-auto'>
-          <Link to='/'>STEMranks</Link>
-        </Navbar.Brand>
-        <Nav>
-          {authUser ? (
-            <NavigationAuth authUser={authUser} />
-          ) : (
-            <NavigationNonAuth />
-          )}
-        </Nav>
-      </Container>
-    </Navbar>
-    {children}
-    <footer class="py-3 bg-light fixed-bottom">
-   <div class="container">
-      <p class="text-center">Copyright &copy; Hello Consultancy 2019</p>
-   </div>
-</footer>
-</>
+      <Navbar variant='dark' fixed='top' expand='sm'>
+        <Container>
+          <Navbar.Brand className='mr-auto'>
+            <Link className='text-light' to='/'>STEMranks</Link>
+          </Navbar.Brand>
+          <Nav>
+            {authUser ? (
+              <NavigationAuth authUser={authUser} />
+            ) : (
+              <NavigationNonAuth />
+            )}
+          </Nav>
+        </Container>
+      </Navbar>
+      {children}
+      <Navbar variant='dark' fixed='bottom'>
+        <Container>
+          <p className='text-center'>Copyright &copy; STEMranks 2019</p>
+        </Container>
+      </Navbar>
+    </>
   );
 };
 
