@@ -10,7 +10,7 @@ const Campus = () => {
 
   return (
     <>
-    <h1>Campuses</h1>
+    <h1 className="text-center">Top Campuses</h1>
       {/* {loading && <div>Loading...</div>} */}
       {campuses ? (
         <CampusList/>

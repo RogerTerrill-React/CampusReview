@@ -40,7 +40,7 @@ const Major = () => {
 
   return (
     <>
-    <h1>Majors</h1>
+    <h1 className="text-center">Top Majors</h1>
       {loading && <div>Loading...</div>}
       {majors ? (
         <MajorList majors={majors} />
