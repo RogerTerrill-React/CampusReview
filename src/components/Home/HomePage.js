@@ -15,6 +15,8 @@ const HomePage = () => {
     <Container>
       <Row>
         <Col><Campus /></Col>
+      </Row>
+      <Row>
         <Col><Major /></Col>
         <Col><Course /></Col>
       </Row>
