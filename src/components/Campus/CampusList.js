@@ -7,9 +7,9 @@ const CampusList = () => {
   const sortedCampusByAverageScore = campuses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
-    <ul class="list-group">
-      {sortedCampusByAverageScore.map((campus) => {
-        return <CampusItem key={campus.uid} campus={campus} />;
+    <ul className="list-group">
+      {sortedCampusByAverageScore.map((campus, index) => {
+        return <CampusItem key={campus.uid} index={index} campus={campus} />;
       })}
     </ul>
   );
@@ -21,7 +21,7 @@ const CampusesByMajorList = ({ major }) => {
   const sortedCampusByAverageScore = campuses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
-    <ul class="list-group">
+    <ul className="list-group">
       {sortedCampusByAverageScore.map((campus) => {
 
         const isCampus = schoolIds.includes(campus.uid);

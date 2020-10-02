@@ -7,9 +7,9 @@ const CourseList = () => {
   const courses = useCourseList();
 
   return (
-    courses ? <ul>
-      {courses.map((course) => (
-        <CourseItem key={course.uid} course={course} />
+    courses ? <ul className="list-group">
+      {courses.map((course, index) => (
+        <CourseItem key={course.uid} index={index} course={course} />
       ))}
     </ul>
     : <p>No courses</p>
@@ -20,7 +20,7 @@ const CampusMajorCoursesList = ({ campus, major }) => {
   const courses = useCourseList();
   
   return (
-    <ul>
+    <ul className="list-group">
       {courses.map((course) => {
         const isCourse = (major.uid === course.majorId) && (campus.uid === course.schoolId)
         
