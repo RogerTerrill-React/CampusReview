@@ -41,22 +41,23 @@ const MajorDetails = () => {
   }, []);
 
   const { campus, major, loading } = values;
+  console.log(major)
 
   return (
     <>
-      {authUser && campus && <AddMajorReviewModal campus={campus} major={major} />}
+      {campus && authUser && <AddMajorReviewModal campus={campus} major={major} />}
       <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
       
 
-      {major && (
+      {campus && major && (
         <div>
           <MajorReviews campus={campus} major={major} />
           {major.name}
         </div>
       )}
 
-      <CampusMajorCoursesList campus={campus} major={major} />
+      {campus && <CampusMajorCoursesList campus={campus} major={major} />}
     </>
   )
 }
