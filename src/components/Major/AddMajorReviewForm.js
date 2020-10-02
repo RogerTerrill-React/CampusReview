@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useAuthUser } from '../Session';
+import { average } from '../../helpers/array';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
+const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
   const firebase = useFirebase();
   const authUser = useAuthUser();
 
@@ -19,9 +20,7 @@ const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
-  // const [totalScore, setTotalScore] = useState(0);
-  // const [count, setCount] = useState(0);
-  // const [snapshot, setSnapshot] = useState(null);
+  const [snapshot, setSnapshot] = useState(null);
 
   const { startYear, endYear, score, review } = values;
 
@@ -47,8 +46,6 @@ const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
           ...values,
           reviews: majorReviewsList,
         });
-        // setCount(majorReviewsList.length);
-        // setTotalScore(totalScore);
       } else {
         setValues({
           ...values,
@@ -60,21 +57,21 @@ const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // // Fetch current campus to set new average score and add new review
-  // useEffect(() => {
-  //   firebase.campus(campus.uid).on('value', (snapshot) => {
-  //     const campusSnapshot = snapshot.val();
+  // Fetch current campus to set new average score and add new review
+  useEffect(() => {
+    firebase.major(major.uid).on('value', (snapshot) => {
+      const majorSnapshot = snapshot.val();
 
-  //     if (campusSnapshot) {
-  //       setSnapshot({ ...campusSnapshot });
-  //     } else {
-  //       setSnapshot(null);
-  //     }
-  //   });
+      if (majorSnapshot) {
+        setSnapshot({ ...majorSnapshot });
+      } else {
+        setSnapshot(null);
+      }
+    });
 
-  //   return () => firebase.campuses(campus.uid).off();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    return () => firebase.major(major.uid).off();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -85,15 +82,14 @@ const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
   };
 
   const onSubmit = (event) => {
-    // const reviewCount = count + 1;
-    // const avgScore = (totalScore + parseInt(score)) / reviewCount;
+    ratings.push(parseInt(score));
+    const avgScore = average(ratings);
 
-    // Set new average score for campus
-    // firebase.campus(campus.uid).set({
-    //   ...snapshot,
-    //   reviewCount,
-    //   averageScore: Number(avgScore.toFixed(2)),
-    // });
+    // Set new average score for major
+    firebase.major(major.uid).set({
+      ...snapshot,
+      averageScore: Number(avgScore.toFixed(2)),
+    });
 
     // Add new review to campus
     firebase.majorReviews(major.uid).push({
@@ -106,6 +102,7 @@ const AddMajorReviewForm = ({ campus, major, setModalShow }) => {
     // setCount(0);
     setValues(INITIAL_STATE);
     setModalShow(false);
+    window.location.reload();
     event.preventDefault();
   };
 

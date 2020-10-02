@@ -4,7 +4,7 @@ import  AddMajorReviewForm  from './AddMajorReviewForm';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const AddMajorReviewModal = ({ campus,  major }) => {
+const AddMajorReviewModal = ({ campus,  major, ratings }) => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
@@ -23,7 +23,7 @@ const AddMajorReviewModal = ({ campus,  major }) => {
           <Modal.Title>Add Campus Review for {campus.name} </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddMajorReviewForm campus={campus} major={major} setModalShow={setModalShow}/>
+          <AddMajorReviewForm campus={campus} major={major} setModalShow={setModalShow} ratings={ratings}/>
         </Modal.Body>
       </Modal>
     </>

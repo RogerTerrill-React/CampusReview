@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useAuthUser } from '../Session';
 
 import AddMajorReviewModal from './AddMajorReviewModal';
-import {CampusesByMajorList} from '../Campus';
+import { CampusesByMajorList } from '../Campus';
 import { CampusMajorCoursesList } from '../Course';
 import MajorReviews from './MajorReviews';
 
@@ -22,6 +22,7 @@ const MajorDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
     if (values.major) {
@@ -45,14 +46,15 @@ const MajorDetails = () => {
 
   return (
     <>
-      {campus && major && authUser && <AddMajorReviewModal campus={campus} major={major} />}
+      {campus && major && authUser && (
+        <AddMajorReviewModal campus={campus} major={major} ratings={ratings} />
+      )}
       <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
-      
 
       {campus && major && (
         <div>
-          <MajorReviews campus={campus} major={major} />
+          <MajorReviews campus={campus} major={major} setRatings={setRatings}/>
           {major.name}
         </div>
       )}
@@ -60,7 +62,7 @@ const MajorDetails = () => {
       {campus && <CampusMajorCoursesList campus={campus} major={major} />}
       {!campus && <CampusesByMajorList major={major} />}
     </>
-  )
-}
+  );
+};
 
-export default MajorDetails
+export default MajorDetails;

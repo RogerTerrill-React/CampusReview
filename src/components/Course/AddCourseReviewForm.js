@@ -18,7 +18,7 @@ const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
     month: '',
     year: ''
   };
-console.log(ratings);
+
   const [values, setValues] = useState(INITIAL_STATE);
   const { month, year, score, review } = values;
   const [snapshot, setSnapshot] = useState(null);
@@ -45,8 +45,6 @@ console.log(ratings);
           ...values,
           reviews: courseReviewsList,
         });
-        // setCount(courseReviewsList.length);
-        // setTotalScore(totalScore);
       } else {
         setValues({
           ...values,
@@ -84,7 +82,6 @@ console.log(ratings);
 
   const onSubmit = (event) => {
     ratings.push(parseInt(score));
-    console.log(ratings);
     const avgScore = average(ratings);
 
     // Set new average score for course
@@ -103,7 +100,7 @@ console.log(ratings);
     // setCount(0);
     setValues(INITIAL_STATE);
     setModalShow(false);
-    window.location.reload(false);
+    window.location.reload();
     event.preventDefault();
   };
 
