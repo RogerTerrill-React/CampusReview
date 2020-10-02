@@ -13,6 +13,25 @@ const CampusList = () => {
   );
 };
 
+const CampusesByMajorList = ({ major }) => {
+  const campuses = useCampusList();
+  const schoolIds = major.schoolIds;
+  console.log(schoolIds);
+
+  return (
+    <ul>
+      {campuses.map((campus) => {
+
+        const isCampus = schoolIds.includes(campus.uid);
+        if (!isCampus) {
+          return null;
+        }
+        return <CampusItem key={campus.uid} major={major} campus={campus} />;
+      })}
+    </ul>
+  )
+}
+
 const CampusOptionsList = () => {
   const campuses = useCampusList();
   return (
@@ -27,5 +46,5 @@ const CampusOptionsList = () => {
     </>
   );
 };
-export { CampusOptionsList };
+export { CampusOptionsList, CampusesByMajorList  };
 export default CampusList;

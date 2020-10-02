@@ -10,8 +10,6 @@ import Nav from 'react-bootstrap/Nav';
 const Navigation = ({ children }) => {
   const authUser = useAuthUser();
   const location = useLocation();
-
-  console.log(location.pathname);
   const isLanding = location.pathname === '/';
 
   return (

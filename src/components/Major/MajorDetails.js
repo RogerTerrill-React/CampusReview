@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useAuthUser } from '../Session';
 
 import AddMajorReviewModal from './AddMajorReviewModal';
+import {CampusesByMajorList} from '../Campus';
 import { CampusMajorCoursesList } from '../Course';
 import MajorReviews from './MajorReviews';
 
@@ -58,6 +59,7 @@ const MajorDetails = () => {
       )}
 
       {campus && <CampusMajorCoursesList campus={campus} major={major} />}
+      {!campus && <CampusesByMajorList major={major} />}
     </>
   )
 }

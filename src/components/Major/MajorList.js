@@ -14,6 +14,7 @@ const MajorList = () => {
   );
 };
 
+
 const CampusMajorsList = ({ campus }) => {
   const majors = useMajorsList();
 
