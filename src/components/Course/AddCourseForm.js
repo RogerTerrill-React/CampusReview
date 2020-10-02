@@ -40,6 +40,7 @@ const AddCourseForm = ({ setModalShow }) => {
       description,
       majorId,
       schoolId,
+      averageScore: 0,
     });
 
     setValues(INITIAL_STATE);

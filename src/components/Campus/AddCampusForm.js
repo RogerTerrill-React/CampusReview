@@ -51,6 +51,7 @@ const AddCampusForm = ({setModalShow}) => {
       phoneNumber,
       url,
       about,
+      averageScore: 0,
     });
 
     setValues(INITIAL_STATE);

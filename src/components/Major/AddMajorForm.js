@@ -43,6 +43,7 @@ const AddMajorForm = ({ setModalShow }) => {
       name,
       code,
       schoolIds,
+      averageScore: 0,
     });
 
     setValues(INITIAL_STATE);

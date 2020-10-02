@@ -1,6 +1,7 @@
 import React from 'react';
 import MajorItem from './MajorItem';
 import { useMajorsList } from '../Major';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const MajorList = () => {
   const majors = useMajorsList();
@@ -19,7 +20,7 @@ const CampusMajorsList = ({ campus }) => {
   const majors = useMajorsList();
 
   return (
-    <ul>
+    <ListGroup>
       {majors.map((major) => {
         const isMajor = Object.values(major)[Object.keys(major).indexOf('schoolIds')].includes(campus.uid)
         if (!isMajor) {
@@ -27,7 +28,7 @@ const CampusMajorsList = ({ campus }) => {
         }
         return <MajorItem key={major.uid} major={major} campus={campus} />;
       })}
-    </ul>
+    </ListGroup>
   );
 }
 

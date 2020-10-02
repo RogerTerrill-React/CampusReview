@@ -42,7 +42,6 @@ const MajorDetails = () => {
   }, []);
 
   const { campus, major, loading } = values;
-  console.log(major)
 
   return (
     <>

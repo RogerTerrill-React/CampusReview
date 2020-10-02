@@ -16,11 +16,12 @@ const CampusList = () => {
 const CampusesByMajorList = ({ major }) => {
   const campuses = useCampusList();
   const schoolIds = major.schoolIds;
-  console.log(schoolIds);
+  const sortedCampusByAverageScore = campuses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
+  
 
   return (
     <ul>
-      {campuses.map((campus) => {
+      {sortedCampusByAverageScore.map((campus) => {
 
         const isCampus = schoolIds.includes(campus.uid);
         if (!isCampus) {
