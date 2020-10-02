@@ -18,6 +18,7 @@ const CourseList = () => {
 
 const CampusMajorCoursesList = ({ campus, major }) => {
   const courses = useCourseList();
+  let index = -1;
   
   return (
     <ul className="list-group">
@@ -27,7 +28,8 @@ const CampusMajorCoursesList = ({ campus, major }) => {
         if (!isCourse) {
           return null;
         }
-        return <CourseItem key={course.uid} course={course} />;
+        index++;
+        return <CourseItem key={course.uid} index={index} course={course} />;
       })}
       
     </ul>

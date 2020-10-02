@@ -28,6 +28,7 @@ const CourseReviews = ({ course }) => {
       const total = scoreArray.reduce(((score, sum) => score + sum),0)
       const average = total / length;
       setValues({...values, average, count: scoreArray.length});
+      
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseList.length])

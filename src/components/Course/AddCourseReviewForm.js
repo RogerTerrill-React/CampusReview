@@ -19,10 +19,6 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
-  // const [totalScore, setTotalScore] = useState(0);
-  // const [count, setCount] = useState(0);
-  // const [snapshot, setSnapshot] = useState(null);
-
   const { month, year, score, review } = values;
 
   // Fetch all reviews to calculate new average score

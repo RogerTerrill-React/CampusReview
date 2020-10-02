@@ -25,7 +25,7 @@ const CampusMajorsList = ({ campus }) => {
         if (!isMajor) {
           return null;
         }
-        return <MajorItem key={major.uid} major={major} campus={campus} />;
+        return <MajorItem key={major.uid} index={index} major={major} campus={campus} />;
       })}
     </ul>
   );
