@@ -46,7 +46,7 @@ const MajorDetails = () => {
 
   return (
     <>
-      {campus && authUser && <AddMajorReviewModal campus={campus} major={major} />}
+      {campus && major && authUser && <AddMajorReviewModal campus={campus} major={major} />}
       <h2>Major ({params.id}) MajorDetails.js</h2>
       {loading && <div>Loading...</div>}
       
