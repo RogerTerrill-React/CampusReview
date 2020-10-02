@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useAuthUser } from '../Session';
+import { average } from '../../helpers/array';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const AddMajorReviewForm = ({ course, setModalShow }) => {
+const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
   const firebase = useFirebase();
   const authUser = useAuthUser();
 
@@ -17,9 +18,10 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
     month: '',
     year: ''
   };
-
+console.log(ratings);
   const [values, setValues] = useState(INITIAL_STATE);
   const { month, year, score, review } = values;
+  const [snapshot, setSnapshot] = useState(null);
 
   // Fetch all reviews to calculate new average score
   useEffect(() => {
@@ -56,21 +58,21 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // // Fetch current campus to set new average score and add new review
-  // useEffect(() => {
-  //   firebase.campus(campus.uid).on('value', (snapshot) => {
-  //     const campusSnapshot = snapshot.val();
+  // Fetch current campus to set new average score and add new review
+  useEffect(() => {
+    firebase.course(course.uid).on('value', (snapshot) => {
+      const courseSnapshot = snapshot.val();
 
-  //     if (campusSnapshot) {
-  //       setSnapshot({ ...campusSnapshot });
-  //     } else {
-  //       setSnapshot(null);
-  //     }
-  //   });
+      if (courseSnapshot) {
+        setSnapshot({ ...courseSnapshot });
+      } else {
+        setSnapshot(null);
+      }
+    });
 
-  //   return () => firebase.campuses(campus.uid).off();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    return () => firebase.course(course.uid).off();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -81,17 +83,17 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
   };
 
   const onSubmit = (event) => {
-    // const reviewCount = count + 1;
-    // const avgScore = (totalScore + parseInt(score)) / reviewCount;
+    ratings.push(parseInt(score));
+    console.log(ratings);
+    const avgScore = average(ratings);
 
-    // Set new average score for campus
-    // firebase.campus(campus.uid).set({
-    //   ...snapshot,
-    //   reviewCount,
-    //   averageScore: Number(avgScore.toFixed(2)),
-    // });
+    // Set new average score for course
+    firebase.course(course.uid).set({
+      ...snapshot,
+      averageScore: Number(avgScore.toFixed(2)),
+    });
 
-    // Add new review to campus
+    // Add new review to course
     firebase.courseReviews(course.uid).push({
       userId: authUser.uid,
       score: parseInt(score),
@@ -101,6 +103,7 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
     // setCount(0);
     setValues(INITIAL_STATE);
     setModalShow(false);
+    window.location.reload(false);
     event.preventDefault();
   };
 
@@ -204,4 +207,4 @@ const AddMajorReviewForm = ({ course, setModalShow }) => {
   );
 };
 
-export default AddMajorReviewForm;
+export default AddCourseReviewForm;

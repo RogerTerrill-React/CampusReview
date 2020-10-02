@@ -21,6 +21,7 @@ const CourseDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
     if (values.course) {
@@ -44,18 +45,20 @@ const CourseDetails = () => {
 
   return (
     <>
-    {course && authUser && <AddCourseReviewModal course={course} />}
+      {course && authUser && (
+        <AddCourseReviewModal course={course} ratings={ratings} />
+      )}
       <h2>Course ({params.id}) CourseDetails.js</h2>
       {loading && <div>Loading...</div>}
 
       {course && (
         <div>
-          <CourseReviews course={course} />
+          <CourseReviews course={course} setRatings={setRatings} />
           {course.name}
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CourseDetails
+export default CourseDetails;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCourseList } from '../Course';
 
-const CourseReviews = ({ course }) => {
+const CourseReviews = ({ course, setRatings }) => {
   const courseList = useCourseList()
   
   const INITIAL_STATE ={
@@ -28,7 +28,7 @@ const CourseReviews = ({ course }) => {
       const total = scoreArray.reduce(((score, sum) => score + sum),0)
       const average = total / length;
       setValues({...values, average, count: scoreArray.length});
-      
+      setRatings(scoreArray);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseList.length])
@@ -38,7 +38,7 @@ const CourseReviews = ({ course }) => {
       |{ course.name}|
       {courseList && count}
 
-      {average }
+      {average.toFixed(2) }
     </>
   )
 }
