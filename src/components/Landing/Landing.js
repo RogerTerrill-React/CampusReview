@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import hero from '../../assets/images/hero.jpg';
@@ -9,7 +8,7 @@ import hero from '../../assets/images/hero.jpg';
 const Landing = () => {
   return (
     <>
-      <Hero className='d-flex align-items-center position-relative vh-100 cover'>
+      <Hero className='d-flex vh-100 cover'>
         <Container fluid>
           <div className='container-fluid text-center'>
             <h1 className='display-4 text-light'>
@@ -38,4 +37,5 @@ const Hero = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;

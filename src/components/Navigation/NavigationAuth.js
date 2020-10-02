@@ -5,7 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
-const NavigationAuth = ({ authUser }) => {
+const NavigationAuth = ({ authUser}) => {
+
   return (
     <>
       <Nav.Link as={Link} className='text-light' to={ROUTES.HOME}>

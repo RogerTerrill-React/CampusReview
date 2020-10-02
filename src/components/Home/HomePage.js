@@ -1,25 +1,33 @@
 import React from 'react';
-import { compose } from 'recompose';
-import { withAuthorization, withEmailVerification } from '../Session';
+// import { compose } from 'recompose';
+// import { withAuthorization, withEmailVerification } from '../Session';
 // import Messages from '../Messages';
 import { Campus } from '../Campus';
+import { Major } from '../Major';
+import { Course } from '../Course';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const HomePage = () => {
   return (
-    <>
-      <h1>Home</h1>
-      <p>The Home Page is accessible by every signed in user.</p>
-
+    <Container>
+      <Row>
+        <Col><Campus /></Col>
+        <Col><Major /></Col>
+        <Col><Course /></Col>
+      </Row>
       {/* <Messages /> */}
-      <Campus />
-      
-    </>
+    </Container>
   );
 };
 
-const condition = (authUser) => authUser !== null;
+// const condition = (authUser) => authUser !== null;
 
-export default compose(
-  withEmailVerification,
-  withAuthorization(condition)
-)(HomePage);
+// export default compose(
+//   withEmailVerification,
+//   withAuthorization(condition)
+// )(HomePage);
+
+export default HomePage;

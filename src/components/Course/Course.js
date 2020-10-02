@@ -37,7 +37,7 @@ const Course = () => {
 
   return (
     <>
-    <h1>Courses List</h1>
+    <h1>Courses</h1>
       {loading && <div>Loading...</div>}
       {courses ? (
         <CourseList />
