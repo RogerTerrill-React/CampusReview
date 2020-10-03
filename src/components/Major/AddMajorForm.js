@@ -9,6 +9,7 @@ const AddMajorForm = ({ setModalShow }) => {
 
   const INITIAL_STATE = {
     name: '',
+    description: '',
     code: '',
     schoolIds: [],
     rating: 0,
@@ -16,7 +17,7 @@ const AddMajorForm = ({ setModalShow }) => {
 
   const [values, setValues] = useState(INITIAL_STATE);
 
-  const { name, code, schoolIds } = values;
+  const { name, description, code, schoolIds } = values;
 
   const onChange = (event) => {
     // Destructure out name and value from event.target
@@ -41,6 +42,7 @@ const AddMajorForm = ({ setModalShow }) => {
   const onSubmit = (event) => {
     firebase.majors().push({
       name,
+      description,
       code,
       schoolIds,
       averageScore: 0,
@@ -75,6 +77,18 @@ const AddMajorForm = ({ setModalShow }) => {
         />
       </Form.Group>
 
+      <Form.Group controlId='formDescription'>
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as='textarea'
+          name='description'
+          value={description}
+          onChange={onChange}
+          type='text'
+          placeholder='Enter Major Description'
+        />
+      </Form.Group>
+
       <Form.Group controlId='formCampus'>
         <Form.Label>Campus</Form.Label>
         <Form.Control
@@ -84,7 +98,7 @@ const AddMajorForm = ({ setModalShow }) => {
           onChange={onSelectChange}
           multiple
         >
-          <CampusOptionsList/>
+          <CampusOptionsList />
         </Form.Control>
       </Form.Group>
 
