@@ -36,7 +36,7 @@ const CampusReviews = ({ campus, setRatings }) => {
       <Card>
         <Card.Header as="h5" className='text-center position-relative'>
           Recent Reviews <AddCampusReviewModal campus={campus} />
-          </Card.Header>
+        </Card.Header>
         <ReviewsBox>
           {reviews && <CampusReviewsList reviews={reviews} />}
         </ReviewsBox>
