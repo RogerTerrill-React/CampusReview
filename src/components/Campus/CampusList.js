@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import CampusItem from './CampusItem';
 import { useCampusList } from '../Campus';
 import CampusReview from './CampusReview';
-import Card from 'react-bootstrap/Card';
+
 
 const CampusList = () => {
   const campuses = useCampusList();
@@ -55,23 +54,13 @@ const CampusOptionsList = () => {
 };
 
 const CampusReviewsList = ({ reviews }) => {
-  const sortedCampusReviewsByTimeStamp = reviews.sort((a,b) => (a.createdAt < b.createdAt) ? 1 : -1)
+  const sortedCampusReviewsByTimeStamp = reviews.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1)
 
-  return (
-    <Card>
-      <Card.Header as="h5" className='text-center'>Recent Reviews</Card.Header>
-      <ReviewsBox>
-        {sortedCampusReviewsByTimeStamp.map(review => {
-          return <CampusReview key={review.uid} review={review} />
-        })}
-      </ReviewsBox>
-    </Card>
+  return sortedCampusReviewsByTimeStamp.map(review => {
+    return <CampusReview key={review.uid} review={review} />
+  }
   )
 }
 export { CampusOptionsList, CampusesByMajorList, CampusReviewsList };
 export default CampusList;
 
-const ReviewsBox = styled.div`
-  max-height: 500px;
-  overflow-y: auto;
-`

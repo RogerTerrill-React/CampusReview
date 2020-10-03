@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
-import { useAuthUser } from '../Session';
 
-import AddCampusReviewModal from './AddCampusReviewModal';
 import { CampusMajorsList } from '../Major';
 import CampusInfo from './CampusInfo';
 import CampusReviews from './CampusReviews';
@@ -15,7 +13,6 @@ const CampusDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
-  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -49,7 +46,7 @@ const CampusDetails = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className='mb-4'>
         <Col>
           <h2 className='text-center mt-3'>{campus.name} </h2>
           {campus.reviewCount ? (
@@ -78,7 +75,6 @@ const CampusDetails = () => {
         </Col>
         <Col>
           <CampusReviews campus={campus} />
-          {authUser && <AddCampusReviewModal campus={campus} />}
         </Col>
       </Row>
     </Container>
