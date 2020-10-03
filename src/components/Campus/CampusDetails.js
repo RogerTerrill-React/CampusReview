@@ -5,6 +5,11 @@ import { useAuthUser } from '../Session';
 
 import AddCampusReviewModal from './AddCampusReviewModal';
 import { CampusMajorsList } from '../Major';
+import CampusInfo from './CampusInfo';
+import CampusReviews from './CampusReviews';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 
 const CampusDetails = () => {
   const firebase = useFirebase();
@@ -43,23 +48,46 @@ const CampusDetails = () => {
   const { campus, loading } = values;
 
   return (
-    <>
-      <h1>{campus.name} </h1>
+    <Container>
+      <Row>
+        <Col>
+          <h2 className='text-center mt-3'>{campus.name} </h2>
+          {campus.reviewCount ? (
+            <h4 className='text-center'>
+              Overall score is {campus.averageScore} based on{' '}
+              {campus.reviewCount} reviews
+            </h4>
+          ) : (
+              <h2>No reviews yet...</h2>
+            )}
+          {loading && <div>Loading...</div>}
+        </Col>
+      </Row>
 
-      {campus.reviewCount ? (
-        <h2>
-          The average score is {campus.averageScore} based on{' '}
-          {campus.reviewCount} reviews
-        </h2>
-      ) : (
-        <h2>No reviews yet...</h2>
-      )}
-      {loading && <div>Loading...</div>}
+      <Row className='mb-4 mx-auto'>
+        <Col className='mx-auto'>
+          {authUser && <AddCampusReviewModal campus={campus} />}
+        </Col>
+      </Row>
 
-      {authUser && <AddCampusReviewModal campus={campus} />}
-
-      <CampusMajorsList campus={campus}/>
-    </>
+      <Row>
+        <Col>
+          <Row className='mb-4'>
+            <Col>
+              <CampusInfo campus={campus} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <CampusMajorsList campus={campus} />
+            </Col>
+          </Row>
+        </Col>
+        <Col>
+          <CampusReviews campus={campus} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

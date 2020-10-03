@@ -1,10 +1,12 @@
 import React from 'react';
 import CampusItem from './CampusItem';
 import { useCampusList } from '../Campus';
+import CampusReview from './CampusReview';
+import Card from 'react-bootstrap/Card';
 
 const CampusList = () => {
   const campuses = useCampusList();
-  const sortedCampusByAverageScore = campuses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
+  const sortedCampusByAverageScore = campuses.sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
     <ul className="list-group">
@@ -18,7 +20,7 @@ const CampusList = () => {
 const CampusesByMajorList = ({ major }) => {
   const campuses = useCampusList();
   const schoolIds = major.schoolIds;
-  const sortedCampusByAverageScore = campuses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
+  const sortedCampusByAverageScore = campuses.sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
   let index = -1;
   return (
     <ul className="list-group">
@@ -37,7 +39,7 @@ const CampusesByMajorList = ({ major }) => {
 
 const CampusOptionsList = () => {
   const campuses = useCampusList();
-  const sortedCampusByAverageScore = campuses.sort((a,b) => (a.name > b.name) ? 1 : -1)
+  const sortedCampusByAverageScore = campuses.sort((a, b) => (a.name > b.name) ? 1 : -1)
   return (
     <>
       {sortedCampusByAverageScore.map((campus) => {
@@ -50,5 +52,17 @@ const CampusOptionsList = () => {
     </>
   );
 };
-export { CampusOptionsList, CampusesByMajorList  };
+
+const CampusReviewsList = ({ reviews }) => {
+
+  return (
+    <Card>
+      <Card.Header as="h5" className='text-center'>Recent Reviews</Card.Header>
+      {reviews.map(review => {
+        return <CampusReview key={review.uid} review={review} />
+      })}
+    </Card>
+  )
+}
+export { CampusOptionsList, CampusesByMajorList, CampusReviewsList };
 export default CampusList;

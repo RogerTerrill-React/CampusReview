@@ -1,13 +1,15 @@
 import React from 'react';
 import MajorItem from './MajorItem';
 import { useMajorsList } from '../Major';
+import Card from 'react-bootstrap/Card';
 
 const MajorList = () => {
   const majors = useMajorsList();
+  const sortedMajorByAverageScore = majors.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
     <ul className="list-group">
-      {majors.map((major, index) => (
+      {sortedMajorByAverageScore.map((major, index) => (
         <MajorItem key={major.uid} index={index} major={major} />
       ))}
     </ul>
@@ -17,17 +19,20 @@ const MajorList = () => {
 
 const CampusMajorsList = ({ campus }) => {
   const majors = useMajorsList();
-
+  const sortedMajorByAverageScore = majors.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
+  let index = -1;
   return (
-    <ul className="list-group">
-      {majors.map((major, index) => {
+    <Card>
+    <Card.Header as="h5" className='text-center'>Top Majors</Card.Header>
+      {sortedMajorByAverageScore.map((major) => {
         const isMajor = Object.values(major)[Object.keys(major).indexOf('schoolIds')].includes(campus.uid)
         if (!isMajor) {
           return null;
         }
+        index++;
         return <MajorItem key={major.uid} index={index} major={major} campus={campus} />;
       })}
-    </ul>
+    </Card>
   );
 }
 

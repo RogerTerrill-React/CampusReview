@@ -4,6 +4,7 @@ import AuthUserContext from './context';
 import { CampusListContext } from '../Campus';
 import { MajorsListContext } from '../Major';
 import { CourseListContext } from '../Course';
+import { UserListContext } from '../User';
 
 const withAuthentication = (Component) => {
   const WithAuthentication = (props) => {
@@ -14,6 +15,7 @@ const withAuthentication = (Component) => {
     const [campusList, setCampusList] = useState([]);
     const [majorsList, setMajorsList] = useState([]);
     const [courseList, setCourseList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
     // Get the authenticated User
     useEffect(() => {
@@ -90,12 +92,34 @@ const withAuthentication = (Component) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Get the full list of users
+    useEffect(() => {
+      firebase.users().on('value', (snapshot) => {
+        const usersSnapshot = snapshot.val();
+
+        if (usersSnapshot) {
+          // convert campus list from snapshot
+          const usersList = Object.keys(usersSnapshot).map((key) => ({
+            ...usersSnapshot[key],
+            uid: key,
+          }));
+          setUserList(usersList);
+        } else {
+          setUserList(null);
+        }
+      });
+      return () => firebase.users().off();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
       <AuthUserContext.Provider value={authUser}>
         <CampusListContext.Provider value={campusList}>
           <MajorsListContext.Provider value={majorsList}>
             <CourseListContext.Provider value={courseList}>
-              <Component {...props} />
+              <UserListContext.Provider value={userList}>
+                <Component {...props} />
+              </UserListContext.Provider>
             </CourseListContext.Provider>
           </MajorsListContext.Provider>
         </CampusListContext.Provider>

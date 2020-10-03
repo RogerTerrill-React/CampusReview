@@ -100,11 +100,14 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
       userId: authUser.uid,
       score: parseInt(score),
       review,
+      startYear,
+      endYear
     });
 
     setCount(0);
     setValues(INITIAL_STATE);
     setModalShow(false);
+    window.location.reload();
     event.preventDefault();
   };
 

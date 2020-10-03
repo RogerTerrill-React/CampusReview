@@ -5,10 +5,11 @@ import { useCourseList } from '../Course';
 // Fill courses list
 const CourseList = () => {
   const courses = useCourseList();
+  const sortedCourseByAverageScore = courses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
     courses ? <ul className="list-group">
-      {courses.map((course, index) => (
+      {sortedCourseByAverageScore.map((course, index) => (
         <CourseItem key={course.uid} index={index} course={course} />
       ))}
     </ul>
@@ -18,11 +19,12 @@ const CourseList = () => {
 
 const CampusMajorCoursesList = ({ campus, major }) => {
   const courses = useCourseList();
+  const sortedCourseByAverageScore = courses.sort((a,b) => (a.averageScore < b.averageScore) ? 1 : -1)
   let index = -1;
   
   return (
     <ul className="list-group">
-      {courses.map((course) => {
+      {sortedCourseByAverageScore.map((course) => {
         const isCourse = (major.uid === course.majorId) && (campus.uid === course.schoolId)
         
         if (!isCourse) {
