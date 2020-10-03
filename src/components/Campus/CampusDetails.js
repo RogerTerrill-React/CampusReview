@@ -63,13 +63,6 @@ const CampusDetails = () => {
           {loading && <div>Loading...</div>}
         </Col>
       </Row>
-
-      <Row className='mb-4 mx-auto'>
-        <Col className='mx-auto'>
-          {authUser && <AddCampusReviewModal campus={campus} />}
-        </Col>
-      </Row>
-
       <Row>
         <Col>
           <Row className='mb-4'>
@@ -85,6 +78,7 @@ const CampusDetails = () => {
         </Col>
         <Col>
           <CampusReviews campus={campus} />
+          {authUser && <AddCampusReviewModal campus={campus} />}
         </Col>
       </Row>
     </Container>

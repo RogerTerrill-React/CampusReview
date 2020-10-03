@@ -97,6 +97,7 @@ const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
       userId: authUser.uid,
       score: parseInt(score),
       review,
+      createdAt: firebase.serverValue.TIMESTAMP,
     });
 
     // setCount(0);

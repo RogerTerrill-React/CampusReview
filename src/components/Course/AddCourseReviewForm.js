@@ -95,6 +95,7 @@ const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
       userId: authUser.uid,
       score: parseInt(score),
       review,
+      createdAt: firebase.serverValue.TIMESTAMP,
     });
 
     // setCount(0);

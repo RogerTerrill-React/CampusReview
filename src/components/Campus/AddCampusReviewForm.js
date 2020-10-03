@@ -101,7 +101,8 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
       score: parseInt(score),
       review,
       startYear,
-      endYear
+      endYear,
+      createdAt: firebase.serverValue.TIMESTAMP,
     });
 
     setCount(0);
