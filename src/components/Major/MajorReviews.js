@@ -41,9 +41,8 @@ const MajorReviews = ({ campus, major, setRatings }) => {
 
   return (
     <>
-      |{ campus.name}-{major.name}|
       {majorsList && count}
-
+===
       {average.toFixed(2) }
 
     </>

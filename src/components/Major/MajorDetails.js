@@ -34,6 +34,7 @@ const MajorDetails = () => {
     // params returned through react router Link
     firebase.major(params.id).on('value', (snapshot) => {
       setValues({
+        ...values, 
         loading: false,
         major: snapshot.val(),
       });
@@ -54,8 +55,7 @@ const MajorDetails = () => {
 
       {campus && major && (
         <div>
-          <MajorReviews campus={campus} major={major} setRatings={setRatings}/>
-          {major.name}
+         This is teh score <MajorReviews campus={campus} major={major} setRatings={setRatings}/>
         </div>
       )}
 

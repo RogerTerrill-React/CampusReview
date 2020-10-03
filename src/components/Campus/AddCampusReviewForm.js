@@ -72,7 +72,7 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
       }
     });
 
-    return () => firebase.campuses(campus.uid).off();
+    return () => firebase.campus(campus.uid).off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

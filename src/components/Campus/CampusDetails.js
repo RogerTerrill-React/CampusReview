@@ -5,6 +5,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { CampusMajorsList } from '../Major';
 import CampusInfo from './CampusInfo';
 import CampusReviews from './CampusReviews';
+import CampusScore from './CampusScore';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -22,6 +23,7 @@ const CampusDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [ratings, setRatings] = useState({reviewCount:0, averageScore:0});
 
   // Get information on specific campus
   useEffect(() => {
@@ -34,6 +36,7 @@ const CampusDetails = () => {
     // params returned through react router Link
     firebase.campus(params.id).on('value', (snapshot) => {
       setValues({
+        ...values,
         loading: false,
         campus: snapshot.val(),
       });
@@ -48,15 +51,10 @@ const CampusDetails = () => {
     <Container>
       <Row className='mb-4'>
         <Col>
+        
           <h2 className='text-center mt-3'>{campus.name} </h2>
-          {campus.reviewCount ? (
-            <h4 className='text-center'>
-              Overall score is {campus.averageScore} based on{' '}
-              {campus.reviewCount} reviews
-            </h4>
-          ) : (
-              <h2>No reviews yet...</h2>
-            )}
+          <CampusScore ratings={ratings} />
+          
           {loading && <div>Loading...</div>}
         </Col>
       </Row>
@@ -74,7 +72,7 @@ const CampusDetails = () => {
           </Row>
         </Col>
         <Col>
-          <CampusReviews campus={campus} />
+          <CampusReviews campus={campus} setRatings={setRatings}/>
         </Col>
       </Row>
     </Container>

@@ -23,6 +23,11 @@ const CampusReviews = ({ campus, setRatings }) => {
           })
         );
         setReviews(campusReviewsList);
+        const scoreArray = campusReviewsList.map(review => review.score);
+        const length = scoreArray.length ? scoreArray.length : 1
+        const total = scoreArray.reduce(((score, sum) => score + sum),0)
+        const average = total / length;
+        setRatings({reviewCount: length, averageScore: average});
       } else {
         setReviews(null);
       }
