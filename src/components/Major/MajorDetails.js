@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../Firebase';
-import { useLocation, useParams } from 'react-router-dom';
-import { useAuthUser } from '../Session';
+import React, { useState, useEffect } from "react";
+import { useFirebase } from "../Firebase";
+import { useLocation, useParams } from "react-router-dom";
+import { useAuthUser } from "../Session";
 
-import AddMajorReviewModal from './AddMajorReviewModal';
-import { CampusesByMajorList } from '../Campus';
-import { CampusMajorCoursesList } from '../Course';
-import MajorReviews from './MajorReviews';
+import AddMajorReviewModal from "./AddMajorReviewModal";
+import { CampusesByMajorList } from "../Campus";
+import { CampusMajorCoursesList } from "../Course";
+import MajorReviews from "./MajorReviews";
+
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 const MajorDetails = () => {
   const firebase = useFirebase();
@@ -32,9 +36,9 @@ const MajorDetails = () => {
     setValues({ ...values, loading: true });
 
     // params returned through react router Link
-    firebase.major(params.id).on('value', (snapshot) => {
+    firebase.major(params.id).on("value", (snapshot) => {
       setValues({
-        ...values, 
+        ...values,
         loading: false,
         major: snapshot.val(),
       });
@@ -47,20 +51,47 @@ const MajorDetails = () => {
 
   return (
     <>
-      {campus && major && authUser && (
-        <AddMajorReviewModal campus={campus} major={major} ratings={ratings} />
-      )}
-      <h2>Major ({params.id}) MajorDetails.js</h2>
-      {loading && <div>Loading...</div>}
+      <Container>
+        <Row className="mb-4">
+          <Col>
+            <h2 className="text-center mt-3">{campus.name} </h2>
+            {/* <CampusScore ratings={ratings} /> */}
+            {campus && major && authUser && (
+              <AddMajorReviewModal
+                campus={campus}
+                major={major}
+                ratings={ratings}
+              />
+            )}
 
-      {campus && major && (
-        <div>
-         This is teh score <MajorReviews campus={campus} major={major} setRatings={setRatings}/>
-        </div>
-      )}
-
-      {campus && <CampusMajorCoursesList campus={campus} major={major} />}
-      {!campus && <CampusesByMajorList major={major} />}
+            {loading && <div>Loading...</div>}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Row className="mb-4">
+              <Col>{/* <MajorInfo campus={campus} /> */}</Col>
+            </Row>
+            <Row>
+              <Col>
+                {campus && (
+                  <CampusMajorCoursesList campus={campus} major={major} />
+                )}
+                {!campus && <CampusesByMajorList major={major} />}
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            {campus && major && (
+              <MajorReviews
+                campus={campus}
+                major={major}
+                setRatings={setRatings}
+              />
+            )}
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };
