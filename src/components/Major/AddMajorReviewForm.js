@@ -35,6 +35,7 @@ const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
         const majorReviewsList = Object.keys(majorReviewsObject).map(
           (key) => ({
             ...majorReviewsObject[key],
+            uid: key,
           })
         );
 

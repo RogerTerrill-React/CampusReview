@@ -1,6 +1,7 @@
 import React from 'react';
 import MajorItem from './MajorItem';
 import { useMajorsList } from '../Major';
+import MajorReview from './MajorReview';
 import Card from 'react-bootstrap/Card';
 
 const MajorList = () => {
@@ -51,5 +52,14 @@ const MajorsOptionsList = () => {
   );
 };
 
-export { CampusMajorsList, MajorsOptionsList }
+const MajorReviewsList = ({ reviews }) => {
+  const sortedMajorReviewsByTimeStamp = reviews.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1)
+
+  return sortedMajorReviewsByTimeStamp.map(review => {
+    return <MajorReview key={review.uid} review={review} />
+  }
+  )
+}
+
+export { CampusMajorsList, MajorsOptionsList, MajorReviewsList }
 export default MajorList;

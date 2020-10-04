@@ -7,6 +7,7 @@ import AddMajorReviewModal from "./AddMajorReviewModal";
 import { CampusesByMajorList } from "../Campus";
 import { CampusMajorCoursesList } from "../Course";
 import MajorReviews from "./MajorReviews";
+import MajorInfo from './MajorInfo';
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -70,7 +71,7 @@ const MajorDetails = () => {
         <Row>
           <Col>
             <Row className="mb-4">
-              <Col>{/* <MajorInfo campus={campus} /> */}</Col>
+              <Col><MajorInfo major={major} /></Col>
             </Row>
             <Row>
               <Col>

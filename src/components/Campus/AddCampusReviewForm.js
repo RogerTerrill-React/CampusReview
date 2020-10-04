@@ -36,6 +36,7 @@ const AddCampusReviewForm = ({ campus, setModalShow }) => {
         const campusReviewsList = Object.keys(campusReviewsObject).map(
           (key) => ({
             ...campusReviewsObject[key],
+            uid: key,
           })
         );
 
