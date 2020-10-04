@@ -4,8 +4,9 @@ import { useLocation, useParams } from "react-router-dom";
 
 import { CampusesByMajorList } from "../Campus";
 import { CampusMajorCoursesList } from "../Course";
+import { Score } from "../Shared";
 import MajorReviews from "./MajorReviews";
-import MajorInfo from './MajorInfo';
+import MajorInfo from "./MajorInfo";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -24,6 +25,7 @@ const MajorDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
+  const [ratings, setRatings] = useState({ reviewCount: 0, averageScore: 0 });
 
   useEffect(() => {
     if (values.major) {
@@ -52,14 +54,16 @@ const MajorDetails = () => {
         <Row className="mb-4">
           <Col>
             <h2 className="text-center mt-3">{campus.name} </h2>
-            {/* <CampusScore ratings={ratings} /> */}
+            <Score ratings={ratings} />
             {loading && <div>Loading...</div>}
           </Col>
         </Row>
         <Row>
           <Col>
             <Row className="mb-4">
-              <Col><MajorInfo major={major} /></Col>
+              <Col>
+                <MajorInfo major={major} />
+              </Col>
             </Row>
             <Row>
               <Col>
@@ -75,6 +79,7 @@ const MajorDetails = () => {
               <MajorReviews
                 campus={campus}
                 major={major}
+                setRatings={setRatings}
               />
             )}
           </Col>

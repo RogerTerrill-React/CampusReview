@@ -6,7 +6,7 @@ import AddMajorReviewModal from './AddMajorReviewModal';
 import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 
-const MajorReviews = ({ campus, major }) => {
+const MajorReviews = ({ campus, major, setRatings }) => {
   const majorsList = useMajorsList();
   const authUser = useAuthUser();
   
@@ -43,6 +43,7 @@ const MajorReviews = ({ campus, major }) => {
       const length = scoreArray.length ? scoreArray.length : 1
       const total = scoreArray.reduce(((score, sum) => score + sum),0)
       const average = total / length;
+      setRatings({reviewCount: length, averageScore: average});
       setValues({...values, average, count: scoreArray.length});
       setRatingsArray(scoreArray);
     }
