@@ -3,6 +3,7 @@ import { useFirebase } from "../Firebase";
 import { useLocation, useParams } from "react-router-dom";
 
 import CourseReviews from "./CourseReviews";
+import CourseInfo from "./CourseInfo";
 import { Score } from "../Shared";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -50,7 +51,9 @@ const CourseDetails = () => {
       <Container>
         <Row className="mb-4">
           <Col>
-            <h2 className="text-center mt-3">{course.code}-{course.name} </h2>
+            <h2 className="text-center mt-3">
+              {course.code}-{course.name}{" "}
+            </h2>
             <Score ratings={ratings} />
             {loading && <div>Loading...</div>}
           </Col>
@@ -58,7 +61,7 @@ const CourseDetails = () => {
         <Row>
           <Col>
             <Row className="mb-4">
-              <Col>{/* <MajorInfo major={major} /> */}</Col>
+              <Col><CourseInfo course={course} /></Col>
             </Row>
           </Col>
           <Col>
