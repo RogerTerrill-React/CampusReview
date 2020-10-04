@@ -54,7 +54,7 @@ const MajorDetails = () => {
         <Row className="mb-4">
           <Col>
             <h2 className="text-center mt-3">{major.name} {!!campus && ` -  ${campus.name}`} </h2>
-            {!campus && <Score ratings={ratings} />}
+            {campus && <Score ratings={ratings} />}
             {loading && <div>Loading...</div>}
           </Col>
         </Row>
