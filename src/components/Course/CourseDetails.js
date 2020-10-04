@@ -50,7 +50,7 @@ const CourseDetails = () => {
       <Container>
         <Row className="mb-4">
           <Col>
-            <h2 className="text-center mt-3">{course.name} </h2>
+            <h2 className="text-center mt-3">{course.code}-{course.name} </h2>
             <Score ratings={ratings} />
             {loading && <div>Loading...</div>}
           </Col>

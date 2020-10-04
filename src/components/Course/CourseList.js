@@ -49,11 +49,11 @@ const CampusMajorCoursesList = ({ campus, major }) => {
 };
 
 const CourseReviewsList = ({ reviews }) => {
-  const sortedMajorReviewsByTimeStamp = reviews.sort((a, b) =>
+  const sortedCourseReviewsByTimeStamp = reviews.sort((a, b) =>
     a.createdAt < b.createdAt ? 1 : -1
   );
 
-  return sortedMajorReviewsByTimeStamp.map((review) => {
+  return sortedCourseReviewsByTimeStamp.map((review) => {
     return <CourseReview key={review.uid} review={review} />;
   });
 };
