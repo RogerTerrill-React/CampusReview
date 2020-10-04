@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { CampusMajorsList } from "../Major";
 import CampusInfo from "./CampusInfo";
 import CampusReviews from "./CampusReviews";
-import CampusScore from "./CampusScore";
+import { Score } from "../Shared";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -52,7 +52,7 @@ const CampusDetails = () => {
       <Row className="mb-4">
         <Col>
           <h2 className="text-center mt-3">{campus.name} </h2>
-          <CampusScore ratings={ratings} />
+          <Score ratings={ratings} />
 
           {loading && <div>Loading...</div>}
         </Col>
