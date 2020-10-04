@@ -35,7 +35,7 @@ const MajorDetails = () => {
     setValues({ ...values, loading: true });
 
     // params returned through react router Link
-    firebase.major(params.id).on("value", (snapshot) => {
+    firebase.major(params.id).on('value', (snapshot) => {
       setValues({
         ...values,
         loading: false,
@@ -53,7 +53,7 @@ const MajorDetails = () => {
       <Container>
         <Row className="mb-4">
           <Col>
-            <h2 className="text-center mt-3">{campus.name} </h2>
+            <h2 className="text-center mt-3">{major.name} - {campus.name} </h2>
             <Score ratings={ratings} />
             {loading && <div>Loading...</div>}
           </Col>

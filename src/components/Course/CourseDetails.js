@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../Firebase';
-import { useLocation, useParams } from 'react-router-dom';
-import { useAuthUser } from '../Session';
+import React, { useState, useEffect } from "react";
+import { useFirebase } from "../Firebase";
+import { useLocation, useParams } from "react-router-dom";
 
-import AddCourseReviewModal from './AddCourseReviewModal';
-import CourseReviews from './CourseReviews';
+import CourseReviews from "./CourseReviews";
+import { Score } from "../Shared";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 
 const CourseDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
-  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -21,7 +22,7 @@ const CourseDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
-  const [ratings, setRatings] = useState(null);
+  const [ratings, setRatings] = useState({ reviewCount: 0, averageScore: 0 });
 
   useEffect(() => {
     if (values.course) {
@@ -31,13 +32,14 @@ const CourseDetails = () => {
     setValues({ ...values, loading: true });
 
     // params returned through react router Link
-    firebase.course(params.id).on('value', (snapshot) => {
+    firebase.course(params.id).on("value", (snapshot) => {
       setValues({
+        ...values,
         loading: false,
         course: snapshot.val(),
       });
     });
-    return () => firebase.major(params.id).off();
+    return () => firebase.course(params.id).off();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,18 +47,27 @@ const CourseDetails = () => {
 
   return (
     <>
-      {course && authUser && (
-        <AddCourseReviewModal course={course} ratings={ratings} />
-      )}
-      <h2>Course ({params.id}) CourseDetails.js</h2>
-      {loading && <div>Loading...</div>}
-
-      {course && (
-        <div>
-          <CourseReviews course={course} setRatings={setRatings} />
-          {course.name}
-        </div>
-      )}
+      <Container>
+        <Row className="mb-4">
+          <Col>
+            <h2 className="text-center mt-3">{course.name} </h2>
+            <Score ratings={ratings} />
+            {loading && <div>Loading...</div>}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Row className="mb-4">
+              <Col>{/* <MajorInfo major={major} /> */}</Col>
+            </Row>
+          </Col>
+          <Col>
+            {course && (
+              <CourseReviews course={course} setRatings={setRatings} />
+            )}
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

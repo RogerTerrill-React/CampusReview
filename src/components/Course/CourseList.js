@@ -1,6 +1,7 @@
 import React from "react";
 import CourseItem from "./CourseItem";
 import { useCourseList } from "../Course";
+import CourseReview from './CourseReview';
 import Card from "react-bootstrap/Card";
 
 // Fill courses list
@@ -47,5 +48,15 @@ const CampusMajorCoursesList = ({ campus, major }) => {
   );
 };
 
-export { CampusMajorCoursesList };
+const CourseReviewsList = ({ reviews }) => {
+  const sortedMajorReviewsByTimeStamp = reviews.sort((a, b) =>
+    a.createdAt < b.createdAt ? 1 : -1
+  );
+
+  return sortedMajorReviewsByTimeStamp.map((review) => {
+    return <CourseReview key={review.uid} review={review} />;
+  });
+};
+
+export { CampusMajorCoursesList, CourseReviewsList };
 export default CourseList;

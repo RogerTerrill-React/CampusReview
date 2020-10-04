@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
+const AddCourseReviewForm = ({ course, setModalShow, ratingsArray }) => {
   const firebase = useFirebase();
   const authUser = useAuthUser();
 
@@ -82,8 +82,8 @@ const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
   };
 
   const onSubmit = (event) => {
-    ratings.push(parseInt(score));
-    const avgScore = average(ratings);
+    ratingsArray.push(parseInt(score));
+    const avgScore = average(ratingsArray);
 
     // Set new average score for course
     firebase.course(course.uid).set({
@@ -96,6 +96,8 @@ const AddCourseReviewForm = ({ course, setModalShow, ratings }) => {
       userId: authUser.uid,
       score: parseInt(score),
       review,
+      month,
+      year,
       createdAt: firebase.serverValue.TIMESTAMP,
     });
 
