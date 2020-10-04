@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
+const AddMajorReviewForm = ({ campus, major, setModalShow, ratingsArray }) => {
   const firebase = useFirebase();
   const authUser = useAuthUser();
 
@@ -83,8 +83,8 @@ const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
   };
 
   const onSubmit = (event) => {
-    ratings.push(parseInt(score));
-    const avgScore = average(ratings);
+    ratingsArray.push(parseInt(score));
+    const avgScore = average(ratingsArray);
 
     // Set new average score for major
     firebase.major(major.uid).set({
@@ -98,6 +98,8 @@ const AddMajorReviewForm = ({ campus, major, setModalShow, ratings }) => {
       userId: authUser.uid,
       score: parseInt(score),
       review,
+      startYear,
+      endYear,
       createdAt: firebase.serverValue.TIMESTAMP,
     });
 

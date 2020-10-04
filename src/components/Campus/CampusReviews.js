@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
+import { useAuthUser } from "../Session";
 import { CampusReviewsList } from './CampusList';
 import AddCampusReviewModal from './AddCampusReviewModal'
 import styled from 'styled-components';
@@ -7,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 
 const CampusReviews = ({ campus, setRatings }) => {
   const firebase = useFirebase();
+  const authUser = useAuthUser();
 
   const [reviews, setReviews] = useState(null);
 
@@ -40,7 +42,7 @@ const CampusReviews = ({ campus, setRatings }) => {
     <>
       <Card>
         <Card.Header as="h5" className='text-center position-relative'>
-          Recent Reviews <AddCampusReviewModal campus={campus} />
+          Recent Reviews { authUser && <AddCampusReviewModal campus={campus} />}
         </Card.Header>
         <ReviewsBox>
           {reviews && <CampusReviewsList reviews={reviews} />}

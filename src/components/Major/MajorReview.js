@@ -9,7 +9,7 @@ const MajorReview = ({ review }) => {
   return (
     <Card.Body className='border-bottom'>
       <Card.Title className='clearfix'>
-        {/* <p className='float-left'>{review.startYear}-{review.endYear}</p> */}
+        <p className='float-left'>{review.startYear}-{review.endYear}</p>
         <p className='float-right'>Rating: {review.score}</p></Card.Title>
       <Card.Text className='font-italic'>
         "{review.review}"

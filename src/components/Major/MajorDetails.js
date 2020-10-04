@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFirebase } from "../Firebase";
 import { useLocation, useParams } from "react-router-dom";
-import { useAuthUser } from "../Session";
 
-import AddMajorReviewModal from "./AddMajorReviewModal";
 import { CampusesByMajorList } from "../Campus";
 import { CampusMajorCoursesList } from "../Course";
 import MajorReviews from "./MajorReviews";
@@ -17,7 +15,6 @@ const MajorDetails = () => {
   const firebase = useFirebase();
   const params = useParams();
   const location = useLocation();
-  const authUser = useAuthUser();
 
   const INITIAL_STATE = {
     loading: false,
@@ -27,7 +24,6 @@ const MajorDetails = () => {
   };
 
   const [values, setValues] = useState(INITIAL_STATE);
-  const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
     if (values.major) {
@@ -57,14 +53,6 @@ const MajorDetails = () => {
           <Col>
             <h2 className="text-center mt-3">{campus.name} </h2>
             {/* <CampusScore ratings={ratings} /> */}
-            {campus && major && authUser && (
-              <AddMajorReviewModal
-                campus={campus}
-                major={major}
-                ratings={ratings}
-              />
-            )}
-
             {loading && <div>Loading...</div>}
           </Col>
         </Row>
@@ -87,7 +75,6 @@ const MajorDetails = () => {
               <MajorReviews
                 campus={campus}
                 major={major}
-                setRatings={setRatings}
               />
             )}
           </Col>

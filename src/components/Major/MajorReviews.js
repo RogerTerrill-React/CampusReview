@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useMajorsList } from '../Major';
+import { useAuthUser } from "../Session";
 import { MajorReviewsList } from './MajorList';
+import AddMajorReviewModal from './AddMajorReviewModal';
 import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 
-const MajorReviews = ({ campus, major, setRatings }) => {
-  const majorsList = useMajorsList()
+const MajorReviews = ({ campus, major }) => {
+  const majorsList = useMajorsList();
+  const authUser = useAuthUser();
   
   const INITIAL_STATE ={
     average: 0,
@@ -13,8 +16,8 @@ const MajorReviews = ({ campus, major, setRatings }) => {
   }
 
   const [values, setValues] = useState(INITIAL_STATE);
-  const {average, count} = values;
   const [reviews, setReviews] = useState([]);
+  const [ratingsArray, setRatingsArray] = useState([]);
 
   useEffect(() => {
     
@@ -41,19 +44,20 @@ const MajorReviews = ({ campus, major, setRatings }) => {
       const total = scoreArray.reduce(((score, sum) => score + sum),0)
       const average = total / length;
       setValues({...values, average, count: scoreArray.length});
-      setRatings(scoreArray);
+      setRatingsArray(scoreArray);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [majorsList.length])
 
   return (
     <>
-      {majorsList && count}
-
-      {average.toFixed(2) }
       <Card>
         <Card.Header as="h5" className='text-center position-relative'>
-           Recent Reviews {/*<AddCampusReviewModal campus={campus} /> */}
+           Recent Reviews {authUser && <AddMajorReviewModal
+                campus={campus}
+                major={major}
+                ratingsArray={ratingsArray}
+              />}
         </Card.Header>
         <ReviewsBox>
           {reviews && <MajorReviewsList reviews={reviews} />}
