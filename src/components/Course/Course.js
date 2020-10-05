@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../Firebase';
-import CourseList from './CourseList';
+import React, { useState, useEffect } from "react";
+import { useFirebase } from "../Firebase";
+import CourseList from "./CourseList";
 
 const Course = () => {
   const firebase = useFirebase();
@@ -15,7 +15,7 @@ const Course = () => {
   useEffect(() => {
     setValues({ ...values, loading: true });
 
-    firebase.courses().on('value', (snapshot) => {
+    firebase.courses().on("value", (snapshot) => {
       const campusObject = snapshot.val();
 
       if (campusObject) {
@@ -37,13 +37,8 @@ const Course = () => {
 
   return (
     <>
-    <h1 className="text-center">Top Courses</h1>
       {loading && <div>Loading...</div>}
-      {courses ? (
-        <CourseList />
-      ) : (
-        <div>There are no courses...</div>
-      )}
+      {courses ? <CourseList /> : <div>There are no courses...</div>}
     </>
   );
 };

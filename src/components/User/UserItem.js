@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../Firebase';
 import { useLocation, useParams } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 
 const UserItem = () => {
   const firebase = useFirebase();
@@ -40,7 +41,10 @@ const UserItem = () => {
   const { user, loading } = values;
 
   return (
-    <>
+    <Card>
+      <Card.Header as="h5" className="text-center">
+        User - {user && user.username}
+      </Card.Header>
       <h2>User ({params.id})</h2>
       {loading && <div>Loading...</div>}
 
@@ -62,7 +66,7 @@ const UserItem = () => {
           </span>
         </div>
       )}
-    </>
+    </Card>
   );
 };
 

@@ -12,11 +12,14 @@ const CourseList = () => {
   );
 
   return courses ? (
-    <ul className="list-group">
+    <Card>
+      <Card.Header as="h5" className="text-center">
+        Top Courses
+      </Card.Header>
       {sortedCourseByAverageScore.map((course, index) => (
         <CourseItem key={course.uid} index={index} course={course} />
       ))}
-    </ul>
+    </Card>
   ) : (
     <p>No courses</p>
   );

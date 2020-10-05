@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../Firebase';
+import React, { useState, useEffect } from "react";
+import { useFirebase } from "../Firebase";
 // import { useAuthUser } from '../Session';
-import MajorList from './MajorList';
+import MajorList from "./MajorList";
 
 const Major = () => {
   const firebase = useFirebase();
@@ -17,7 +17,7 @@ const Major = () => {
   useEffect(() => {
     setValues({ ...values, loading: true });
 
-    firebase.majors().on('value', (snapshot) => {
+    firebase.majors().on("value", (snapshot) => {
       const majorsSnapshot = snapshot.val();
 
       if (majorsSnapshot) {
@@ -40,7 +40,6 @@ const Major = () => {
 
   return (
     <>
-    <h1 className="text-center">Top Majors</h1>
       {loading && <div>Loading...</div>}
       {majors ? (
         <MajorList majors={majors} />

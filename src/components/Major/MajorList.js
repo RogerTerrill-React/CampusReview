@@ -11,11 +11,14 @@ const MajorList = () => {
   );
 
   return (
-    <ul className="list-group">
+    <Card>
+      <Card.Header as="h5" className="text-center">
+        Top Majors
+      </Card.Header>
       {sortedMajorByAverageScore.map((major, index) => (
         <MajorItem key={major.uid} index={index} major={major} />
       ))}
-    </ul>
+    </Card>
   );
 };
 

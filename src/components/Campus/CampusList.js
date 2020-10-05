@@ -2,6 +2,7 @@ import React from 'react';
 import CampusItem from './CampusItem';
 import { useCampusList } from '../Campus';
 import CampusReview from './CampusReview';
+import Card from 'react-bootstrap/Card';
 
 
 const CampusList = () => {
@@ -9,11 +10,14 @@ const CampusList = () => {
   const sortedCampusByAverageScore = campuses.sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
 
   return (
-    <ul className="list-group">
+    <Card>
+      <Card.Header as="h5" className="text-center">
+        Top Campuses
+      </Card.Header>
       {sortedCampusByAverageScore.map((campus, index) => {
         return <CampusItem key={campus.uid} index={index} campus={campus} />;
       })}
-    </ul>
+    </Card>
   );
 };
 

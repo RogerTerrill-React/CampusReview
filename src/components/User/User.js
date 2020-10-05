@@ -36,7 +36,6 @@ const User = () => {
 
   return (
     <>
-      <h2>Users</h2>
       {loading && <div>Loading...</div>}
       <UserList users={users} />
     </>
