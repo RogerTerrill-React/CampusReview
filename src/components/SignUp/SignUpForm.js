@@ -101,7 +101,7 @@ const SignUpForm = () => {
         type='password'
         placeholder='Confirm Password'
       />
-      <label>
+      {/* <label>
         Admin:
         <input
           name='isAdmin'
@@ -109,7 +109,7 @@ const SignUpForm = () => {
           checked={isAdmin}
           onChange={onChangeCheckbox}
         />
-      </label>
+      </label> */}
       <button disabled={isInvalid} type='submit'>
         Sign Up
       </button>

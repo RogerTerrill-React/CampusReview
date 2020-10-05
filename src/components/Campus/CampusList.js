@@ -27,7 +27,10 @@ const CampusesByMajorList = ({ major }) => {
   const sortedCampusByAverageScore = campuses.sort((a, b) => (a.averageScore < b.averageScore) ? 1 : -1)
   let index = -1;
   return (
-    <ul className="list-group">
+    <Card>
+      <Card.Header as="h5" className="text-center">
+        Campuses Offering {major.name}
+      </Card.Header>
       {sortedCampusByAverageScore.map((campus) => {
 
         const isCampus = schoolIds.includes(campus.uid);
@@ -37,7 +40,7 @@ const CampusesByMajorList = ({ major }) => {
         index++;
         return <CampusItem key={campus.uid} index={index} major={major} campus={campus} />;
       })}
-    </ul>
+    </Card>
   )
 }
 
