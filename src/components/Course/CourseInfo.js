@@ -13,6 +13,7 @@ const CourseInfo = ({ course }) => {
       <Card.Body>
         <Card.Title>About</Card.Title>
         <Card.Text>{course.description}</Card.Text>
+        <Card.Text><span className='font-weight-bold'>Units:</span> {course.units}</Card.Text>
         <hr />
         <Card.Text>Offered at: {campus && campus.name}</Card.Text>
       </Card.Body>

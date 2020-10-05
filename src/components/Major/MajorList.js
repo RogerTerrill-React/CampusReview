@@ -1,8 +1,8 @@
-import React from "react";
-import MajorItem from "./MajorItem";
-import { useMajorsList } from "../Major";
-import MajorReview from "./MajorReview";
-import Card from "react-bootstrap/Card";
+import React from 'react';
+import MajorItem from './MajorItem';
+import { useMajorsList } from '../Major';
+import MajorReview from './MajorReview';
+import Card from 'react-bootstrap/Card';
 
 const MajorList = () => {
   const majors = useMajorsList();
@@ -12,12 +12,14 @@ const MajorList = () => {
 
   return (
     <Card>
-      <Card.Header as="h5" className="text-center">
+      <Card.Header as='h5' className='text-center'>
         Top Majors
       </Card.Header>
-      {sortedMajorByAverageScore.map((major, index) => (
-        <MajorItem key={major.uid} index={index} major={major} />
-      ))}
+      <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
+        {sortedMajorByAverageScore.map((major, index) => (
+          <MajorItem key={major.uid} index={index} major={major} />
+        ))}
+      </div>
     </Card>
   );
 };
@@ -30,12 +32,12 @@ const CampusMajorsList = ({ campus }) => {
   let index = -1;
   return (
     <Card>
-      <Card.Header as="h5" className="text-center">
+      <Card.Header as='h5' className='text-center'>
         Top Majors
       </Card.Header>
       {sortedMajorByAverageScore.map((major) => {
         const isMajor = Object.values(major)[
-          Object.keys(major).indexOf("schoolIds")
+          Object.keys(major).indexOf('schoolIds')
         ].includes(campus.uid);
         if (!isMajor) {
           return null;

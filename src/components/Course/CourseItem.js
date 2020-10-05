@@ -11,7 +11,7 @@ const CourseItem = ({ course, index }) => {
           state: { course },
         }}
       >
-        {index + 1}. {course.name}
+        {index + 1}. {course.code}-{course.name}
       </Link>
       <span className='badge badge-primary badge-pill'>
         {course.averageScore.toFixed(2)}

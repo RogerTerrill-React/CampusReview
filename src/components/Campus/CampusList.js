@@ -12,11 +12,13 @@ const CampusList = () => {
   return (
     <Card>
       <Card.Header as="h5" className="text-center">
-        Top Campuses
+        Top Rated CSU Campuses
       </Card.Header>
+      <div style={{'maxHeight': '15rem', 'overflowY':'auto'}}>
       {sortedCampusByAverageScore.map((campus, index) => {
         return <CampusItem key={campus.uid} index={index} campus={campus} />;
       })}
+      </div>
     </Card>
   );
 };

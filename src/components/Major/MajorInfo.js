@@ -9,7 +9,7 @@ const MajorInfo = ({ major }) => {
       </Card.Header>
       <Card.Body>
         <Card.Title>About</Card.Title>
-        <Card.Text>{major.name}</Card.Text>
+        <Card.Text>{major.description}</Card.Text>
       </Card.Body>
     </Card>
   );

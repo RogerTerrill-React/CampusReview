@@ -40,9 +40,12 @@ const MajorReviews = ({ campus, major, setRatings }) => {
 
       setReviews(campusMajorReviewList);
       const scoreArray = campusMajorReviewList.map((review) => review.score);
-      const length = scoreArray.length ? scoreArray.length : 1;
+      const length = scoreArray.length;
       const total = scoreArray.reduce((score, sum) => score + sum, 0);
-      const average = total / length;
+      let average = total / length;
+      if(isNaN(average)){
+        average = 0;
+      } 
       setRatings({ reviewCount: length, averageScore: average });
       setValues({ ...values, average, count: scoreArray.length });
       setRatingsArray(scoreArray);

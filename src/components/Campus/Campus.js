@@ -10,6 +10,7 @@ const Campus = () => {
 
   return (
     <>
+    {/* {loading && <div>Loading...</div>} */}
       {campuses ? (
         <CampusList/>
       ) : (

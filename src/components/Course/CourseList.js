@@ -1,8 +1,8 @@
-import React from "react";
-import CourseItem from "./CourseItem";
-import { useCourseList } from "../Course";
+import React from 'react';
+import CourseItem from './CourseItem';
+import { useCourseList } from '../Course';
 import CourseReview from './CourseReview';
-import Card from "react-bootstrap/Card";
+import Card from 'react-bootstrap/Card';
 
 // Fill courses list
 const CourseList = () => {
@@ -13,12 +13,14 @@ const CourseList = () => {
 
   return courses ? (
     <Card>
-      <Card.Header as="h5" className="text-center">
-        Top Courses
+      <Card.Header as='h5' className='text-center'>
+        Top Rated CSU Courses
       </Card.Header>
-      {sortedCourseByAverageScore.map((course, index) => (
-        <CourseItem key={course.uid} index={index} course={course} />
-      ))}
+      <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
+        {sortedCourseByAverageScore.map((course, index) => (
+          <CourseItem key={course.uid} index={index} course={course} />
+        ))}
+      </div>
     </Card>
   ) : (
     <p>No courses</p>
@@ -34,19 +36,21 @@ const CampusMajorCoursesList = ({ campus, major }) => {
 
   return (
     <Card>
-      <Card.Header as="h5" className="text-center">
+      <Card.Header as='h5' className='text-center'>
         Curriculum
       </Card.Header>
-      {sortedCourseByAverageScore.map((course) => {
-        const isCourse =
-          major.uid === course.majorId && campus.uid === course.schoolId;
+      <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
+        {sortedCourseByAverageScore.map((course) => {
+          const isCourse =
+            major.uid === course.majorId && campus.uid === course.schoolId;
 
-        if (!isCourse) {
-          return null;
-        }
-        index++;
-        return <CourseItem key={course.uid} index={index} course={course} />;
-      })}
+          if (!isCourse) {
+            return null;
+          }
+          index++;
+          return <CourseItem key={course.uid} index={index} course={course} />;
+        })}
+      </div>
     </Card>
   );
 };

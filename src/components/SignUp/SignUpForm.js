@@ -56,15 +56,15 @@ const SignUpForm = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const onChangeCheckbox = (event) => {
-    // Destructure out name and value from event.target
-    const { name, checked } = event.target;
+  // const onChangeCheckbox = (event) => {
+  //   // Destructure out name and value from event.target
+  //   const { name, checked } = event.target;
 
-    // Spread current values and overwrite with the destructured value
-    setValues({ ...values, [name]: checked });
-  };
+  //   // Spread current values and overwrite with the destructured value
+  //   setValues({ ...values, [name]: checked });
+  // };
 
-  const { username, email, passwordOne, passwordTwo, isAdmin } = values;
+  const { username, email, passwordOne, passwordTwo } = values;
 
   const isInvalid =
     passwordOne !== passwordTwo ||

@@ -13,7 +13,7 @@ const Navigation = ({ children }) => {
   const isLanding = location.pathname === '/';
 
   return (
-    <>
+    <div style={isLanding ? {} : {'paddingBottom': '100px'}}>
       <Navbar
         variant='dark'
         fixed={isLanding ? 'top' : ''}
@@ -37,7 +37,7 @@ const Navigation = ({ children }) => {
       <Navbar variant='dark' bg={isLanding ? '' : 'dark'} fixed='bottom'>
         <p className='text-center text-light'>Copyright &copy; STEMranks 2020</p>
       </Navbar>
-    </>
+    </div>
   );
 };
 
