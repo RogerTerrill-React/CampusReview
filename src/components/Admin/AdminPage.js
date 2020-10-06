@@ -61,7 +61,7 @@ const AdminPage = () => {
         <Col>
           <Row>
             <Col>
-              <Major />
+              <Major title='Complete List of Majors'/>
             </Col>
           </Row>
           <Row className='mt-4'>

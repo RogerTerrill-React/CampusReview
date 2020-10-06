@@ -71,7 +71,7 @@ const AddCampusForm = ({setModalShow}) => {
           value={name}
           onChange={onChange}
           type='text'
-          placeholder='Enter Course Name'
+          placeholder='Enter Campus Name'
         />
       </Form.Group>
       <Form.Group controlId='formStreet'>
