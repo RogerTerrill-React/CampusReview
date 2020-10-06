@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import { withAuthorization, withEmailVerification } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
-import {generateRandomReviews} from '../../helpers/array';
+import {generateRandomCampusReviews} from '../../helpers/generateReviews';
 import {useFirebase } from '../Firebase';
 
 import { UserItem } from "../User";
@@ -27,7 +27,7 @@ const AdminPage = () => {
       <Row className="mb-4">
         <Col className="text-center">
           <AddCampusModal />
-          <button onClick={()=>generateRandomReviews(firebase)}>Generate Campuses</button>
+          <button onClick={()=>generateRandomCampusReviews(firebase)}>Generate Campuses</button>
         </Col>
         <Col className="text-center">
           <AddMajorModal />
