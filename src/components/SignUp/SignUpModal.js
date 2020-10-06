@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const SignInModal = () => {
+const SignUpModal = () => {
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
       <Button variant='outline-light' onClick={() => setModalShow(true)}>
-        Sign In
+        Sign Up
       </Button>
       <Modal
         onHide={() => setModalShow(false)}
@@ -20,14 +20,14 @@ const SignInModal = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Sign In</Modal.Title>
+          <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <SignInForm setModalShow={setModalShow} />
+          <SignUpForm setModalShow={setModalShow} />
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
-export default SignInModal;
+export default SignUpModal;

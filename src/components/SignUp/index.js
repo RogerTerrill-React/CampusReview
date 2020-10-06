@@ -1,6 +1,6 @@
-import SignUp from './SignUpPage';
+import SignUpModal from './SignUpModal';
 import SignUpLink from './SignUpLink'
 
-export default SignUp;
+export default SignUpModal;
 export { SignUpLink };
 

@@ -3,8 +3,10 @@ import { useFirebase } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-const SignUpForm = () => {
+const SignUpForm = ({ setModalShow }) => {
   const firebase = useFirebase();
   const history = useHistory();
 
@@ -46,6 +48,7 @@ const SignUpForm = () => {
         setValues(error);
       });
     event.preventDefault();
+    setModalShow(false);
   };
 
   const onChange = (event) => {
@@ -72,35 +75,60 @@ const SignUpForm = () => {
     email === '' ||
     username === '';
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        name='username'
-        value={username}
-        onChange={onChange}
-        type='text'
-        placeholder='Full Name'
-      />
-      <input
-        name='email'
-        value={email}
-        onChange={onChange}
-        type='text'
-        placeholder='Email Address'
-      />
-      <input
-        name='passwordOne'
-        value={passwordOne}
-        onChange={onChange}
-        type='password'
-        placeholder='Password'
-      />
-      <input
-        name='passwordTwo'
-        value={passwordTwo}
-        onChange={onChange}
-        type='password'
-        placeholder='Confirm Password'
-      />
+    <>
+      <Form onSubmit={onSubmit}>
+        <Form.Group controlId='formUsername'>
+          <Form.Control
+            name='username'
+            value={username}
+            onChange={onChange}
+            type='text'
+            placeholder='Full Name'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formEmail'>
+          <Form.Control
+            name='email'
+            value={email}
+            onChange={onChange}
+            type='text'
+            placeholder='Email Address'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formPasswordOne'>
+          <Form.Control
+            name='passwordOne'
+            value={passwordOne}
+            onChange={onChange}
+            type='password'
+            placeholder='Password'
+          />
+        </Form.Group>
+
+        <Form.Group controlId='formPasswordTwo'>
+          <Form.Control
+            name='passwordTwo'
+            value={passwordTwo}
+            onChange={onChange}
+            type='password'
+            placeholder='Confirm Password'
+          />
+        </Form.Group>
+        {values.error && <p>{values.error.message}</p>}
+
+        <Button
+          className='btn-block'
+          disabled={isInvalid}
+          variant='primary'
+          type='submit'
+        >
+          Sign Up
+        </Button>
+        {values.error && <p>{values.error.message}</p>}
+      </Form>
+
       {/* <label>
         Admin:
         <input
@@ -110,11 +138,7 @@ const SignUpForm = () => {
           onChange={onChangeCheckbox}
         />
       </label> */}
-      <button disabled={isInvalid} type='submit'>
-        Sign Up
-      </button>
-      {values.error && <p>{values.error.message}</p>}
-    </form>
+    </>
   );
 };
 

@@ -1,16 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Nav from "react-bootstrap/Nav";
-import * as ROUTES from "../../constants/routes";
-import SignInModal from "../SignIn";
+import React from 'react';
+import SignInModal from '../SignIn';
+import SignUpModal from '../SignUp';
 
 const NavigationNonAuth = () => {
   return (
     <>
       <SignInModal />
-      <Nav.Link as={Link} className="text-light" to={ROUTES.SIGN_UP}>
-        Sign Up
-      </Nav.Link>
+      <SignUpModal />
     </>
   );
 };
