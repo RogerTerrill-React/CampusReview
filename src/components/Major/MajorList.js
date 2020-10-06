@@ -4,7 +4,7 @@ import { useMajorsList } from '../Major';
 import MajorReview from './MajorReview';
 import Card from 'react-bootstrap/Card';
 
-const MajorList = () => {
+const MajorList = ({title}) => {
   const majors = useMajorsList();
   const sortedMajorByAverageScore = majors.sort((a, b) =>
     a.averageScore < b.averageScore ? 1 : -1
@@ -13,7 +13,7 @@ const MajorList = () => {
   return (
     <Card>
       <Card.Header as='h5' className='text-center'>
-        Top Majors
+        {title}
       </Card.Header>
       <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
         {sortedMajorByAverageScore.map((major, index) => (

@@ -1,48 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useFirebase } from "../Firebase";
-// import { useAuthUser } from '../Session';
+import React from "react";
+import {useMajorsList} from '../Major';
 import MajorList from "./MajorList";
 
-const Major = () => {
-  const firebase = useFirebase();
-  // const authUser = useAuthUser();
-
-  const INITIAL_STATE = {
-    loading: false,
-    majors: [],
-  };
-
-  const [values, setValues] = useState(INITIAL_STATE);
-
-  useEffect(() => {
-    setValues({ ...values, loading: true });
-
-    firebase.majors().on("value", (snapshot) => {
-      const majorsSnapshot = snapshot.val();
-
-      if (majorsSnapshot) {
-        // convert campus list from snapshot
-        const majorList = Object.keys(majorsSnapshot).map((key) => ({
-          ...majorsSnapshot[key],
-          uid: key,
-        }));
-
-        setValues({ ...values, loading: false, majors: majorList });
-      } else {
-        setValues({ ...values, loading: false, majors: null });
-      }
-    });
-    return () => firebase.majors().off();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { majors, loading } = values;
-
+const Major = ({title}) => {
+  const majorsList = useMajorsList();
   return (
     <>
-      {loading && <div>Loading...</div>}
-      {majors ? (
-        <MajorList majors={majors} />
+      {majorsList ? (
+        <MajorList title={title}/>
       ) : (
         <div>There are no majors...</div>
       )}

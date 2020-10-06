@@ -6,11 +6,8 @@ const Campus = () => {
 
   const campuses = useCampusList();
 
-  // const [loading, setLoading] = useState(false);
-
   return (
     <>
-    {/* {loading && <div>Loading...</div>} */}
       {campuses ? (
         <CampusList/>
       ) : (

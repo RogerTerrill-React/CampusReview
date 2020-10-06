@@ -1,38 +1,40 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { compose } from "recompose";
-import { withAuthorization, withEmailVerification } from "../Session";
-import * as ROLES from "../../constants/roles";
-import * as ROUTES from "../../constants/routes";
-import {generateRandomCampusReviews} from '../../helpers/generateReviews';
-import {useFirebase } from '../Firebase';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { compose } from 'recompose';
+import { withAuthorization, withEmailVerification } from '../Session';
+import * as ROLES from '../../constants/roles';
+import * as ROUTES from '../../constants/routes';
+import { generateRandomCampusReviews } from '../../helpers/generateReviews';
+import { useFirebase } from '../Firebase';
 
-import { UserItem } from "../User";
-import User from "../User";
-import { Campus } from "../Campus";
-import { Major } from "../Major";
-import { Course } from "../Course";
-import AddCampusModal from "../Campus";
-import AddMajorModal from "../Major";
-import AddCourseModal from "../Course";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import { UserItem } from '../User';
+import User from '../User';
+import { Campus } from '../Campus';
+import { Major } from '../Major';
+import { Course } from '../Course';
+import AddCampusModal from '../Campus';
+import AddMajorModal from '../Major';
+import AddCourseModal from '../Course';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const AdminPage = () => {
   const firebase = useFirebase();
   return (
     <Container>
-      <h1 className="text-center mt-4 mb-4">Admin Dashboard</h1>
-      <Row className="mb-4">
-        <Col className="text-center">
+      <h1 className='text-center mt-4 mb-4'>Admin Dashboard</h1>
+      <Row className='mb-4'>
+        <Col className='text-center'>
           <AddCampusModal />
-          <button onClick={()=>generateRandomCampusReviews(firebase)}>Generate Campuses</button>
+          <button onClick={() => generateRandomCampusReviews(firebase)}>
+            Generate Campuses
+          </button>
         </Col>
-        <Col className="text-center">
+        <Col className='text-center'>
           <AddMajorModal />
         </Col>
-        <Col className="text-center">
+        <Col className='text-center'>
           <AddCourseModal />
         </Col>
       </Row>
@@ -50,7 +52,7 @@ const AdminPage = () => {
               </Switch>
             </Col>
           </Row>
-          <Row className="mt-4">
+          <Row className='mt-4'>
             <Col>
               <Campus />
             </Col>
@@ -62,7 +64,7 @@ const AdminPage = () => {
               <Major />
             </Col>
           </Row>
-          <Row className="mt-4">
+          <Row className='mt-4'>
             <Col>
               <Course />
             </Col>
