@@ -17,11 +17,29 @@ const generateRandomCampusReviews = (firebase) => {
   ];
 
   const campusesUids = [
-    '-MI2AyHbeuWe89Dd-ZvN',
-    '-MI2BISs2izvrWf44_jc',
-    '-MI2BigPXog_1z-mFFDU',
-    // '-MI2C6d8Z1hUt7uI_9gw',
-    '-MI64aUpC2_pGxPwi8oe',
+    //'-MI2AyHbeuWe89Dd-ZvN', // Bakersfield
+    //'-MI2BISs2izvrWf44_jc', // Dominguez Hills
+    //'-MI2BigPXog_1z-mFFDU', // Channel Islands
+    // '-MI2C6d8Z1hUt7uI_9gw', // Monterey Bay
+    //'-MI64aUpC2_pGxPwi8oe', // Pomona
+    '-MIzpKOdcBZhL_COijXl', // Chico
+    '-MIzptmj-aHWVAR6KqUM', // East Bay
+    '-MIzqfGubJbhQB-wEAe9', // Fresno
+    '-MIzrG1g72fgCfXn-VyS', // Fullerton
+    '-MIzsHNeNEJExrcsvkh3', // Humboldt
+    '-MIzuGL4YCh59wa-mkgB', // Long Beach
+    '-MIzujWg8oo-45nrNqSZ', // Los Angeles
+    '-MIzvl4oLNWZP27NJqIK', // Maritime
+    '-MIzwMEo9vRatw7K1uM6', // Northridge
+    '-MIzwxUiQTxwlGWxnavj', // Sacramento
+    '-MIzxQoteKHV0reQPCup', // San Bernardino
+    '-MIzxv8BeHyW3m8z-LE2', // San Diego
+    '-MIzyXhulRFM-a8JIKRT', // San Francisco
+    '-MIzz2AVOWOBycq9iHUa', // San Jose
+    '-MJ-2i-z3xdYoieOBxkg', // San Luis Obispo
+    '-MJ-5cW2KIWKMnl5A28x', // San Marcos
+    '-MJ-68TKI37FwPRUqNKW', // Sonoma
+    '-MJ-6YKCOr-5YHPzENzZ', // Stanislaus
   ];
 
   const userUids = [
