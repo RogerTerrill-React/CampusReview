@@ -17,6 +17,7 @@ const AddCampusForm = ({setModalShow}) => {
     phoneNumber: '',
     url: '',
     about: '',
+    logoUrl: '',
     rating: 0,
   };
 
@@ -31,6 +32,7 @@ const AddCampusForm = ({setModalShow}) => {
     phoneNumber,
     url,
     about,
+    logoUrl,
   } = values;
 
   const onChange = (event) => {
@@ -51,6 +53,7 @@ const AddCampusForm = ({setModalShow}) => {
       phoneNumber,
       url,
       about,
+      logoUrl,
       averageScore: 0,
     });
 
@@ -125,6 +128,10 @@ const AddCampusForm = ({setModalShow}) => {
       <Form.Group controlId='formUrl'>
         <Form.Label>Website</Form.Label>
         <Form.Control name='url' value={url} onChange={onChange} type='url' />
+      </Form.Group>
+      <Form.Group controlId='formLogoUrl'>
+        <Form.Label>Logo Url</Form.Label>
+        <Form.Control name='logoUrl' value={logoUrl} onChange={onChange} type='url' />
       </Form.Group>
       <Form.Group controlId='formAbout'>
         <Form.Label>About</Form.Label>
