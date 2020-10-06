@@ -24,6 +24,26 @@ const MajorList = ({title}) => {
   );
 };
 
+const MajorListByName = ({title}) => {
+  const majors = useMajorsList();
+  const sortedMajorByAverageScore = majors.sort((a, b) =>
+    a.name > b.name ? 1 : -1
+  );
+
+  return (
+    <Card>
+      <Card.Header as='h5' className='text-center'>
+        {title}
+      </Card.Header>
+      <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
+        {sortedMajorByAverageScore.map((major, index) => (
+          <MajorItem key={major.uid} index={index} major={major} />
+        ))}
+      </div>
+    </Card>
+  );
+};
+
 const CampusMajorsList = ({ campus }) => {
   const majors = useMajorsList();
   const sortedMajorByAverageScore = majors.sort((a, b) =>
@@ -81,5 +101,5 @@ const MajorReviewsList = ({ reviews }) => {
   });
 };
 
-export { CampusMajorsList, MajorsOptionsList, MajorReviewsList };
+export { CampusMajorsList, MajorsOptionsList, MajorReviewsList, MajorListByName };
 export default MajorList;

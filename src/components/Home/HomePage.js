@@ -3,7 +3,7 @@ import React from 'react';
 // import { withAuthorization, withEmailVerification } from '../Session';
 // import Messages from '../Messages';
 import { Campus } from '../Campus';
-import { Major } from '../Major';
+import { MajorListByName } from '../Major';
 import { Course } from '../Course';
 
 import Container from 'react-bootstrap/Container';
@@ -20,7 +20,7 @@ const HomePage = () => {
       </Row>
       <Row>
         <Col>
-          <Major title='CSU STEM Majors'/>
+          <MajorListByName title='CSU STEM Majors'/>
         </Col>
         <Col>
           <Course />
