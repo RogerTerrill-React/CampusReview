@@ -1,2 +1,2 @@
-import SignInPage from './SignInPage';
-export default SignInPage;
+import SignInModal from './SignInModal';
+export default SignInModal;

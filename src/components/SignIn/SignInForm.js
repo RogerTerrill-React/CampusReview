@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
-import { useFirebase } from '../Firebase';
-import { useHistory } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
+import React, { useState } from "react";
+import { useFirebase } from "../Firebase";
+import { useHistory } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
 
-const SignInForm = () => {
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+const SignInForm = ({setModalShow}) => {
   const firebase = useFirebase();
   const history = useHistory();
 
   const INITIAL_STATE = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     error: null,
   };
 
@@ -24,9 +27,10 @@ const SignInForm = () => {
         history.push(ROUTES.HOME);
       })
       .catch((error) => {
-        setValues(error);
+        setValues({...values, error});
       });
     event.preventDefault();
+    setModalShow(false);
   };
 
   const onChange = (event) => {
@@ -39,29 +43,39 @@ const SignInForm = () => {
 
   const { email, password } = values;
 
-  const isInvalid = password === '' || email === '';
+  const isInvalid = password === "" || email === "";
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        name='email'
-        value={email}
-        onChange={onChange}
-        type='text'
-        placeholder='Email Address'
-      />
-      <input
-        name='password'
-        value={password}
-        onChange={onChange}
-        type='password'
-        placeholder='Password'
-      />
-      <button disabled={isInvalid} type='submit'>
-        Sign In
-      </button>
-      {values.error && <p>{values.error.message}</p>}
-    </form>
+    <>
+      <Form onSubmit={onSubmit}>
+        <Form.Group controlId="formName">
+          <Form.Label>E-Mail</Form.Label>
+          <Form.Control
+            name="email"
+            value={email}
+            onChange={onChange}
+            type="text"
+            placeholder="Email"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formPasswor">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            value={password}
+            onChange={onChange}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+
+        <Button disabled={isInvalid} variant="primary" type="submit">
+          Sign In
+        </Button>
+        {values.error && <p>{values.error.message}</p>}
+      </Form>
+    </>
   );
 };
 
