@@ -4,6 +4,8 @@ import { compose } from "recompose";
 import { withAuthorization, withEmailVerification } from "../Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
+import {generateRandomReviews} from '../../helpers/array';
+import {useFirebase } from '../Firebase';
 
 import { UserItem } from "../User";
 import User from "../User";
@@ -18,12 +20,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 const AdminPage = () => {
+  const firebase = useFirebase();
   return (
     <Container>
       <h1 className="text-center mt-4 mb-4">Admin Dashboard</h1>
       <Row className="mb-4">
         <Col className="text-center">
           <AddCampusModal />
+          <button onClick={()=>generateRandomReviews(firebase)}>Generate Campuses</button>
         </Col>
         <Col className="text-center">
           <AddMajorModal />
