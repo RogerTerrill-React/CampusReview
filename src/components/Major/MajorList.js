@@ -55,6 +55,7 @@ const CampusMajorsList = ({ campus }) => {
       <Card.Header as='h5' className='text-center'>
         Top Majors
       </Card.Header>
+      <div style={{'maxHeight': '15rem', 'overflowY':'auto'}}>
       {sortedMajorByAverageScore.map((major) => {
         const isMajor = Object.values(major)[
           Object.keys(major).indexOf('schoolIds')
@@ -72,6 +73,7 @@ const CampusMajorsList = ({ campus }) => {
           />
         );
       })}
+      </div>
     </Card>
   );
 };
