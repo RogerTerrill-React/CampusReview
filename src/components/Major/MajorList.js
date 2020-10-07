@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 
 const MajorList = ({title}) => {
   const majors = useMajorsList();
-  const sortedMajorByAverageScore = majors.sort((a, b) =>
+  const sortedMajorByName = majors.sort((a, b) =>
     a.averageScore < b.averageScore ? 1 : -1
   );
 
@@ -16,7 +16,7 @@ const MajorList = ({title}) => {
         {title}
       </Card.Header>
       <div style={{ 'maxHeight': '15rem', 'overflowY': 'auto' }}>
-        {sortedMajorByAverageScore.map((major, index) => (
+        {sortedMajorByName.map((major, index) => (
           <MajorItem key={major.uid} index={index} major={major} />
         ))}
       </div>
@@ -80,9 +80,12 @@ const CampusMajorsList = ({ campus }) => {
 
 const MajorsOptionsList = () => {
   const majors = useMajorsList();
+  const sortedMajorByName = majors.sort((a, b) =>
+    a.name > b.name ? 1 : -1
+  );
   return (
     <>
-      {majors.map((major) => {
+      {sortedMajorByName.map((major) => {
         return (
           <option key={major.uid} value={major.uid}>
             {major.name}
