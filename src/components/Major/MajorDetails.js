@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useFirebase } from "../Firebase";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useFirebase } from '../Firebase';
+import { useLocation, useParams } from 'react-router-dom';
 
-import { CampusesByMajorList } from "../Campus";
-import { CampusMajorCoursesList } from "../Course";
-import { Score } from "../Shared";
-import MajorReviews from "./MajorReviews";
-import MajorInfo from "./MajorInfo";
+import { CampusesByMajorList } from '../Campus';
+import { CampusMajorCoursesList } from '../Course';
+import { Score } from '../Shared';
+import MajorReviews from './MajorReviews';
+import MajorInfo from './MajorInfo';
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 const MajorDetails = () => {
   const firebase = useFirebase();
@@ -50,41 +50,70 @@ const MajorDetails = () => {
 
   return (
     <>
-      <Container>
-        <Row className="mb-4">
-          <Col>
-            <h2 className="text-center mt-3">{major.name} {!!campus && ` -  ${campus.name}`} </h2>
-            {campus && <Score ratings={ratings} />}
-            {loading && <div>Loading...</div>}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Row className="mb-4">
-              <Col>
-                <MajorInfo major={major} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                {campus && (
-                  <CampusMajorCoursesList campus={campus} major={major} />
-                )}
-                {!campus && <CampusesByMajorList major={major} />}
-              </Col>
-            </Row>
-          </Col>
-          <Col>
-            {campus && major && (
-              <MajorReviews
-                campus={campus}
-                major={major}
-                setRatings={setRatings}
-              />
-            )}
-          </Col>
-        </Row>
-      </Container>
+      {campus && (
+        <Container>
+          <Row className='mb-4'>
+            <Col>
+              <h2 className='text-center mt-3'>
+                {major.name} {!!campus && ` -  ${campus.name}`}{' '}
+              </h2>
+              {campus && <Score ratings={ratings} />}
+              {loading && <div>Loading...</div>}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Row className='mb-4'>
+                <Col>
+                  <MajorInfo major={major} />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  {campus && (
+                    <CampusMajorCoursesList campus={campus} major={major} />
+                  )}
+                  {!campus && <CampusesByMajorList major={major} />}
+                </Col>
+              </Row>
+            </Col>
+            <Col>
+              {campus && major && (
+                <MajorReviews
+                  campus={campus}
+                  major={major}
+                  setRatings={setRatings}
+                />
+              )}
+            </Col>
+          </Row>
+        </Container>
+      )}
+      {!campus && (
+        <Container>
+          <Row className='mb-4'>
+            <Col>
+              <h2 className='text-center mt-3'>
+                {major.name} {!!campus && ` -  ${campus.name}`}{' '}
+              </h2>
+              {campus && <Score ratings={ratings} />}
+              {loading && <div>Loading...</div>}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Row className='mb-4'>
+                <Col>
+                  <MajorInfo major={major} />
+                </Col>
+                <Col>
+                  <CampusesByMajorList major={major} />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </>
   );
 };
