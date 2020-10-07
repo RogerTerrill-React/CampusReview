@@ -35,7 +35,7 @@ const Navigation = ({ children }) => {
       </Navbar>
       {children}
       <Navbar variant='dark' bg={isLanding ? '' : 'dark'} fixed='bottom'>
-        <p className='text-center text-light'>Copyright &copy; STEMranks 2020</p>
+        <p className='text-center text-light' style={{'width':'100%', 'margin':'16px'}}>Copyright &copy; STEMranks 2020</p>
       </Navbar>
     </div>
   );
