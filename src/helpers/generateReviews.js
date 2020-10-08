@@ -50,6 +50,60 @@ const majorsUids = [
   '-MJ-KpdZZwnR9LNNgVvP',
 ];
 
+const coursesUids = [
+  '-MJ40OcXtScp-2GlhgIA',
+  '-MJ40ES2PVS3o036zQHj',
+  '-MJ407WaMZWhvfJjiyJN',
+  '-MJ401C6oJRuAvrK6isl',
+  '-MJ4-t3xsoWsKzAv1gAE',
+  '-MJ4-mpFkvrCq11st2K9',
+  '-MJ4-gEKb8g3LQSlsJ0L',
+  '-MJ4-_EOmqt3EqT9o2BK',
+  '-MJ4-TwONMuZeAcJq5Cf',
+  '-MJ4-MuLR-JmNDDsAlSH',
+  '-MJ4-DccaGK4nJakGi10',
+  '-MJ4-6bsE3WijTsjFsty',
+  '-MJ3zyV1ODDoWmR82oGD',
+  '-MJ3zpzEsJ2SpWBVQg3d',
+  '-MJ3zitWXss-v_Iq7GSy',
+  '-MJ3zbxlYCKu80MUH1Zo',
+  '-MJ3zMXQX71vhUcxRM8a',
+  '-MJ3z9pbOYpwBx0dQJtY',
+  '-MJ3z3X7G-YRmYdw4amX',
+  '-MJ3yxdY6ZiHdXLLm2z-',
+  '-MJ3yi7cP7r5cmXqf63K',
+  '-MJ3yJJNZQyfcAjT22Xb',
+  '-MJ3y9XH-qFg26wtlAE1',
+  '-MJ3y1Sb9ramQgKuWXoW',
+  '-MJ3xuq87D2qNWanUMgN',
+  '-MJ3xobo_ZRVqlx37UOH',
+  '-MJ3xhMsdpYi-Yb2rZQw',
+  '-MJ3xHeLyEtTgZjNfZ8F',
+  '-MJ3xA8OBxlLUBTKAd6r',
+  '-MJ3x0uSqF8JAw8ElbTE',
+  '-MJ3wkYB37MebSkguLXR',
+  '-MJ3wS2AnXjNTBFBgaL0',
+  '-MIrSD5tHxckexP9SZj6',
+  '-MIrS4mdFyoOzwZSdNGV',
+  '-MIrRovRjh7755ztbIIz',
+  '-MIrRe9ZQ_O-KI6rHdsx',
+  '-MIrRWaRjIwDUWs8D1mz',
+  '-MIrRCrv3Dc1Pi9YFIw3',
+  '-MIrR3R3e_GfBTm0YrV8',
+  '-MIrQudw2ta4h18Gb97q',
+  '-MIrQZfaDM6h8mA91Izl',
+  '-MIrQMc90t9_HEnOkCz1',
+  '-MIrQED-PEiAisY_-O52',
+  '-MIrQ039zpcVTKHk12Fq',
+  '-MIrPqd8boXCu2debbIi',
+  '-MIrPSL3NLi2ijE37J9x',
+  '-MIrP9SQ3SddIwL6zluq',
+  '-MIrOb5baq4a6FTncORp',
+  '-MIGUj2MQjCXQg0ieOlJ',
+  '-MIGPkhlb_B-JWGcAgW-',
+  '-MI7DIBeepBNR-9XGrbm',
+];
+
 const reviews = [
   'Great campus with fabulous faculty and diverse group of students. Always something to do. Enjoyed the aura of the campus during my duration here. Lively and safe environment! Definitely would recommend.',
   "Most of the students here keep to themselves. Joining clubs, organizations and etc are great ways to make friends. The opportunities here are good. Some of them aren't advertised to a lot of students. Take advantage of the career events and workshops. Definitely, keep up with CSULB social media cause they have cool events &amp; important infos.",
@@ -76,6 +130,20 @@ const userUids = [
 ];
 
 const year = ['2016', '2017', '2018', '2019', '2020'];
+const month = [
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '07',
+  '08',
+  '09',
+  '10',
+  '11',
+  '12',
+];
 
 const generateRandomCampusReviews = (firebase) => {
   let scoreArray = [];
@@ -84,8 +152,6 @@ const generateRandomCampusReviews = (firebase) => {
     for (let j = 0; j < reviews.length; j++) {
       scoreArray.push(randomNumber(1, 5));
     }
-
-    console.log(campusesUids[i], average(scoreArray));
 
     for (let j = 0; j < reviews.length; j++) {
       firebase.campusReviews(campusesUids[i]).push({
@@ -122,4 +188,34 @@ const generateRandomMajorReviews = (firebase) => {
   }
 };
 
-export { generateRandomCampusReviews, generateRandomMajorReviews };
+const generateRandomCourseReviews = (firebase) => {
+  let scoreArray = [];
+
+  for (let i = 0; i < coursesUids.length; i++) {
+    for (let j = 0; j < reviews.length; j++) {
+      scoreArray.push(randomNumber(1, 5));
+    }
+
+    for (let j = 0; j < reviews.length; j++) {
+      firebase.courseReviews(coursesUids[i]).push({
+        userId: userUids[Math.floor(Math.random() * userUids.length)],
+        score: scoreArray[j],
+        review: reviews[Math.floor(Math.random() * reviews.length)],
+        month: month[Math.floor(Math.random() * month.length)],
+        year: year[Math.floor(Math.random() * year.length)],
+        createdAt: firebase.serverValue.TIMESTAMP,
+      });
+
+      firebase.course(coursesUids[i]).update({
+        averageScore: average(scoreArray),
+      })
+    }
+    scoreArray = [];
+  }
+};
+
+export {
+  generateRandomCampusReviews,
+  generateRandomMajorReviews,
+  generateRandomCourseReviews,
+};
