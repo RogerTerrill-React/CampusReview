@@ -162,6 +162,10 @@ const generateRandomCampusReviews = (firebase) => {
         endYear: year[Math.floor(Math.random() * year.length)],
         createdAt: firebase.serverValue.TIMESTAMP,
       });
+
+      firebase.campus(campusesUids[i]).update({
+        averageScore: average(scoreArray),
+      })
     }
     scoreArray = [];
   }

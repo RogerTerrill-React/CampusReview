@@ -14,7 +14,7 @@ import { useFirebase } from '../Firebase';
 import { UserItem } from '../User';
 import User from '../User';
 import { Campus } from '../Campus';
-import { Major } from '../Major';
+import { Major, MajorListByName } from '../Major';
 import { Course } from '../Course';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
@@ -71,7 +71,7 @@ const AdminPage = () => {
         <Col>
           <Row>
             <Col>
-              <Major title='Complete List of Majors' />
+              <MajorListByName title='CSU STEM Majors' />
             </Col>
           </Row>
           <Row className='mt-4'>

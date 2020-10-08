@@ -20,7 +20,7 @@ const HomePage = () => {
       </Row>
       <Row>
         <Col>
-          <MajorListByName title='CSU STEM Majors'/>
+          <MajorListByName title='CSU STEM Majors' />
         </Col>
         <Col>
           <Course />
