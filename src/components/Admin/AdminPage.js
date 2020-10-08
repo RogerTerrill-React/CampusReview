@@ -14,7 +14,7 @@ import { useFirebase } from '../Firebase';
 import { UserItem } from '../User';
 import User from '../User';
 import { Campus } from '../Campus';
-import { Major, MajorListByName } from '../Major';
+import { MajorListByName } from '../Major';
 import { Course } from '../Course';
 import AddCampusModal from '../Campus';
 import AddMajorModal from '../Major';
