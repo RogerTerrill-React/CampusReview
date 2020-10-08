@@ -11,14 +11,19 @@ const MajorItem = ({ major, campus, index }) => {
   useEffect(() =>{
     if (major.reviews && campus) {
       const campusMajorReviewsList = Object.values(major.reviews);
+
+      // List of only the values we want but with nulls
       const scoreArray = campusMajorReviewsList.map((review) => {
         if(review.campusUid !== campus.uid) {
           return null;
         }
         return review.score
       });
-      const length = scoreArray.length;
-      const total = scoreArray.reduce((score, sum) => score + sum, 0);
+
+      // Filter out the nulls leaving only valid scores
+      const validScores = scoreArray.filter(score => score > 0 );
+      const length = validScores.length;
+      const total = validScores.reduce((score, sum) => score + sum, 0);
       setAverage(isNaN(total / length) ? 0 : total / length);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

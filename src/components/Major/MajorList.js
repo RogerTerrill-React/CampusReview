@@ -3,9 +3,11 @@ import MajorItem from './MajorItem';
 import { useMajorsList } from '../Major';
 import MajorReview from './MajorReview';
 import Card from 'react-bootstrap/Card';
+import {average} from '../../helpers/array';
 
 const MajorList = ({title}) => {
   const majors = useMajorsList();
+  console.log(majors)
   const sortedMajorByName = majors.sort((a, b) =>
     a.averageScore < b.averageScore ? 1 : -1
   );
@@ -46,9 +48,19 @@ const MajorListByName = ({title}) => {
 
 const CampusMajorsList = ({ campus }) => {
   const majors = useMajorsList();
-  const sortedMajorByAverageScore = majors.sort((a, b) =>
-    a.averageScore < b.averageScore ? 1 : -1
+  const majorsReviewsList = majors.map((major) => major.reviews);
+  const majorsReviewsListValues = majorsReviewsList.map(reviews => Object.values(reviews));
+  const majorScores = majorsReviewsListValues.map(review => review.map( reviewScore =>reviewScore.score));
+  const scores =  majorScores.map(scores => average(scores));
+  const newSortedMajors = [...majors]
+  for(let i =0; i<majors.length; i++ ){
+    newSortedMajors[i].averageScore = scores[i];
+  }
+  
+  const sortedMajorByAverageScore = newSortedMajors.sort((a, b) =>
+  a.averageScore < b.averageScore ? 1 : -1
   );
+  console.log(sortedMajorByAverageScore)
   let index = -1;
   return (
     <Card>

@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { withAuthorization, withEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
-import { generateRandomCampusReviews } from '../../helpers/generateReviews';
+import { generateRandomCampusReviews, generateRandomMajorReviews } from '../../helpers/generateReviews';
 import { useFirebase } from '../Firebase';
 
 import { UserItem } from '../User';
@@ -28,11 +28,14 @@ const AdminPage = () => {
         <Col className='text-center'>
           <AddCampusModal />
           <button onClick={() => generateRandomCampusReviews(firebase)}>
-            Generate Campuses
+            Generate Campuse Reviews
           </button>
         </Col>
         <Col className='text-center'>
           <AddMajorModal />
+          <button onClick={() => generateRandomMajorReviews(firebase)}>
+            Generate Major Reviews
+          </button>
         </Col>
         <Col className='text-center'>
           <AddCourseModal />
