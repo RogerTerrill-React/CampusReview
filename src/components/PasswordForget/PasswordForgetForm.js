@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const PasswordForgetForm = () => {
   const firebase = useFirebase();
@@ -36,24 +38,32 @@ const PasswordForgetForm = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const { email } = values;
+  const { error, email } = values;
 
   const isInvalid = email === '';
 
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        name='email'
-        value={email}
-        onChange={onChange}
-        type='text'
-        placeholder='Email Address'
-      />
-      <button disabled={isInvalid} type='submit'>
-        Reset My Password
-      </button>
-      {values.error && <p>{values.error.message}</p>}
-    </form>
+    <Form onSubmit={onSubmit}>
+      <Form.Group controlId='formEmail'>
+        <Form.Control
+          name='email'
+          value={email}
+          onChange={onChange}
+          type='text'
+          placeholder='Email Address'
+        />
+
+        <Button
+          className='btn-block'
+          disabled={isInvalid}
+          variant='primary'
+          type='submit'
+        >
+          Forgot Password
+        </Button>
+        {error && <p>{error.message}</p>}
+      </Form.Group>
+    </Form>
   );
 };
 

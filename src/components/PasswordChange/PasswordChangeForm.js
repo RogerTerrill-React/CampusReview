@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useFirebase } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const PasswordChangeForm = () => {
   const firebase = useFirebase();
@@ -40,28 +42,36 @@ const PasswordChangeForm = () => {
   const { passwordOne, passwordTwo, error } = values;
 
   const isInvalid = passwordOne === '' || passwordOne !== passwordTwo;
-    
+
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        name='passwordOne'
-        value={passwordOne}
-        onChange={onChange}
-        type='password'
-        placeholder='New Password'
-      />
-      <input
-        name='passwordTwo'
-        value={passwordTwo}
-        onChange={onChange}
-        type='password'
-        placeholder='Confirm New Password'
-      />
-      <button disabled={isInvalid} type='submit'>
-        Reset My Password
-      </button>
-      {error && <p>{error.message}</p>}
-    </form>
+    <Form onSubmit={onSubmit}>
+      <Form.Group controlId='formPasswordOne'>
+        <Form.Control
+          name='passwordOne'
+          value={passwordOne}
+          onChange={onChange}
+          type='text'
+          placeholder='New Password'
+        />
+        <Form.Control
+          name='passwordTwo'
+          value={passwordTwo}
+          onChange={onChange}
+          type='text'
+          placeholder='ConfirmNew Password'
+        />
+
+        <Button
+          className='btn-block'
+          disabled={isInvalid}
+          variant='primary'
+          type='submit'
+        >
+          Change Password
+        </Button>
+        {error && <p>{error.message}</p>}
+      </Form.Group>
+    </Form>
   );
 };
 
