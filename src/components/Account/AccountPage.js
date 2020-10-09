@@ -7,15 +7,15 @@ import {
 } from '../Session';
 import { PasswordForgetForm } from '../PasswordForget';
 import { PasswordChangeForm } from '../PasswordChange';
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 
 const AccountPage = () => {
   const authUser = useAuthUser();
   return (
     <Container>
-      <h1>Account: {authUser.username}</h1>
-      <PasswordForgetForm />
-      <PasswordChangeForm />
+        <h1>Account: {authUser.username}</h1>
+        <PasswordForgetForm />
+        <PasswordChangeForm />
     </Container>
   );
 };
